@@ -1,0 +1,54 @@
+[gd_scene load_steps=25 format=3 uid="uid://d3el3tppyninl"]
+
+[ext_resource type="AnimationLibrary" uid="uid://bsi7lmoac1b5m" path="res://animations/Not So Scary Zombie Pack/walking.fbx" id="1_v2866"]
+[ext_resource type="AnimationLibrary" uid="uid://ckyqybmmcjs4v" path="res://animations/Not So Scary Zombie Pack/walking (2).fbx" id="2_byhay"]
+[ext_resource type="AnimationLibrary" uid="uid://dd5g651w681in" path="res://animations/Not So Scary Zombie Pack/zombie agonizing.fbx" id="3_m2hq8"]
+[ext_resource type="AnimationLibrary" uid="uid://qf7bqgmf07u3" path="res://animations/Not So Scary Zombie Pack/zombie attack.fbx" id="4_cvwlt"]
+[ext_resource type="AnimationLibrary" uid="uid://dvcyc2jql8rvf" path="res://animations/Not So Scary Zombie Pack/zombie headbutt.fbx" id="5_58o17"]
+[ext_resource type="AnimationLibrary" uid="uid://c3jjmq5om5j2q" path="res://animations/Not So Scary Zombie Pack/zombie idle.fbx" id="6_df4op"]
+[ext_resource type="AnimationLibrary" uid="uid://bn2cpyn0ttphl" path="res://animations/Not So Scary Zombie Pack/zombie idle (2).fbx" id="7_nnod0"]
+[ext_resource type="AnimationLibrary" uid="uid://b6a6p1yu2lcy3" path="res://animations/Not So Scary Zombie Pack/zombie idle (3).fbx" id="8_vmhpb"]
+[ext_resource type="AnimationLibrary" uid="uid://cgi455nmdu2vi" path="res://animations/Not So Scary Zombie Pack/zombie idle (4).fbx" id="9_mfpv5"]
+[ext_resource type="AnimationLibrary" uid="uid://bukwkmg74jaob" path="res://animations/Not So Scary Zombie Pack/zombie kicking.fbx" id="10_8yuj1"]
+[ext_resource type="AnimationLibrary" uid="uid://dcclocsrswv4x" path="res://animations/Not So Scary Zombie Pack/zombie kicking (2).fbx" id="11_njft1"]
+[ext_resource type="AnimationLibrary" uid="uid://bacutk0d0miei" path="res://animations/Not So Scary Zombie Pack/zombie punching.fbx" id="12_recu2"]
+[ext_resource type="AnimationLibrary" uid="uid://m1ndsly5doco" path="res://animations/Not So Scary Zombie Pack/zombie punching (2).fbx" id="13_1knyk"]
+[ext_resource type="AnimationLibrary" uid="uid://dfkpkvtj3ebur" path="res://animations/Not So Scary Zombie Pack/zombie reaction hit.fbx" id="14_j2sko"]
+[ext_resource type="AnimationLibrary" uid="uid://d2asunphj11yh" path="res://animations/Not So Scary Zombie Pack/zombie reaction hit (2).fbx" id="15_qh1gp"]
+[ext_resource type="AnimationLibrary" uid="uid://xmn5jsx0ssv7" path="res://animations/Not So Scary Zombie Pack/zombie running.fbx" id="16_uuj43"]
+[ext_resource type="AnimationLibrary" uid="uid://c0pggnydwxfmv" path="res://animations/Not So Scary Zombie Pack/zombie scratch idle.fbx" id="17_s3au6"]
+[ext_resource type="AnimationLibrary" uid="uid://cjcfbo64gnc02" path="res://animations/Not So Scary Zombie Pack/zombie stand up.fbx" id="18_i8qkd"]
+[ext_resource type="AnimationLibrary" uid="uid://do8kxkg6m8eg3" path="res://animations/Not So Scary Zombie Pack/zombie stand up (2).fbx" id="19_n6ywb"]
+[ext_resource type="AnimationLibrary" uid="uid://6jvm7vortrme" path="res://animations/Not So Scary Zombie Pack/zombie stand up (3).fbx" id="20_2ap4p"]
+[ext_resource type="AnimationLibrary" uid="uid://b8qerra5khrwv" path="res://animations/Not So Scary Zombie Pack/zombie stumbling.fbx" id="21_2pqd2"]
+[ext_resource type="AnimationLibrary" uid="uid://dup2b7a2l6get" path="res://animations/Not So Scary Zombie Pack/zombie transition.fbx" id="22_5unx6"]
+[ext_resource type="AnimationLibrary" uid="uid://qlkehd57whao" path="res://animations/Not So Scary Zombie Pack/zombie transition (2).fbx" id="23_lt3kd"]
+[ext_resource type="AnimationLibrary" uid="uid://dftx4xd05f8lg" path="res://animations/Not So Scary Zombie Pack/zombie turn.fbx" id="24_qrnoc"]
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+libraries = {
+"walking": ExtResource("1_v2866"),
+"walking (2)": ExtResource("2_byhay"),
+"zombie agonizing": ExtResource("3_m2hq8"),
+"zombie attack": ExtResource("4_cvwlt"),
+"zombie headbutt": ExtResource("5_58o17"),
+"zombie idle": ExtResource("6_df4op"),
+"zombie idle (2)": ExtResource("7_nnod0"),
+"zombie idle (3)": ExtResource("8_vmhpb"),
+"zombie idle (4)": ExtResource("9_mfpv5"),
+"zombie kicking": ExtResource("10_8yuj1"),
+"zombie kicking (2)": ExtResource("11_njft1"),
+"zombie punching": ExtResource("12_recu2"),
+"zombie punching (2)": ExtResource("13_1knyk"),
+"zombie reaction hit": ExtResource("14_j2sko"),
+"zombie reaction hit (2)": ExtResource("15_qh1gp"),
+"zombie running": ExtResource("16_uuj43"),
+"zombie scratch idle": ExtResource("17_s3au6"),
+"zombie stand up": ExtResource("18_i8qkd"),
+"zombie stand up (2)": ExtResource("19_n6ywb"),
+"zombie stand up (3)": ExtResource("20_2ap4p"),
+"zombie stumbling": ExtResource("21_2pqd2"),
+"zombie transition": ExtResource("22_5unx6"),
+"zombie transition (2)": ExtResource("23_lt3kd"),
+"zombie turn": ExtResource("24_qrnoc")
+}

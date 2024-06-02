@@ -1,0 +1,29 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3g0ee424twu3"]
+
+[ext_resource type="AnimationLibrary" uid="uid://n32rv1doyp5v" path="res://animations/Female Locomotion Pack/idle.fbx" id="2_qx81m"]
+[ext_resource type="AnimationLibrary" uid="uid://dycp1ek0jv8jq" path="res://animations/Female Locomotion Pack/jump.fbx" id="3_wrwpf"]
+[ext_resource type="AnimationLibrary" uid="uid://ggcif80rknue" path="res://animations/Female Locomotion Pack/left strafe.fbx" id="4_uc0jn"]
+[ext_resource type="AnimationLibrary" uid="uid://dplttf3cqtdt3" path="res://animations/Female Locomotion Pack/left strafe walk.fbx" id="5_i0tcb"]
+[ext_resource type="AnimationLibrary" uid="uid://x875dyc7a43e" path="res://animations/Female Locomotion Pack/left turn.fbx" id="6_ip7uf"]
+[ext_resource type="AnimationLibrary" uid="uid://ctwuu840tre5y" path="res://animations/Female Locomotion Pack/right strafe.fbx" id="7_wjyja"]
+[ext_resource type="AnimationLibrary" uid="uid://cdget6gmmp66m" path="res://animations/Female Locomotion Pack/right strafe walk.fbx" id="8_bjg50"]
+[ext_resource type="AnimationLibrary" uid="uid://b5u66a8tlbncy" path="res://animations/Female Locomotion Pack/right turn.fbx" id="9_hptqt"]
+[ext_resource type="AnimationLibrary" uid="uid://cx7sec37cc1b0" path="res://animations/Female Locomotion Pack/running.fbx" id="10_tqi82"]
+[ext_resource type="AnimationLibrary" uid="uid://b5nw44537p6jy" path="res://animations/Female Locomotion Pack/walking.fbx" id="11_d06hh"]
+
+[node name="Character" type="Node3D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+libraries = {
+"idle": ExtResource("2_qx81m"),
+"jump": ExtResource("3_wrwpf"),
+"left strafe": ExtResource("4_uc0jn"),
+"left strafe walk": ExtResource("5_i0tcb"),
+"left turn": ExtResource("6_ip7uf"),
+"right strafe": ExtResource("7_wjyja"),
+"right strafe walk": ExtResource("8_bjg50"),
+"right turn": ExtResource("9_hptqt"),
+"running": ExtResource("10_tqi82"),
+"walking": ExtResource("11_d06hh")
+}
