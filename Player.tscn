@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt80o0nqyotka"]
+
+[ext_resource type="Script" path="res://player/Player.gd" id="1_0cohp"]
+[ext_resource type="AudioStream" uid="uid://cgfoo1uerd1fh" path="res://sound-effects/collect/item-collected.wav" id="2_i3x3s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0f6p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqogg"]
+size = Vector3(1, 1.75399, 0.435577)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8f0nk"]
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_0cohp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00771, 0)
+shape = SubResource("CapsuleShape3D_r0f6p")
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924976, 0.292979)
+shape = SubResource("BoxShape3D_fqogg")
+
+[node name="FloorCheck" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00097248, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.349133, 0)
+shape = SubResource("BoxShape3D_8f0nk")
+
+[node name="CollectItemSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_i3x3s")
+
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]

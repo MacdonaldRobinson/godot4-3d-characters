@@ -1,0 +1,26 @@
+[gd_scene load_steps=11 format=3 uid="uid://djmorr7887ajv"]
+
+[ext_resource type="AnimationLibrary" uid="uid://d1b0xrvj086x" path="res://animations/Male Locomotion Pack/idle.fbx" id="1_e53q7"]
+[ext_resource type="AnimationLibrary" uid="uid://kl02avwqtyaj" path="res://animations/Male Locomotion Pack/jump.fbx" id="2_m21pp"]
+[ext_resource type="AnimationLibrary" uid="uid://dmonbdis3q5kb" path="res://animations/Male Locomotion Pack/left strafe.fbx" id="3_1iwdv"]
+[ext_resource type="AnimationLibrary" uid="uid://csuwqwbhpipji" path="res://animations/Male Locomotion Pack/left strafe walking.fbx" id="4_0yqnq"]
+[ext_resource type="AnimationLibrary" uid="uid://k4ei6rcolhdd" path="res://animations/Male Locomotion Pack/left turn 90.fbx" id="5_gvrlc"]
+[ext_resource type="AnimationLibrary" uid="uid://cls3n022di0am" path="res://animations/Male Locomotion Pack/right strafe.fbx" id="6_16ebn"]
+[ext_resource type="AnimationLibrary" uid="uid://b08bwmt8hlkv3" path="res://animations/Male Locomotion Pack/right strafe walking.fbx" id="7_sjdg7"]
+[ext_resource type="AnimationLibrary" uid="uid://di55pfqrtilph" path="res://animations/Male Locomotion Pack/right turn 90.fbx" id="8_63hl5"]
+[ext_resource type="AnimationLibrary" uid="uid://caxyiq1ygfts0" path="res://animations/Male Locomotion Pack/standard run.fbx" id="9_42k85"]
+[ext_resource type="AnimationLibrary" uid="uid://c8xs7qv8q3064" path="res://animations/Male Locomotion Pack/walking.fbx" id="10_u16rq"]
+
+[node name="MaleLocomotionPack" type="AnimationPlayer"]
+libraries = {
+"idle": ExtResource("1_e53q7"),
+"jump": ExtResource("2_m21pp"),
+"left strafe": ExtResource("3_1iwdv"),
+"left strafe walking": ExtResource("4_0yqnq"),
+"left turn 90": ExtResource("5_gvrlc"),
+"right strafe": ExtResource("6_16ebn"),
+"right strafe walking": ExtResource("7_sjdg7"),
+"right turn 90": ExtResource("8_63hl5"),
+"standard run": ExtResource("9_42k85"),
+"walking": ExtResource("10_u16rq")
+}

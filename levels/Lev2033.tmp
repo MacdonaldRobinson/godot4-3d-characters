@@ -1,0 +1,76 @@
+[gd_scene load_steps=18 format=3 uid="uid://c0sxcuwv2unn1"]
+
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_6gwn7"]
+[ext_resource type="Resource" path="res://height-maps/terrain1/terrain1-data/data.hterrain" id="3_ayiy5"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_f6up2"]
+[ext_resource type="Texture2D" uid="uid://ci88napqk11qg" path="res://height-maps/terrain1/textures/0ad-textures-1/desert_plants_a.png" id="5_vc168"]
+[ext_resource type="Texture2D" uid="uid://hc1fs445cbtp" path="res://height-maps/terrain1/textures/0ad-textures-1/desert_cliff_persia_1.png" id="6_34uoh"]
+[ext_resource type="Texture2D" uid="uid://ckarmbtxn0lxf" path="res://height-maps/terrain1/textures/0ad-textures-1/alpine_grass_c.png" id="7_v0blx"]
+[ext_resource type="Texture2D" uid="uid://chpvy4wf76txi" path="res://height-maps/terrain1/textures/0ad-textures-1/desert_plants_b_norm.png" id="8_l06hy"]
+[ext_resource type="Texture2D" uid="uid://bouodruchoa80" path="res://height-maps/terrain1/textures/0ad-textures-1/desert_cliff_persia_1_norm.png" id="9_l2vws"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="10_a0ye1"]
+[ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="11_acv8u"]
+[ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="12_6p8bv"]
+[ext_resource type="PackedScene" uid="uid://fmut12bsdsah" path="res://players/player.tscn" id="12_atpgc"]
+[ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="12_cw6tw"]
+
+[sub_resource type="Resource" id="Resource_xaxds"]
+script = ExtResource("4_f6up2")
+mode = 0
+textures = [[ExtResource("5_vc168"), ExtResource("6_34uoh"), ExtResource("7_v0blx")], [ExtResource("8_l06hy"), ExtResource("9_l2vws"), null]]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0ht4"]
+
+[sub_resource type="Sky" id="Sky_m7l4b"]
+sky_material = SubResource("ProceduralSkyMaterial_c0ht4")
+
+[sub_resource type="Environment" id="Environment_7purq"]
+background_mode = 2
+sky = SubResource("Sky_m7l4b")
+
+[node name="Level1" type="Node3D"]
+
+[node name="Terrain1" type="Node3D" parent="."]
+script = ExtResource("2_6gwn7")
+ambient_wind = 0.1
+centered = true
+_terrain_data = ExtResource("3_ayiy5")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_xaxds")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+
+[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain1"]
+script = ExtResource("10_a0ye1")
+texture = ExtResource("11_acv8u")
+density = 10.0
+shader_params/u_globalmap_tint_bottom = null
+shader_params/u_globalmap_tint_top = null
+shader_params/u_bottom_ao = null
+shader_params/u_instance_scale = null
+shader_params/u_roughness = null
+metadata/_editor_icon = ExtResource("12_6p8bv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7purq")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("12_cw6tw")]
+follow_node = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("12_atpgc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.36276, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187439, 4.88957, 0.519386)
+use_collision = true
+size = Vector3(5.99329, 0.232422, 5.13281)

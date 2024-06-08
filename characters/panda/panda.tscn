@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtcxppow6yua3"]
+
+[ext_resource type="PackedScene" uid="uid://der4iy3v75xow" path="res://characters/panda/T-Pose.fbx" id="1_x6rvb"]
+[ext_resource type="Script" path="res://characters/character.gd" id="2_s42dd"]
+[ext_resource type="PackedScene" uid="uid://djmorr7887ajv" path="res://characters/Male Locomotion Pack.tscn" id="3_kowd3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ju57s"]
+animation = &"idle/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tdjik"]
+animation = &"standard run/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k4fbw"]
+animation = &"standard run/mixamo_com"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dt4ps"]
+animation = &"right turn 90/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jbelp"]
+animation = &"left turn 90/mixamo_com"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_wrr5g"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ju57s")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_tdjik")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_k4fbw")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_dt4ps")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_jbelp")
+blend_point_4/pos = Vector2(-1, 0)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7u4wa"]
+graph_offset = Vector2(-562, -26)
+nodes/motion/node = SubResource("AnimationNodeBlendSpace2D_wrr5g")
+nodes/motion/position = Vector2(-220, 40)
+node_connections = [&"output", 0, &"motion"]
+
+[node name="Panda" instance=ExtResource("1_x6rvb")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.0130942, -0.812402, 0)
+script = ExtResource("2_s42dd")
+
+[node name="GeneralSkeleton" parent="." index="0"]
+bones/0/position = Vector3(3.62936e-05, 0.0123772, 6.04496e-05)
+bones/0/rotation = Quaternion(-0.0313003, -0.0465268, -0.0291738, 0.998)
+bones/1/rotation = Quaternion(0.0291048, 0.0127518, 0.022127, 0.99925)
+bones/2/rotation = Quaternion(0.0100911, 0.00282568, 0.0135793, 0.999853)
+bones/3/rotation = Quaternion(0.00986804, 0.0030212, 0.0136075, 0.999854)
+bones/4/rotation = Quaternion(0.049076, -0.000882985, 0.00392925, 0.998787)
+bones/5/rotation = Quaternion(-0.0659584, 0.0119327, -0.00149329, 0.99775)
+bones/7/rotation = Quaternion(0.457469, 0.499804, 0.632508, -0.375302)
+bones/8/rotation = Quaternion(0.123045, 0.804013, -0.567754, -0.126803)
+bones/9/rotation = Quaternion(0.00900495, -0.70705, 0.00900499, 0.707049)
+bones/10/rotation = Quaternion(0.0531249, 0.47523, -0.0151884, 0.878125)
+bones/11/rotation = Quaternion(-0.230498, 0.682892, 0.1717, 0.671601)
+bones/12/rotation = Quaternion(0.201495, 0.203892, -0.0595914, 0.956178)
+bones/13/rotation = Quaternion(0.0400128, -0.0528761, -0.128588, 0.989479)
+bones/15/rotation = Quaternion(0.0662167, 0.00073342, 0.00843099, 0.997769)
+bones/16/rotation = Quaternion(0.150998, -1.78814e-07, -0.0154737, 0.988413)
+bones/17/rotation = Quaternion(0.0700819, 5.96046e-08, -0.00718176, 0.997515)
+bones/19/rotation = Quaternion(0.136531, -0.00383569, -0.0229524, 0.990362)
+bones/20/rotation = Quaternion(0.151255, -1.49012e-08, -0.0155001, 0.988373)
+bones/21/rotation = Quaternion(0.159933, 1.49012e-08, -0.0163893, 0.986992)
+bones/23/rotation = Quaternion(0.183251, -0.00465292, -0.0314552, 0.982552)
+bones/24/rotation = Quaternion(0.181388, -7.45058e-08, -0.018588, 0.983236)
+bones/25/rotation = Quaternion(0.155213, -1.49012e-08, -0.0159057, 0.987753)
+bones/27/rotation = Quaternion(0.476209, -0.479052, -0.634676, -0.375394)
+bones/28/rotation = Quaternion(-0.151514, 0.827243, -0.497306, 0.213073)
+bones/29/rotation = Quaternion(0.0412814, 0.705901, -0.0412813, 0.705901)
+bones/30/rotation = Quaternion(0.0459479, -0.57107, 0.0375273, 0.818755)
+bones/31/rotation = Quaternion(-0.24052, -0.67193, -0.184747, 0.675669)
+bones/32/rotation = Quaternion(0.238227, -0.209855, 0.0511835, 0.946884)
+bones/33/rotation = Quaternion(0.0455454, 0.0460794, 0.161693, 0.984712)
+bones/35/rotation = Quaternion(0.059513, -0.000991389, -0.0109757, 0.998167)
+bones/36/rotation = Quaternion(0.151288, 1.49012e-07, 0.0123242, 0.988413)
+bones/37/rotation = Quaternion(0.0702164, -4.47035e-08, 0.0057199, 0.997515)
+bones/39/rotation = Quaternion(0.130515, 0.0036899, 0.0189222, 0.991259)
+bones/40/rotation = Quaternion(0.151545, -1.04308e-07, 0.0123452, 0.988373)
+bones/41/rotation = Quaternion(0.160239, 1.19209e-07, 0.0130535, 0.986992)
+bones/43/rotation = Quaternion(0.177452, 0.00450155, 0.026459, 0.983763)
+bones/44/rotation = Quaternion(0.181736, 1.04308e-07, 0.0148047, 0.983236)
+bones/45/rotation = Quaternion(0.15551, 2.98023e-08, 0.0126683, 0.987753)
+bones/47/rotation = Quaternion(0.135689, 0.0790393, 0.984474, -0.0784322)
+bones/48/rotation = Quaternion(-0.0381019, 0.992647, -0.114165, 0.0129222)
+bones/49/rotation = Quaternion(-0.0428992, 0.706798, -0.704296, 0.0506295)
+bones/50/rotation = Quaternion(-8.75864e-08, 0.999075, 0.0429963, 3.29272e-09)
+bones/52/rotation = Quaternion(-0.090188, -0.0159653, 0.99543, -0.0270317)
+bones/53/rotation = Quaternion(0.0328599, 0.994511, -0.0546577, -0.0829562)
+bones/54/rotation = Quaternion(0.0119575, 0.682592, -0.730028, -0.0313693)
+bones/55/rotation = Quaternion(6.12446e-08, 0.997981, 0.0635124, -2.96345e-08)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="1"]
+root_motion_track = NodePath("%GeneralSkeleton:Hips")
+tree_root = SubResource("AnimationNodeBlendTree_7u4wa")
+anim_player = NodePath("../MaleLocomotionPack")
+parameters/current_length = 8.33333
+parameters/current_position = 3.67046
+parameters/current_delta = 0.0166667
+parameters/motion/current_length = 8.33333
+parameters/motion/current_position = 3.67046
+parameters/motion/current_delta = 0.0166667
+parameters/motion/blend_position = Vector2(0.000791788, 0)
+parameters/motion/0/current_length = 8.33333
+parameters/motion/0/current_position = 3.67046
+parameters/motion/0/current_delta = 0.0166667
+parameters/motion/1/current_length = 0.733333
+parameters/motion/1/current_position = 0.320448
+parameters/motion/1/current_delta = 0.0166667
+parameters/motion/2/current_length = 0.733333
+parameters/motion/2/current_position = 0.427343
+parameters/motion/2/current_delta = 0.0166667
+parameters/motion/3/current_length = 0.933333
+parameters/motion/3/current_position = 0.403785
+parameters/motion/3/current_delta = 0.0166667
+parameters/motion/4/current_length = 0.933333
+parameters/motion/4/current_position = 0.0773433
+parameters/motion/4/current_delta = 0.0166667
+parameters/output/current_length = 8.33333
+parameters/output/current_position = 3.67046
+parameters/output/current_delta = 0.0166667
+
+[node name="RootMotionView" type="RootMotionView" parent="." index="2"]
+animation_path = NodePath("../AnimationTree")
+
+[node name="MaleLocomotionPack" parent="." index="3" instance=ExtResource("3_kowd3")]

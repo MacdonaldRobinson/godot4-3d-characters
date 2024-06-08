@@ -11,7 +11,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://cx7sec37cc1b0" path="res://animations/Female Locomotion Pack/running.fbx" id="9_xj8h2"]
 [ext_resource type="AnimationLibrary" uid="uid://b5nw44537p6jy" path="res://animations/Female Locomotion Pack/walking.fbx" id="10_ssnwl"]
 
-[node name="AnimationPlayer" type="AnimationPlayer"]
+[node name="FemaleLocomotionPack" type="AnimationPlayer"]
 libraries = {
 "idle": ExtResource("1_hu6n7"),
 "jump": ExtResource("2_i5wwn"),
