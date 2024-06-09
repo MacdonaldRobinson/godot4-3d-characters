@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3el3tppyninl"]
+[gd_scene load_steps=26 format=3 uid="uid://d3el3tppyninl"]
 
 [ext_resource type="AnimationLibrary" uid="uid://bsi7lmoac1b5m" path="res://animations/Not So Scary Zombie Pack/walking.fbx" id="1_v2866"]
 [ext_resource type="AnimationLibrary" uid="uid://ckyqybmmcjs4v" path="res://animations/Not So Scary Zombie Pack/walking (2).fbx" id="2_byhay"]
@@ -25,8 +25,11 @@
 [ext_resource type="AnimationLibrary" uid="uid://qlkehd57whao" path="res://animations/Not So Scary Zombie Pack/zombie transition (2).fbx" id="23_lt3kd"]
 [ext_resource type="AnimationLibrary" uid="uid://dftx4xd05f8lg" path="res://animations/Not So Scary Zombie Pack/zombie turn.fbx" id="24_qrnoc"]
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jcnl"]
+
 [node name="NotSoScaryZombiePack" type="AnimationPlayer"]
 libraries = {
+"CallBackTracks": SubResource("AnimationLibrary_7jcnl"),
 "walking": ExtResource("1_v2866"),
 "walking (2)": ExtResource("2_byhay"),
 "zombie agonizing": ExtResource("3_m2hq8"),

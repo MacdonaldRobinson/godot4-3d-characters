@@ -1,25 +1,26 @@
 extends Node3D
-class_name Character
+class_name PlayableCharacter
 
 @onready var anim_tree: AnimationTree = $AnimationTree
 
-signal AnimationChanged(anim_tree: AnimationTree)
+signal AnimationChanged(anim_tree: AnimationTree, delta: float)
 var motion_direction: Vector2 = Vector2(0, 0)
 var is_falling: bool = false
 var is_jumping: bool = false
 var is_on_floor: bool = true
+var is_dying: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_motion(motion_direction)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var animation_name: String = "";
 	
 	if not is_on_floor:		
 		set_falling()	
-	else:
+	elif is_on_floor and not is_dying:
 		if Input.is_action_pressed("forward"):
 			motion_direction = lerp_vector(motion_direction, Vector2(0, 1))
 			set_motion(motion_direction)
@@ -43,7 +44,7 @@ func _process(delta: float) -> void:
 			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
 			set_motion(motion_direction)			
 		
-	AnimationChanged.emit(anim_tree)
+	AnimationChanged.emit(anim_tree, delta)
 	
 func set_is_on_floor(is_on_floor: bool):
 	self.is_on_floor = is_on_floor
@@ -56,6 +57,10 @@ func set_jumping(motion_direction: Vector2):
 	is_falling = false	
 	anim_tree.set("parameters/jump_direction/blend_position", motion_direction)
 	anim_tree.set("parameters/jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	
+func set_dying():
+	is_dying = true	
+	anim_tree.set("parameters/motion_state/transition_request", "dying")	
 
 func set_motion(motion_direction: Vector2):
 	is_falling = false

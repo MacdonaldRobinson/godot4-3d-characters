@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2l1vj4n6hnhl"]
+
+[ext_resource type="PackedScene" uid="uid://cwo1ydpelqw41" path="res://characters/warrok/warrok_w_kurniawan.tscn" id="1_o8snk"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_ukksm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_exufp"]
+radius = 0.930022
+
+[node name="Warrok" type="CharacterBody3D"]
+script = ExtResource("1_ukksm")
+
+[node name="Warrok W Kurniawan" parent="." instance=ExtResource("1_o8snk")]
+transform = Transform3D(0.999476, 0, 0.0323702, 0, 1, 0, -0.0323702, 0, 0.999476, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887006, 0.2)
+shape = SubResource("CapsuleShape3D_exufp")

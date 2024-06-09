@@ -3,6 +3,10 @@ extends SpringArm3D
 @export var follow_node: Node3D
 @onready var camera: Camera3D = $Camera3D
 
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	self.top_level = true
+
 func _input(event: InputEvent) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED	
 	
@@ -50,7 +54,3 @@ func _process(delta: float) -> void:
 		follow_node.get_parent().rotation.x = 0
 		follow_node.get_parent().rotation.z = 0			
 		
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.

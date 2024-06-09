@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2l1vj4n6hnhl"]
+
+[ext_resource type="PackedScene" uid="uid://cwo1ydpelqw41" path="res://characters/warrok/warrok_w_kurniawan.tscn" id="1_o8snk"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_ukksm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_68ybt"]
+radius = 0.807597
+height = 2.09762
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rgjuf"]
+radius = 4.74196
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6uh1o"]
+radius = 1.15805
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x7jhx"]
+radius = 3.39317
+
+[node name="Warrok" type="CharacterBody3D"]
+script = ExtResource("1_ukksm")
+
+[node name="Warrok W Kurniawan" parent="." instance=ExtResource("1_o8snk")]
+transform = Transform3D(0.999476, 0, 0.0323702, 0, 1, 0, -0.0323702, 0, 0.999476, 0, 0, 0)
+
+[node name="CharacterCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0347, 0.11265)
+shape = SubResource("CapsuleShape3D_68ybt")
+
+[node name="AlertArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03855, 0)
+shape = SubResource("CylinderShape3D_rgjuf")
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.901829, 0.212281)
+shape = SubResource("CylinderShape3D_6uh1o")
+
+[node name="FollowArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FollowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01344, 0)
+shape = SubResource("CylinderShape3D_x7jhx")
+
+[connection signal="AttackFinished" from="Warrok W Kurniawan" to="." method="_on_warrok_w_kurniawan_attack_finished"]
