@@ -8,7 +8,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:			
 		var normalized = event.screen_relative.normalized() / 30		
-		self.rotate_y(normalized.x)		
+		self.rotate_y(-normalized.x)		
 		camera.rotate_x(-normalized.y)
 		
 		if camera.rotation.x < -1:
@@ -38,9 +38,18 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	self.global_position = follow_node.global_position
 	
-	follow_node.get_parent().look_at(camera.global_position)
-	follow_node.get_parent().rotation.x = 0
-	follow_node.get_parent().rotation.z = 0		
+	if Input.is_anything_pressed():
+		
+		if Input.is_action_pressed("left"):
+			return
+		
+		if Input.is_action_pressed("right"):
+			return
+		
+		follow_node.get_parent().look_at(camera.global_position)
+		follow_node.get_parent().rotation.x = 0
+		follow_node.get_parent().rotation.z = 0			
+		
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -73,6 +73,6 @@ follow_node = NodePath("../Player/CameraLookAtPoint")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7839, -2.20005, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("14_e3jeo")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -28.8, 0, -7.20063)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.8, 0, -7.20063)
 
 [editable path="Player"]

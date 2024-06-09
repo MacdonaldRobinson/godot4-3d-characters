@@ -22,6 +22,8 @@ func _physics_process(delta: float) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	anim_tree.set("parameters/motion_attack/transition_request", "motion")
+
 	var alert_found_character: CharacterBody3D = null
 	var attack_found_character: CharacterBody3D = null
 	
@@ -34,11 +36,11 @@ func _process(delta: float) -> void:
 					alert_found_character = body
 					break
 					
-	if alert_found_character == null:
-		anim_tree.set("parameters/motion/blend_position", Vector2(0, 0))
-		return
+	if alert_found_character:
+		lerp_motion_animation(Vector2(0, 1))
 	else:
-		anim_tree.set("parameters/motion/blend_position", Vector2(0, 1))
+		lerp_motion_animation(Vector2(0, 0))
+		return
 		
 	var attack_overlapping_bodies = attack_area.get_overlapping_bodies()
 		
@@ -49,12 +51,31 @@ func _process(delta: float) -> void:
 				break
 				
 	if attack_found_character:
-		anim_tree.set("parameters/motion/blend_position", Vector2(0, 0))
+		attack()
 						
-	self.look_at(alert_found_character.global_position, Vector3.UP, true)
-	self.rotation.x = 0
-	self.rotation.z = 0
+	look_at_target(alert_found_character)
+	apply_root_motion()
+
+		
+func lerp_motion_animation(new_value: Vector2):
+	anim_tree.set("parameters/motion_attack/transition_request", "motion")		
+	var current_value: Vector2 = anim_tree.get("parameters/motion/blend_position")	
+	var lerp_val = lerp(current_value, new_value, 0.1)
+	anim_tree.set("parameters/motion/blend_position", lerp_val)
 	
+func attack():
+	var attacks:Array[String] = ["attack1"]
+	var random_attack = attacks.pick_random()
+	
+	anim_tree.set("parameters/motion_attack/transition_request", "attack")	
+	anim_tree.set("parameters/attacks/transition_request", random_attack)	
+	
+func look_at_target(target: Node3D):
+	self.look_at(target.global_position, Vector3.UP, true)
+	self.rotation.x = 0
+	self.rotation.z = 0		
+	
+func apply_root_motion():
 	var root_motion_position =  anim_tree.get_root_motion_position()
 	var root_motion_rotation = anim_tree.get_root_motion_rotation()
 
@@ -67,9 +88,4 @@ func _process(delta: float) -> void:
 	self.translate_object_local(root_motion_position)
 	
 	if root_motion_rotation_normalized != Vector3.ZERO:
-		self.rotate_object_local(root_motion_rotation_normalized, root_motion_rotation.get_angle())	
-		
-
-
-func _on_attack_area_body_entered(body: Node3D) -> void:
-	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		self.rotate_object_local(root_motion_rotation_normalized, root_motion_rotation.get_angle())		

@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://k0swbs8ro717"]
+[gd_scene load_steps=15 format=3 uid="uid://k0swbs8ro717"]
 
 [ext_resource type="AnimationLibrary" uid="uid://n32rv1doyp5v" path="res://animations/Female Locomotion Pack/idle.fbx" id="1_hu6n7"]
+[ext_resource type="AnimationLibrary" uid="uid://buv71ojeqcwcl" path="res://animations/Falling Idle.fbx" id="1_x78tq"]
+[ext_resource type="AnimationLibrary" uid="uid://bpbbn18nw3kau" path="res://animations/Jump Backward.fbx" id="2_0mls4"]
+[ext_resource type="AnimationLibrary" uid="uid://bkhitmes3q45n" path="res://animations/Running Jump.fbx" id="2_bfdlh"]
 [ext_resource type="AnimationLibrary" uid="uid://dycp1ek0jv8jq" path="res://animations/Female Locomotion Pack/jump.fbx" id="2_i5wwn"]
 [ext_resource type="AnimationLibrary" uid="uid://ggcif80rknue" path="res://animations/Female Locomotion Pack/left strafe.fbx" id="3_c75n5"]
+[ext_resource type="AnimationLibrary" uid="uid://5144tbnx3waw" path="res://animations/Jumping Up.fbx" id="3_yvdol"]
 [ext_resource type="AnimationLibrary" uid="uid://dplttf3cqtdt3" path="res://animations/Female Locomotion Pack/left strafe walk.fbx" id="4_3sjnr"]
 [ext_resource type="AnimationLibrary" uid="uid://x875dyc7a43e" path="res://animations/Female Locomotion Pack/left turn.fbx" id="5_mgnpl"]
 [ext_resource type="AnimationLibrary" uid="uid://ctwuu840tre5y" path="res://animations/Female Locomotion Pack/right strafe.fbx" id="6_ro5cb"]
@@ -13,6 +17,10 @@
 
 [node name="FemaleLocomotionPack" type="AnimationPlayer"]
 libraries = {
+"Falling Idle": ExtResource("1_x78tq"),
+"Jump Backward": ExtResource("2_0mls4"),
+"Jumping Up": ExtResource("3_yvdol"),
+"Running Jump": ExtResource("2_bfdlh"),
 "idle": ExtResource("1_hu6n7"),
 "jump": ExtResource("2_i5wwn"),
 "left strafe": ExtResource("3_c75n5"),

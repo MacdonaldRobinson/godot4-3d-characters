@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://camera-controller/camera_controller.gd" id="1_261hn"]
 
 [node name="CameraController" type="SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 spring_length = 3.0
 script = ExtResource("1_261hn")
 
