@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://by34vayk4mdoy"
+path.s3tc="res://.godot/imported/amy-t-pose-with-root-bone_Ch46_1001_Glossiness.png-3598b2fa6735f962b38ad78294f031a1.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b58950d2b5dc59f4e98e045e957250d9"
+}
+
+[deps]
+
+source_file="res://characters/amy/amy-t-pose-with-root-bone_Ch46_1001_Glossiness.png"
+dest_files=["res://.godot/imported/amy-t-pose-with-root-bone_Ch46_1001_Glossiness.png-3598b2fa6735f962b38ad78294f031a1.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

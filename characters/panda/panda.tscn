@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dtcxppow6yua3"]
 
 [ext_resource type="PackedScene" uid="uid://der4iy3v75xow" path="res://characters/panda/T-Pose.fbx" id="1_x6rvb"]
-[ext_resource type="Script" path="res://characters/character.gd" id="2_s42dd"]
+[ext_resource type="Script" path="res://characters/PlayableCharacter.gd" id="2_s42dd"]
 [ext_resource type="PackedScene" uid="uid://djmorr7887ajv" path="res://characters/Male Locomotion Pack.tscn" id="3_kowd3"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ju57s"]

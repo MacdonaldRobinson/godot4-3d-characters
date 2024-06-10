@@ -4,7 +4,7 @@ class_name Enemy
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-@onready var enemy_character: EnemyCharacter = $"Warrok W Kurniawan"
+@onready var enemy_character: EnemyCharacter = $"warrok-t-post-with-root-bone"
 
 @onready var alert_area: Area3D = $AlertArea
 @onready var interact_area: Area3D = $InteractArea

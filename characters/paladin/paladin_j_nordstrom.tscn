@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ch4wic8ll7flt"]
 
 [ext_resource type="PackedScene" uid="uid://48a15nga6ot1" path="res://characters/paladin/Paladin J Nordstrom.fbx" id="1_2e3r8"]
-[ext_resource type="Script" path="res://characters/character.gd" id="2_2syay"]
+[ext_resource type="Script" path="res://characters/PlayableCharacter.gd" id="2_2syay"]
 [ext_resource type="PackedScene" uid="uid://k0swbs8ro717" path="res://characters/Female Locomotion Pack.tscn" id="3_8yepf"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ju57s"]

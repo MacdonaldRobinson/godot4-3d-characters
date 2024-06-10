@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwo1ydpelqw41"]
+[gd_scene load_steps=14 format=3 uid="uid://cwo1ydpelqw41"]
 
 [ext_resource type="PackedScene" uid="uid://cc8vfnmd3hoiq" path="res://characters/warrok/Warrok W Kurniawan.fbx" id="1_0ne24"]
-[ext_resource type="Script" path="res://characters/warrok/warrok.gd" id="2_25mel"]
-[ext_resource type="PackedScene" uid="uid://d3el3tppyninl" path="res://characters/Not So Scary Zombie Pack.tscn" id="2_ftlds"]
+[ext_resource type="Script" path="res://characters/EnemyCharacter.gd" id="2_25mel"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3jsr6"]
-animation = &"zombie punching (2)/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie punching (2)"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yuwqd"]
-animation = &"zombie attack/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie attack"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_x2510"]
 input_0/name = "attack1"
@@ -21,21 +20,21 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y18m4"]
-animation = &"zombie idle (2)/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie idle (3)"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jlemr"]
-animation = &"zombie running/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie running"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bhsk1"]
-animation = &"zombie running/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie running"
 play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tmwqx"]
-animation = &"zombie turn/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie turn"
 play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n82qq"]
-animation = &"zombie turn/mixamo_com"
+animation = &"enemy-animation-with-root-bones/zombie turn"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_j6wat"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_y18m4")
@@ -61,11 +60,11 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_d1ndn"]
-graph_offset = Vector2(-778.307, -35.0504)
+graph_offset = Vector2(-500.426, 44.5431)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_yuwqd")
-nodes/Animation/position = Vector2(-580, 80)
+nodes/Animation/position = Vector2(-680, 60)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_3jsr6")
-"nodes/Animation 2/position" = Vector2(-600, 240)
+"nodes/Animation 2/position" = Vector2(-720, 240)
 nodes/attacks/node = SubResource("AnimationNodeTransition_x2510")
 nodes/attacks/position = Vector2(-160, 200)
 nodes/motion/node = SubResource("AnimationNodeBlendSpace2D_j6wat")
@@ -133,15 +132,13 @@ bones/68/rotation = Quaternion(-0.159489, 0.269709, 0.921128, 0.230961)
 bones/69/rotation = Quaternion(-0.0261324, 0.915424, -0.401331, 0.0157838)
 bones/70/rotation = Quaternion(0.126075, 0.5755, -0.789554, -0.171781)
 
-[node name="AnimationPlayer" parent="." index="1" instance=ExtResource("2_ftlds")]
-
-[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="1"]
 root_motion_track = NodePath("%GeneralSkeleton:Hips")
 tree_root = SubResource("AnimationNodeBlendTree_d1ndn")
 anim_player = NodePath("../AnimationPlayer")
-parameters/current_length = 4.0
-parameters/current_position = 0.583677
-parameters/current_delta = 0.0172024
+parameters/current_length = 0.0
+parameters/current_position = 0.0
+parameters/current_delta = 0.0
 parameters/Animation/current_length = 4.63333
 parameters/Animation/current_position = 3.95142
 parameters/Animation/current_delta = 0.023244
@@ -154,35 +151,35 @@ parameters/attacks/current_delta = 0.023244
 parameters/attacks/current_state = "attack1"
 parameters/attacks/transition_request = ""
 parameters/attacks/current_index = 0
-parameters/motion/current_length = 4.0
-parameters/motion/current_position = 0.583677
-parameters/motion/current_delta = 0.0172024
+parameters/motion/current_length = 0.0
+parameters/motion/current_position = 0.0
+parameters/motion/current_delta = 0.0
 parameters/motion/blend_position = Vector2(0, 0)
-parameters/motion/0/current_length = 4.0
-parameters/motion/0/current_position = 0.583677
-parameters/motion/0/current_delta = 0.0172024
-parameters/motion/1/current_length = 0.8
-parameters/motion/1/current_position = 0.583676
-parameters/motion/1/current_delta = 0.0172024
+parameters/motion/0/current_length = 0.0
+parameters/motion/0/current_position = 0.0
+parameters/motion/0/current_delta = 0.0
+parameters/motion/1/current_length = 0.0
+parameters/motion/1/current_position = 0.0
+parameters/motion/1/current_delta = 0.0
 parameters/motion/2/current_length = 0.8
 parameters/motion/2/current_position = 0.0857219
 parameters/motion/2/current_delta = 0.0306287
-parameters/motion/3/current_length = 3.0
-parameters/motion/3/current_position = 0.583677
-parameters/motion/3/current_delta = 0.0172024
+parameters/motion/3/current_length = 0.0
+parameters/motion/3/current_position = 0.0
+parameters/motion/3/current_delta = 0.0
 parameters/motion/4/current_length = 3.0
 parameters/motion/4/current_position = 1.88572
 parameters/motion/4/current_delta = 0.0306287
-parameters/motion_attack/current_length = 4.0
-parameters/motion_attack/current_position = 0.583677
-parameters/motion_attack/current_delta = 0.0172024
+parameters/motion_attack/current_length = 0.0
+parameters/motion_attack/current_position = 0.0
+parameters/motion_attack/current_delta = 0.0
 parameters/motion_attack/current_state = "motion"
 parameters/motion_attack/transition_request = ""
 parameters/motion_attack/current_index = 0
-parameters/output/current_length = 4.0
-parameters/output/current_position = 0.583677
-parameters/output/current_delta = 0.0172024
+parameters/output/current_length = 0.0
+parameters/output/current_position = 0.0
+parameters/output/current_delta = 0.0
 
-[node name="RootMotionView" type="RootMotionView" parent="." index="3"]
+[node name="RootMotionView" type="RootMotionView" parent="." index="2"]
 visible = false
 animation_path = NodePath("../AnimationTree")

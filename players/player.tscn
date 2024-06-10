@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://fmut12bsdsah"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_qrxws"]
-[ext_resource type="PackedScene" uid="uid://dvlcw7s2uauvv" path="res://characters/amy/amy.tscn" id="2_d6tro"]
 [ext_resource type="PackedScene" uid="uid://cofew2kmghae0" path="res://ui/health-bar/health_bar.tscn" id="3_me1sq"]
 [ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="4_itwra"]
+[ext_resource type="PackedScene" uid="uid://bbesb6vr1lech" path="res://characters/amy/amy_t_pose_with_root_bone.tscn" id="4_nddtr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_elmul"]
 height = 1.76308
@@ -21,8 +21,6 @@ shape = SubResource("CapsuleShape3D_elmul")
 [node name="CameraLookAtPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72416, 0)
 
-[node name="Amy" parent="." instance=ExtResource("2_d6tro")]
-
 [node name="HealthBar" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54697, 0)
 pixel_size = 0.005
@@ -39,4 +37,6 @@ size = Vector2i(100, 40)
 [node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("4_itwra")]
 follow_node = NodePath("../CameraLookAtPoint")
 
-[connection signal="AnimationChanged" from="Amy" to="." method="_on_animation_changed"]
+[node name="amy-t-pose-with-root-bone" parent="." instance=ExtResource("4_nddtr")]
+
+[connection signal="AnimationChanged" from="amy-t-pose-with-root-bone" to="." method="_on_animation_changed"]
