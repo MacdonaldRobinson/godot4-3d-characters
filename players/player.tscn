@@ -23,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72416, 0)
 
 [node name="HealthBar" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54697, 0)
-pixel_size = 0.005
+pixel_size = 0.0025
 billboard = 2
 texture = SubResource("ViewportTexture_6fwxo")
 

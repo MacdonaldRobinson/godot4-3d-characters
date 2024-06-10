@@ -37,6 +37,9 @@ func _process(delta: float) -> void:
 	for node in nodes_in_alert_area:
 		if node.name != self.name:
 			if node is Player:
+				if node.character.is_dying:
+					break
+									
 				target = node
 				look_at_target(node)
 				break
@@ -44,6 +47,9 @@ func _process(delta: float) -> void:
 	for node in nodes_in_follow_area:
 		if node.name != self.name:
 			if node is Player:
+				if node.character.is_dying:
+					break
+					
 				target = node
 				enemy_character.lerp_motion_animation(Vector2(0, 1))
 				break				
@@ -51,6 +57,9 @@ func _process(delta: float) -> void:
 	for node in nodes_in_interact_area:
 		if node.name != self.name:
 			if node is Player:
+				if node.character.is_dying:
+					break
+				
 				target = node
 				enemy_character.attack()
 				break
@@ -72,9 +81,9 @@ func apply_root_motion():
 	var root_motion_position =  enemy_character.anim_tree.get_root_motion_position()
 	var root_motion_rotation = enemy_character.anim_tree.get_root_motion_rotation()
 
-	root_motion_position.y = 0
-	root_motion_rotation.x = 0
-	root_motion_rotation.z = 0
+	#root_motion_position.y = 0
+	#root_motion_rotation.x = 0
+	#root_motion_rotation.z = 0
 	
 	var root_motion_rotation_normalized = root_motion_rotation.get_axis().normalized()
 

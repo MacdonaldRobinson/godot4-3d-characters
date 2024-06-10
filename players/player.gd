@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 
 	character.set_is_on_floor(is_on_floor())
 
-	if health_bar.progress_bar.value == 0:
+	if !character.is_dying && health_bar.progress_bar.value == 0:
 		character.set_dying()
 				
 	move_and_slide()

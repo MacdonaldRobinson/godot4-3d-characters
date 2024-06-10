@@ -42,6 +42,12 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	self.global_position = follow_node.global_position
 	
+	var target_parent = follow_node.get_parent()
+	
+	if target_parent is Player:
+		if target_parent.character.is_dying:
+			return
+	
 	if Input.is_anything_pressed():
 		
 		if Input.is_action_pressed("left"):
