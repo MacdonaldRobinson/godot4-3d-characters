@@ -1,4 +1,4 @@
-#Godot 4 - Character Animations and Enemy AI 
+# Godot 4 - Character Animations and Enemy AI 
 
 - Shows how to easily create a Camera Controller
 - Shows how to easily create a charater controller with root motion and animations
