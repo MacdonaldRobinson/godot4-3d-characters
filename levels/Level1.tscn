@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0sxcuwv2unn1"]
+[gd_scene load_steps=18 format=3 uid="uid://c0sxcuwv2unn1"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_6gwn7"]
 [ext_resource type="Resource" path="res://height-maps/terrain1/terrain1-data/data.hterrain" id="3_ayiy5"]
+[ext_resource type="Texture2D" uid="uid://pfb6rpxkkjpg" path="res://height-maps/terrain1/textures/OpenfootageNETgrass2jpg/OpenfootageNETgrassIItif2 copy.jpg" id="4_54w5v"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_f6up2"]
+[ext_resource type="Texture2D" uid="uid://co8fwe7dhef7q" path="res://height-maps/terrain1/textures/OpenfootageNETgrass2jpg/OpenfootageNETgrassIItif6 copy.jpg" id="5_3m4ms"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="10_a0ye1"]
 [ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="11_acv8u"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="12_6p8bv"]
@@ -10,25 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/warrok/warrok.tscn" id="14_e3jeo"]
 [ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="15_mudkg"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3y47h"]
-load_path = "res://.godot/imported/desert_plants_a.png-14a3e973d4ba25362b0d6d7ee20652eb.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mag5b"]
-load_path = "res://.godot/imported/desert_cliff_persia_1.png-a2308ecee7658d72f96dc1a438ce8942.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ys1hh"]
-load_path = "res://.godot/imported/alpine_grass_c.png-4a6b6a0e9462f8d9ac3c917e080ecf99.s3tc.ctex"
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5oexm"]
-load_path = "res://.godot/imported/desert_plants_b_norm.png-5f475fec7816bef1a0af8eea30119120.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o8621"]
-load_path = "res://.godot/imported/desert_cliff_persia_1_norm.png-5e8b52f6669d87f6772d0f1a614a6c31.ctex"
 
 [sub_resource type="Resource" id="Resource_xaxds"]
 script = ExtResource("4_f6up2")
 mode = 0
-textures = [[SubResource("CompressedTexture2D_3y47h"), SubResource("CompressedTexture2D_mag5b"), SubResource("CompressedTexture2D_ys1hh")], [SubResource("CompressedTexture2D_5oexm"), SubResource("CompressedTexture2D_o8621"), null]]
+textures = [[ExtResource("4_54w5v"), ExtResource("4_54w5v"), ExtResource("5_3m4ms")], [SubResource("CompressedTexture2D_5oexm"), SubResource("CompressedTexture2D_o8621"), null]]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0ht4"]
 
