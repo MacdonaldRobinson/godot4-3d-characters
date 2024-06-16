@@ -51,13 +51,16 @@ func _process(delta: float) -> void:
 	
 	var target_parent = follow_node.get_parent()
 
+			
+	var character_animation: CharacterAnimations = target_parent.character_animations
+			
 	self.global_position = follow_node.global_position
 	camera.look_at(follow_node.global_position)
 
 	if target_parent is Character:
 		if target_parent.character_animations.is_dying():
 			return
-	
+			
 	if Input.is_anything_pressed():
 		
 		follow_node.get_parent().look_at(camera.global_position)

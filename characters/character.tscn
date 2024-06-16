@@ -38,10 +38,8 @@ root_motion_track = NodePath("%GeneralSkeleton:Root")
 
 [node name="AnimationTree" parent="CharacterAnimations" index="1"]
 root_node = NodePath("../../Clara")
-parameters/current_position = 1.19548
-parameters/current_delta = 0.0402574
-"parameters/Animation 3/current_position" = 1.19548
-"parameters/Animation 3/current_delta" = 0.0402574
+parameters/current_position = 3.29103
+"parameters/Animation 3/current_position" = 3.29103
 "parameters/Animation 6/current_delta" = 0.0283028
 parameters/TimeScale/current_length = 0.666667
 parameters/TimeScale/current_position = 0.559374
@@ -50,8 +48,7 @@ parameters/TimeScale/scale = 1.5
 "parameters/TimeScale 2/current_delta" = 0.0465909
 "parameters/TimeScale 2/scale" = 1.5
 parameters/attack_state/current_delta = 0.0283028
-parameters/jump/current_position = 1.19548
-parameters/jump/current_delta = 0.0402574
+parameters/jump/current_position = 3.29103
 parameters/jump_direction/current_delta = 0.0465909
 parameters/jump_direction/blend_position = Vector2(0.00143886, 0.00757575)
 parameters/jump_direction/3/current_length = 0.866667
@@ -92,12 +89,9 @@ parameters/motion/11/current_delta = 0.025
 parameters/motion/12/current_length = 1.06667
 parameters/motion/12/current_position = 0.475815
 parameters/motion/12/current_delta = 0.025
-parameters/motion_attack/current_position = 1.19548
-parameters/motion_attack/current_delta = 0.0402574
-parameters/motion_state/current_position = 1.19548
-parameters/motion_state/current_delta = 0.0402574
-parameters/output/current_position = 1.19548
-parameters/output/current_delta = 0.0402574
+parameters/motion_attack/current_position = 3.29103
+parameters/motion_state/current_position = 3.29103
+parameters/output/current_position = 3.29103
 
 [node name="RootMotionView" type="RootMotionView" parent="."]
 animation_path = NodePath("../CharacterAnimations/AnimationTree")
@@ -134,8 +128,8 @@ shape = SubResource("CylinderShape3D_x7jhx")
 [node name="HealthBar" parent="." instance=ExtResource("4_5agvn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89053, 0)
 texture = SubResource("ViewportTexture_rh5lm")
-max_health = 1000
-current_health = 1000
+max_health = 100
+current_health = 100
 
 [node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("9_ohuyf")]
 follow_node = NodePath("../CameraLookAtPoint")
