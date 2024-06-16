@@ -3,7 +3,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://cbacn6efdymri" path="res://animations/custom-locomotion-pack/custom-locomotion-pack.glb" id="1_43svu"]
 [ext_resource type="Script" path="res://characters/character_animations/character_animations.gd" id="1_s6p48"]
 [ext_resource type="AnimationLibrary" uid="uid://cr5nio0utun3w" path="res://animations/custom-dying-pack/custom-dying-pack.glb" id="2_5n5gj"]
-[ext_resource type="AnimationLibrary" uid="uid://bikk2tqhr5dxg" path="res://animations/custom-attack-punch-kick-pack/custom-attack-punch-kick-pack.glb" id="2_ofu1x"]
+[ext_resource type="AnimationLibrary" uid="uid://crw5ru71bh6xc" path="res://animations/custom-attack-punch-kick-pack/custom-attack-punch-kick-pack.glb" id="2_ofu1x"]
 [ext_resource type="AnimationLibrary" uid="uid://dooem8cdowvkb" path="res://animations/custom-jumping-falling-pack/custom-jumping-falling-pack.glb" id="3_qbuhl"]
 [ext_resource type="PackedScene" uid="uid://bsjopd8rbl3xg" path="res://characters/clara/Clara.glb" id="5_5sbk1"]
 
@@ -20,13 +20,13 @@ animation = &"custom-attack-punch-kick-pack/Punching"
 animation = &"custom-attack-punch-kick-pack/Punching (1)"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vgryh"]
-animation = &"custom-attack-punch-kick-pack/Punch Combo"
+animation = &"custom-attack-punch-kick-pack/Combo Punch"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5bbyk"]
-animation = &"custom-attack-punch-kick-pack/Kicking"
+animation = &"custom-attack-punch-kick-pack/Roundhouse Kick"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i2spy"]
-animation = &"custom-attack-punch-kick-pack/Hurricane Kick"
+animation = &"custom-attack-punch-kick-pack/Center Block"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0vc6e"]
 animation = &"custom-jumping-falling-pack/Falling Idle"
@@ -36,6 +36,7 @@ animation = &"custom-jumping-falling-pack/Falling Idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_w7bmg"]
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_7q44r"]
+xfade_time = 0.2
 input_0/name = "state_0"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
@@ -56,10 +57,6 @@ input_4/name = "state_4"
 input_4/auto_advance = false
 input_4/break_loop_at_end = false
 input_4/reset = true
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_maj6n"]
-fadein_time = 0.2
-fadeout_time = 0.2
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_fnbg2"]
 fadein_time = 0.2
@@ -159,6 +156,10 @@ blend_point_11/pos = Vector2(-0.5, 0)
 blend_point_12/node = SubResource("AnimationNodeAnimation_eg0ks")
 blend_point_12/pos = Vector2(0.5, 0)
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_maj6n"]
+fadein_time = 0.2
+fadeout_time = 0.2
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_uob51"]
 xfade_time = 0.2
 input_0/name = "motion"
@@ -179,7 +180,7 @@ input_3/break_loop_at_end = false
 input_3/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_pjakq"]
-graph_offset = Vector2(-716.548, 352.386)
+graph_offset = Vector2(-297.975, 204.906)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_0vc6e")
 nodes/Animation/position = Vector2(-280, 200)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_p14b4")
@@ -193,31 +194,30 @@ nodes/Animation/position = Vector2(-280, 200)
 "nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_vgryh")
 "nodes/Animation 6/position" = Vector2(-860, 1280)
 "nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_5bbyk")
-"nodes/Animation 7/position" = Vector2(-820, 1440)
+"nodes/Animation 7/position" = Vector2(-900, 1440)
 "nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_i2spy")
 "nodes/Animation 8/position" = Vector2(-840, 1640)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_w7bmg")
 nodes/TimeScale/position = Vector2(-20, 0)
 "nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_6s1cl")
 "nodes/TimeScale 2/position" = Vector2(660, 420)
-nodes/Transition/node = SubResource("AnimationNodeTransition_7q44r")
-nodes/Transition/position = Vector2(-360, 1080)
-nodes/attack_state/node = SubResource("AnimationNodeOneShot_maj6n")
-nodes/attack_state/position = Vector2(-120, 780)
+nodes/attack_state/node = SubResource("AnimationNodeTransition_7q44r")
+nodes/attack_state/position = Vector2(-360, 1080)
 nodes/jump/node = SubResource("AnimationNodeOneShot_fnbg2")
 nodes/jump/position = Vector2(880, 240)
 nodes/jump_direction/node = SubResource("AnimationNodeBlendSpace2D_0pigd")
 nodes/jump_direction/position = Vector2(380, 540)
 nodes/motion/node = SubResource("AnimationNodeBlendSpace2D_wrr5g")
 nodes/motion/position = Vector2(-300, -40)
+nodes/motion_attack/node = SubResource("AnimationNodeOneShot_maj6n")
+nodes/motion_attack/position = Vector2(-120, 780)
 nodes/motion_state/node = SubResource("AnimationNodeTransition_uob51")
 nodes/motion_state/position = Vector2(360, 80)
 nodes/output/position = Vector2(1220, 240)
-node_connections = [&"TimeScale", 0, &"motion", &"TimeScale 2", 0, &"jump_direction", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 5", &"Transition", 2, &"Animation 6", &"Transition", 3, &"Animation 7", &"Transition", 4, &"Animation 8", &"attack_state", 0, &"Animation 3", &"attack_state", 1, &"Transition", &"jump", 0, &"motion_state", &"jump", 1, &"TimeScale 2", &"motion_state", 0, &"TimeScale", &"motion_state", 1, &"Animation", &"motion_state", 2, &"Animation 2", &"motion_state", 3, &"attack_state", &"output", 0, &"jump"]
+node_connections = [&"TimeScale", 0, &"motion", &"TimeScale 2", 0, &"jump_direction", &"attack_state", 0, &"Animation 4", &"attack_state", 1, &"Animation 5", &"attack_state", 2, &"Animation 6", &"attack_state", 3, &"Animation 7", &"attack_state", 4, &"Animation 8", &"jump", 0, &"motion_state", &"jump", 1, &"TimeScale 2", &"motion_attack", 0, &"Animation 3", &"motion_attack", 1, &"attack_state", &"motion_state", 0, &"TimeScale", &"motion_state", 1, &"Animation", &"motion_state", 2, &"Animation 2", &"motion_state", 3, &"motion_attack", &"output", 0, &"jump"]
 
 [node name="CharacterAnimations" type="Node3D"]
 script = ExtResource("1_s6p48")
-character_node_path = NodePath("Clara")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Clara")
@@ -234,8 +234,8 @@ root_motion_track = NodePath("%GeneralSkeleton:Root")
 tree_root = SubResource("AnimationNodeBlendTree_pjakq")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 3.33333
-parameters/current_position = 2.42747
-parameters/current_delta = 0.0166667
+parameters/current_position = 0.0919368
+parameters/current_delta = 0.0152778
 parameters/Animation/current_length = 0.733333
 parameters/Animation/current_position = 0.101727
 parameters/Animation/current_delta = 0.03
@@ -243,46 +243,40 @@ parameters/Animation/current_delta = 0.03
 "parameters/Animation 2/current_position" = 3.66667
 "parameters/Animation 2/current_delta" = 0.0
 "parameters/Animation 3/current_length" = 3.33333
-"parameters/Animation 3/current_position" = 2.42747
-"parameters/Animation 3/current_delta" = 0.0166667
+"parameters/Animation 3/current_position" = 0.0919368
+"parameters/Animation 3/current_delta" = 0.0152778
 "parameters/Animation 4/current_length" = 1.06667
 "parameters/Animation 4/current_position" = 1.06667
-"parameters/Animation 4/current_delta" = 0.0542453
+"parameters/Animation 4/current_delta" = 0.0782031
 "parameters/Animation 5/current_length" = 1.03333
 "parameters/Animation 5/current_position" = 1.03333
-"parameters/Animation 5/current_delta" = 0.0496779
-"parameters/Animation 6/current_length" = 2.23333
-"parameters/Animation 6/current_position" = 2.23333
-"parameters/Animation 6/current_delta" = 0.0500652
+"parameters/Animation 5/current_delta" = 0.0529907
+"parameters/Animation 6/current_length" = 3.0
+"parameters/Animation 6/current_position" = 3.0
+"parameters/Animation 6/current_delta" = 0.0336749
 "parameters/Animation 7/current_length" = 2.16667
 "parameters/Animation 7/current_position" = 2.16667
 "parameters/Animation 7/current_delta" = 0.0512578
-"parameters/Animation 8/current_length" = 1.86667
-"parameters/Animation 8/current_position" = 1.86667
-"parameters/Animation 8/current_delta" = 0.0325274
-parameters/TimeScale/current_length = 0.666667
-parameters/TimeScale/current_position = 0.247915
-parameters/TimeScale/current_delta = 0.030144
+"parameters/Animation 8/current_length" = 3.0
+"parameters/Animation 8/current_position" = 3.0
+"parameters/Animation 8/current_delta" = 0.0619037
+parameters/TimeScale/current_length = 8.8
+parameters/TimeScale/current_position = 1.09521
+parameters/TimeScale/current_delta = 0.030668
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 2/current_length" = 2.2
 "parameters/TimeScale 2/current_position" = 2.2
 "parameters/TimeScale 2/current_delta" = 0.060856
 "parameters/TimeScale 2/scale" = 1.0
-parameters/Transition/current_length = 1.86667
-parameters/Transition/current_position = 1.86667
-parameters/Transition/current_delta = 0.0325274
-parameters/Transition/current_state = "state_4"
-parameters/Transition/transition_request = ""
-parameters/Transition/current_index = 4
-parameters/attack_state/current_length = 3.33333
-parameters/attack_state/current_position = 2.42747
-parameters/attack_state/current_delta = 0.0166667
-parameters/attack_state/active = false
-parameters/attack_state/internal_active = false
-parameters/attack_state/request = 0
+parameters/attack_state/current_length = 3.0
+parameters/attack_state/current_position = 3.0
+parameters/attack_state/current_delta = 0.0336749
+parameters/attack_state/current_state = "state_2"
+parameters/attack_state/transition_request = ""
+parameters/attack_state/current_index = 2
 parameters/jump/current_length = 3.33333
-parameters/jump/current_position = 2.42747
-parameters/jump/current_delta = 0.0166667
+parameters/jump/current_position = 0.0919368
+parameters/jump/current_delta = 0.0152778
 parameters/jump/active = false
 parameters/jump/internal_active = false
 parameters/jump/request = 0
@@ -305,16 +299,16 @@ parameters/jump_direction/3/current_delta = null
 parameters/jump_direction/4/current_length = 2.2
 parameters/jump_direction/4/current_position = 2.2
 parameters/jump_direction/4/current_delta = 0.060856
-parameters/motion/current_length = 0.666667
-parameters/motion/current_position = 0.247915
-parameters/motion/current_delta = 0.030144
-parameters/motion/blend_position = Vector2(0, 1)
+parameters/motion/current_length = 8.8
+parameters/motion/current_position = 1.09521
+parameters/motion/current_delta = 0.030668
+parameters/motion/blend_position = Vector2(0, 0)
 parameters/motion/0/current_length = 8.8
-parameters/motion/0/current_position = 3.84581
-parameters/motion/0/current_delta = 0.0181802
+parameters/motion/0/current_position = 1.09521
+parameters/motion/0/current_delta = 0.030668
 parameters/motion/1/current_length = 0.666667
-parameters/motion/1/current_position = 0.247915
-parameters/motion/1/current_delta = 0.030144
+parameters/motion/1/current_position = 0.0275027
+parameters/motion/1/current_delta = 0.0203704
 parameters/motion/2/current_length = 0.0
 parameters/motion/2/current_position = 0.0
 parameters/motion/2/current_delta = 0.0
@@ -325,11 +319,11 @@ parameters/motion/4/current_length = 0.0
 parameters/motion/4/current_position = 0.0
 parameters/motion/4/current_delta = 0.0
 parameters/motion/5/current_length = 0.833333
-parameters/motion/5/current_position = 0.581248
-parameters/motion/5/current_delta = 0.030144
+parameters/motion/5/current_position = 0.19417
+parameters/motion/5/current_delta = 0.0203704
 parameters/motion/6/current_length = 0.866667
-parameters/motion/6/current_position = 0.779147
-parameters/motion/6/current_delta = 0.0181802
+parameters/motion/6/current_position = 0.628547
+parameters/motion/6/current_delta = 0.030668
 parameters/motion/7/current_length = 0.866667
 parameters/motion/7/current_position = 0.0
 parameters/motion/7/current_delta = 0.0
@@ -337,8 +331,8 @@ parameters/motion/8/current_length = null
 parameters/motion/8/current_position = null
 parameters/motion/8/current_delta = null
 parameters/motion/9/current_length = 1.06667
-parameters/motion/9/current_position = 0.114581
-parameters/motion/9/current_delta = 0.030144
+parameters/motion/9/current_position = 0.828546
+parameters/motion/9/current_delta = 0.030668
 parameters/motion/10/current_length = 0.0
 parameters/motion/10/current_position = 0.0
 parameters/motion/10/current_delta = 0.0
@@ -348,14 +342,20 @@ parameters/motion/11/current_delta = null
 parameters/motion/12/current_length = null
 parameters/motion/12/current_position = null
 parameters/motion/12/current_delta = null
+parameters/motion_attack/current_length = 3.33333
+parameters/motion_attack/current_position = 0.0919368
+parameters/motion_attack/current_delta = 0.0152778
+parameters/motion_attack/active = false
+parameters/motion_attack/internal_active = false
+parameters/motion_attack/request = 0
 parameters/motion_state/current_length = 3.33333
-parameters/motion_state/current_position = 2.42747
-parameters/motion_state/current_delta = 0.0166667
+parameters/motion_state/current_position = 0.0919368
+parameters/motion_state/current_delta = 0.0152778
 parameters/motion_state/current_state = "attacking"
 parameters/motion_state/transition_request = ""
 parameters/motion_state/current_index = 3
 parameters/output/current_length = 3.33333
-parameters/output/current_position = 2.42747
-parameters/output/current_delta = 0.0166667
+parameters/output/current_position = 0.0919368
+parameters/output/current_delta = 0.0152778
 
 [node name="Clara" parent="." instance=ExtResource("5_5sbk1")]

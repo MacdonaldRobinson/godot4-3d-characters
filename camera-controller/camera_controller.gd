@@ -9,6 +9,7 @@ func _ready() -> void:
 	self.top_level = true
 
 func _input(event: InputEvent) -> void:
+	
 	if not camera.current:
 		return
 	
@@ -19,11 +20,11 @@ func _input(event: InputEvent) -> void:
 		self.rotate_y(-normalized.x)		
 		camera.rotate_x(-normalized.y)
 		
-		if camera.rotation.x < -1:
-			camera.rotation.x = -1
+		if camera.rotation.x < -0.5:
+			camera.rotation.x = -0.5
 
-		if camera.rotation.x > 1:
-			camera.rotation.x = 1
+		if camera.rotation.x > 0.5:
+			camera.rotation.x = 0.5
 			
 	if event is InputEventMouseButton:
 		
@@ -39,8 +40,8 @@ func _input(event: InputEvent) -> void:
 			var tween: Tween = self.create_tween()
 			var to_val = self.spring_length + 0.5
 			
-			if to_val > 3:
-				to_val = 3
+			if to_val > 5:
+				to_val = 5
 
 			tween.tween_property(self, "spring_length", to_val, 0.1)
 			
@@ -48,12 +49,13 @@ func _process(delta: float) -> void:
 	if not camera.current:
 		return
 	
-	self.global_position = follow_node.global_position
-	
 	var target_parent = follow_node.get_parent()
-	
+
+	self.global_position = follow_node.global_position
+	camera.look_at(follow_node.global_position)
+
 	if target_parent is Character:
-		if target_parent.is_dying:
+		if target_parent.character_animations.is_dying():
 			return
 	
 	if Input.is_anything_pressed():

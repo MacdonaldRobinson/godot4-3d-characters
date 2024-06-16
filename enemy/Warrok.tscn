@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2l1vj4n6hnhl"]
+[gd_scene load_steps=13 format=3 uid="uid://b2l1vj4n6hnhl"]
 
 [ext_resource type="Script" path="res://characters/character.gd" id="1_it3re"]
 [ext_resource type="PackedScene" uid="uid://b5ueref4pofyp" path="res://characters/warrok/warrok-t-post-with-root-bone.glb" id="2_6es7q"]
 [ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="3_35rhl"]
 [ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="4_ddsfh"]
 [ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="5_svdwt"]
+[ext_resource type="AudioStream" uid="uid://b73u3tpje4o5b" path="res://sound/effects/390758__d00121058__fx_003_footstep_gravel_l.wav" id="6_kaony"]
+[ext_resource type="AudioStream" uid="uid://bnvpi1gr14gwf" path="res://sound/effects/dying/37823__the_bizniss__demon-dying.wav" id="7_ahvch"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xrp7"]
 radius = 0.522308
@@ -15,8 +17,8 @@ height = 1.307
 radius = 4.74196
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6uh1o"]
-height = 1.36815
-radius = 1.15805
+height = 1.63078
+radius = 0.715021
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_x7jhx"]
 height = 1.00929
@@ -31,7 +33,38 @@ script = ExtResource("1_it3re")
 [node name="warrok-t-post-with-root-bone" parent="." instance=ExtResource("2_6es7q")]
 
 [node name="CharacterAnimations" parent="." instance=ExtResource("3_35rhl")]
-character_node_path = NodePath("../warrok-t-post-with-root-bone")
+
+[node name="AnimationPlayer" parent="CharacterAnimations" index="0"]
+root_node = NodePath("../../warrok-t-post-with-root-bone")
+
+[node name="AnimationTree" parent="CharacterAnimations" index="1"]
+root_node = NodePath("../../warrok-t-post-with-root-bone")
+parameters/current_position = 2.64166
+parameters/current_delta = 0.0166567
+"parameters/Animation 3/current_position" = 2.64166
+"parameters/Animation 3/current_delta" = 0.0166567
+parameters/TimeScale/current_position = 1.66796
+parameters/TimeScale/current_delta = 0.047498
+parameters/jump/current_position = 2.64166
+parameters/jump/current_delta = 0.0166567
+parameters/motion/current_position = 1.66796
+parameters/motion/current_delta = 0.047498
+parameters/motion/0/current_position = 1.66796
+parameters/motion/0/current_delta = 0.047498
+parameters/motion/1/current_position = 0.0
+parameters/motion/1/current_delta = 0.508954
+parameters/motion/5/current_position = 0.0
+parameters/motion/5/current_delta = 0.175622
+parameters/motion/6/current_position = 0.6013
+parameters/motion/6/current_delta = 0.047498
+parameters/motion/9/current_position = 0.0679596
+parameters/motion/9/current_delta = 0.047498
+parameters/motion_attack/current_position = 2.64166
+parameters/motion_attack/current_delta = 0.0166567
+parameters/motion_state/current_position = 2.64166
+parameters/motion_state/current_delta = 0.0166567
+parameters/output/current_position = 2.64166
+parameters/output/current_delta = 0.0166567
 
 [node name="RootMotionView" type="RootMotionView" parent="."]
 
@@ -53,7 +86,7 @@ shape = SubResource("CylinderShape3D_rgjuf")
 [node name="InteractArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732465, 0.212281)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.813596, 0.212281)
 shape = SubResource("CylinderShape3D_6uh1o")
 
 [node name="FollowArea" type="Area3D" parent="."]
@@ -65,6 +98,8 @@ shape = SubResource("CylinderShape3D_x7jhx")
 [node name="HealthBar" parent="." instance=ExtResource("4_ddsfh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.23699, 0)
 texture = SubResource("ViewportTexture_rh5lm")
+max_health = 100
+current_health = 100
 
 [node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("5_svdwt")]
 follow_node = NodePath("../CameraLookAtPoint")
@@ -72,4 +107,12 @@ follow_node = NodePath("../CameraLookAtPoint")
 [node name="Camera3D" parent="CameraController" index="0"]
 current = false
 
+[node name="FootStepSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_kaony")
+panning_strength = 0.5
+
+[node name="DyingSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_ahvch")
+
+[editable path="CharacterAnimations"]
 [editable path="CameraController"]

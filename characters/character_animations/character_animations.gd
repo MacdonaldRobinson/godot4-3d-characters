@@ -2,25 +2,19 @@ extends Node3D
 class_name CharacterAnimations
 
 signal AnimationChanged(anim_tree: CharacterAnimations, delta: float)
-signal AttackFinished
 
 var motion_direction: Vector2 = Vector2(0, 0)
 
 var is_jumping: bool = false
-var is_falling: bool = false
-var is_dying: bool = false
+var is_attacking: bool = false
 var is_on_floor: bool = false
 
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
-@export var character_node_path: NodePath
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Clara.hide()	
-	anim_player.root_node = character_node_path
-	
 	set_motion(motion_direction)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		if not parent.camera_controller.camera.current:
 			return		
 
-	if is_dying:
+	if is_dying():
 		return
 		
 	var animation_name: String = "";
@@ -38,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor:		
 		set_falling()	
 		
-	elif is_on_floor and not is_dying:
+	elif is_on_floor and not is_dying():
 		if Input.is_action_pressed("forward"):
 			motion_direction = lerp_vector(motion_direction, Vector2(0, 1))
 			set_motion(motion_direction)
@@ -64,24 +58,26 @@ func _physics_process(delta: float) -> void:
 		
 	AnimationChanged.emit(self, delta)
 	
+func start_attacking():
+	is_attacking = true
+
+func finish_attacking():
+	is_attacking = false
+	
 func set_is_on_floor(is_on_floor: bool):
 	self.is_on_floor = is_on_floor
 	
 func set_falling():
-	is_falling = true
 	anim_tree.set("parameters/motion_state/transition_request", "falling")
 
 func set_jumping(motion_direction: Vector2):
-	is_falling = false	
 	anim_tree.set("parameters/jump_direction/blend_position", motion_direction)
 	anim_tree.set("parameters/jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
 func set_dying():
-	is_dying = true	
 	anim_tree.set("parameters/motion_state/transition_request", "dying")	
-
+	
 func set_motion(motion_direction: Vector2):
-	is_falling = false
 	anim_tree.set("parameters/motion_state/transition_request", "motion")
 	anim_tree.set("parameters/motion/blend_position", motion_direction)
 	
@@ -93,22 +89,59 @@ func lerp_vector(current_vector: Vector2, final_vector: Vector2) -> Vector2:
 	return new_vector
 
 func lerp_motion_animation(new_value: Vector2):
-	anim_tree.set("parameters/motion_attack/transition_request", "motion")		
+	anim_tree.set("parameters/motion_state/transition_request", "motion")		
 	var current_value: Vector2 = anim_tree.get("parameters/motion/blend_position")	
 	var lerp_val = lerp(current_value, new_value, 0.1)
 	anim_tree.set("parameters/motion/blend_position", lerp_val)
 
 func idle():
-	anim_tree.set("parameters/motion_attack/transition_request", "motion")	
-	lerp_motion_animation(Vector2(0, 0))
-	
-func attack():
-	var attacks:Array[String] = ["state_0","state_1","state_2","state_3"]
-	var random_attack = attacks.pick_random()	
+	anim_tree.set("parameters/motion_state/transition_request", "motion")	
+	lerp_motion_animation(Vector2(0, 0))	
 
-	print(anim_tree.get("parameters/motion_attack/transition_request"))
-	anim_tree.set("parameters/motion_attack/transition_request", "attacking")	
-	anim_tree.set("parameters/attack_state/request", random_attack)
+func is_dying():
+	var current_motion_state = get_current_motion_state()
+	return current_motion_state == "dying"
+
+func is_falling():
+	var current_motion_state = get_current_motion_state()
+	return current_motion_state == "falling"
 	
-func attack_finished():
-	AttackFinished.emit()
+func get_current_motion_state():
+	var current_motion_state = anim_tree.get("parameters/motion_state/transition_request")
+	return current_motion_state
+
+func attack_stance(auto_attack: bool):
+	anim_tree.set("parameters/motion_state/transition_request", "attacking")
+	
+	if !is_attacking and auto_attack:
+		var attack_state: Array[String] =["state_0", "state_1", "state_2", "state_3"]
+		var random_attack_state: String = attack_state.pick_random()
+		attack(random_attack_state)
+			
+	if auto_attack:
+		return
+
+	if (Input.is_action_pressed("forward") or
+		Input.is_action_pressed("backward") or
+		Input.is_action_pressed("left") or
+		Input.is_action_pressed("right")):
+			idle()
+			return
+	
+	if is_attacking:
+		return
+
+	if Input.is_action_pressed("attack1"):
+		var attack_state: Array[String] =["state_0", "state_1", "state_2", "state_3"]
+		var random_attack_state: String = attack_state.pick_random()
+		attack(random_attack_state)
+		
+	elif Input.is_action_pressed("attack2"):	
+		var attack_state: Array[String] =["state_4"]
+		var random_attack_state: String = attack_state.pick_random()
+		attack(random_attack_state)
+		
+
+func attack(attack_state: String):
+	anim_tree.set("parameters/attack_state/transition_request", attack_state)
+	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)	

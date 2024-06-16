@@ -71,13 +71,17 @@ environment = SubResource("Environment_7purq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_mudkg")
+autoplay = true
 parameters/looping = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 0)
 
 [node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("12_hyi4l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 66.3306, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 3.37116, 0)
+
+[node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("12_hyi4l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4333, 3.37116, 0)
 
 [node name="Character" parent="." groups=["player"] instance=ExtResource("12_vi2ih")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.89755, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.764, 0)

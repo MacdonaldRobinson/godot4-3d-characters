@@ -3,13 +3,13 @@
 importer="animation_library"
 importer_version=1
 type="AnimationLibrary"
-uid="uid://bikk2tqhr5dxg"
-path="res://.godot/imported/custom-attack-punch-kick-pack.glb-949dfd912091b93235cb519a08665f49.res"
+uid="uid://crw5ru71bh6xc"
+path="res://.godot/imported/custom-attack-punch-kick-pack.glb-a931deca278aeb979226d8754263ab11.res"
 
 [deps]
 
-source_file="res://animations/custom-attack-punch-block-pack/custom-attack-punch-kick-pack.glb"
-dest_files=["res://.godot/imported/custom-attack-punch-kick-pack.glb-949dfd912091b93235cb519a08665f49.res"]
+source_file="res://animations/custom-attack-punch-kick-pack/custom-attack-punch-kick-pack.glb"
+dest_files=["res://.godot/imported/custom-attack-punch-kick-pack.glb-a931deca278aeb979226d8754263ab11.res"]
 
 [params]
 
@@ -36,8 +36,8 @@ _subresources={
 "Bouncing Fight Idle": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Bouncing Fight Idle.res",
-"settings/loop_mode": 1,
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Bouncing Fight Idle.res",
+"settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -1835,8 +1835,8 @@ _subresources={
 "Center Block": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Center Block.res",
-"settings/loop_mode": 1,
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Center Block.res",
+"settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -3634,7 +3634,7 @@ _subresources={
 "Combo Punch": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Combo Punch.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Combo Punch.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -5433,7 +5433,7 @@ _subresources={
 "Elbow Punching": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Elbow Punching.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Elbow Punching.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -7232,7 +7232,7 @@ _subresources={
 "Fight Idle": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Fight Idle.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Fight Idle.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -9031,7 +9031,7 @@ _subresources={
 "Fighting Idle": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Fighting Idle.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Fighting Idle.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -10830,7 +10830,7 @@ _subresources={
 "Hook Punch": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Hook Punch.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Hook Punch.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -12629,8 +12629,8 @@ _subresources={
 "Hurricane Kick": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Hurricane Kick.res",
-"settings/loop_mode": 1,
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Hurricane Kick.res",
+"settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
 "slice_1/name": "",
@@ -14428,7 +14428,7 @@ _subresources={
 "Kicking": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Kicking.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Kicking.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -16227,7 +16227,7 @@ _subresources={
 "Punch Combo": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Punch Combo.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Punch Combo.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -18026,7 +18026,7 @@ _subresources={
 "Punching": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Punching.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Punching.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -19825,7 +19825,7 @@ _subresources={
 "Punching (1)": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Punching (1).res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Punching (1).res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -21624,7 +21624,7 @@ _subresources={
 "Receive Punch To The Face": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Receive Punch To The Face.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Receive Punch To The Face.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -23423,7 +23423,7 @@ _subresources={
 "Roundhouse Kick": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Roundhouse Kick.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Roundhouse Kick.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
@@ -25222,7 +25222,7 @@ _subresources={
 "Y Bot-T-Pose": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://animations/custom-attack-punch-block-pack/editable-tracks/Y Bot-T-Pose.res",
+"save_to_file/path": "res://animations/custom-attack-punch-kick-pack/editable-tracks/Y Bot-T-Pose.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
