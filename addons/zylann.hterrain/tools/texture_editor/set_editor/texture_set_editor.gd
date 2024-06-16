@@ -526,4 +526,3 @@ static func backup_for_undo(texture_set: HTerrainTextureSet, ur: UndoRedo):
 #func _on_ModeConfirmationDialog_cancelled():
 #	print("Cancelled")
 #	_set_selected_id(_mode_selector, _texture_set.get_mode())
-

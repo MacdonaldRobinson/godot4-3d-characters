@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://b2l1vj4n6hnhl"]
+
+[ext_resource type="Script" path="res://characters/character.gd" id="1_it3re"]
+[ext_resource type="PackedScene" uid="uid://b5ueref4pofyp" path="res://characters/warrok/warrok-t-post-with-root-bone.glb" id="2_6es7q"]
+[ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="3_35rhl"]
+[ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="4_ddsfh"]
+[ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="5_svdwt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xrp7"]
+radius = 0.522308
+height = 2.24918
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rgjuf"]
+height = 1.307
+radius = 4.74196
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6uh1o"]
+height = 1.36815
+radius = 1.15805
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x7jhx"]
+height = 1.00929
+radius = 3.39317
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rh5lm"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Warrok" type="CharacterBody3D"]
+script = ExtResource("1_it3re")
+
+[node name="warrok-t-post-with-root-bone" parent="." instance=ExtResource("2_6es7q")]
+
+[node name="CharacterAnimations" parent="." instance=ExtResource("3_35rhl")]
+character_node_path = NodePath("../warrok-t-post-with-root-bone")
+
+[node name="RootMotionView" type="RootMotionView" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10555, 0)
+shape = SubResource("CapsuleShape3D_0xrp7")
+
+[node name="CameraLookAtPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48014, 0)
+
+[node name="FloorCheckRayCast" type="RayCast3D" parent="."]
+
+[node name="AlertArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712344, 0)
+shape = SubResource("CylinderShape3D_rgjuf")
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732465, 0.212281)
+shape = SubResource("CylinderShape3D_6uh1o")
+
+[node name="FollowArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FollowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.662804, 0)
+shape = SubResource("CylinderShape3D_x7jhx")
+
+[node name="HealthBar" parent="." instance=ExtResource("4_ddsfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.23699, 0)
+texture = SubResource("ViewportTexture_rh5lm")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("5_svdwt")]
+follow_node = NodePath("../CameraLookAtPoint")
+
+[node name="Camera3D" parent="CameraController" index="0"]
+current = false
+
+[editable path="CameraController"]

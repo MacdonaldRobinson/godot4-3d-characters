@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0sxcuwv2unn1"]
+[gd_scene load_steps=19 format=3 uid="uid://c0sxcuwv2unn1"]
 
+[ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_gsgj3"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_6gwn7"]
 [ext_resource type="Resource" path="res://height-maps/terrain1/terrain1-data/data.hterrain" id="3_ayiy5"]
 [ext_resource type="Texture2D" uid="uid://pfb6rpxkkjpg" path="res://height-maps/terrain1/textures/OpenfootageNETgrass2jpg/OpenfootageNETgrassIItif2 copy.jpg" id="4_54w5v"]
@@ -8,8 +9,8 @@
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="10_a0ye1"]
 [ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="11_acv8u"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="12_6p8bv"]
-[ext_resource type="PackedScene" uid="uid://fmut12bsdsah" path="res://players/player.tscn" id="12_atpgc"]
-[ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/warrok/warrok.tscn" id="14_e3jeo"]
+[ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/Warrok.tscn" id="12_hyi4l"]
+[ext_resource type="PackedScene" uid="uid://cfn7ocuss05kg" path="res://characters/character.tscn" id="12_vi2ih"]
 [ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="15_mudkg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5oexm"]
@@ -32,6 +33,7 @@ sky = SubResource("Sky_m7l4b")
 fog_enabled = true
 
 [node name="Level1" type="Node3D"]
+script = ExtResource("1_gsgj3")
 
 [node name="Terrain1" type="Node3D" parent="."]
 script = ExtResource("2_6gwn7")
@@ -67,22 +69,15 @@ metadata/_editor_icon = ExtResource("12_6p8bv")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7purq")
 
-[node name="Player" parent="." instance=ExtResource("12_atpgc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7839, -2.20005, 0)
-
-[node name="Enemy" parent="." instance=ExtResource("14_e3jeo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.2582, 0, -7.20063)
-
-[node name="Enemy2" parent="." instance=ExtResource("14_e3jeo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1861, 0, -7.20063)
-
-[node name="Enemy3" parent="." instance=ExtResource("14_e3jeo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1861, 0, 3.58786)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_mudkg")
-autoplay = true
 parameters/looping = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 0)
+
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("12_hyi4l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 66.3306, 0)
+
+[node name="Character" parent="." groups=["player"] instance=ExtResource("12_vi2ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.89755, 0)

@@ -55,4 +55,3 @@ const _names = {
 
 static func get_message(err_code: int):
 	return str("[", err_code, "]: ", _names[err_code])
-

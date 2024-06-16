@@ -1,0 +1,281 @@
+[gd_scene load_steps=38 format=3 uid="uid://cfn7ocuss05kg"]
+
+[ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="1_5ogck"]
+[ext_resource type="Script" path="res://characters/character.gd" id="1_viqmd"]
+[ext_resource type="PackedScene" uid="uid://bsjopd8rbl3xg" path="res://characters/clara/Clara.glb" id="2_uncqv"]
+[ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="4_5agvn"]
+[ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="9_ohuyf"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p14b4"]
+animation = &"custom-dying-pack/Standing React Death Backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0vc6e"]
+animation = &"custom-jumping-falling-pack/Falling Idle"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6s1cl"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_w7bmg"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_fnbg2"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7rum7"]
+animation = &"custom-jumping-falling-pack/Running Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g2qld"]
+animation = &"custom-jumping-falling-pack/Jump Backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sioyo"]
+animation = &"custom-jumping-falling-pack/Jumping Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_58fuk"]
+animation = &"custom-jumping-falling-pack/Running Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71gjp"]
+animation = &"custom-jumping-falling-pack/jump"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_0pigd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_7rum7")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_g2qld")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_sioyo")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_58fuk")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_71gjp")
+blend_point_4/pos = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ju57s"]
+animation = &"custom-locomotion-pack/Neutral Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tdjik"]
+animation = &"custom-locomotion-pack/Running Forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hr32o"]
+animation = &"custom-locomotion-pack/Walking Backwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_os1kb"]
+animation = &"custom-locomotion-pack/Left Strafe Walking"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eg0ks"]
+animation = &"custom-locomotion-pack/Right Strafe Walking"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k4fbw"]
+animation = &"custom-locomotion-pack/Running Backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dt4ps"]
+animation = &"custom-locomotion-pack/Right Strafe Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jbelp"]
+animation = &"custom-locomotion-pack/Left Strafe Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v2uje"]
+animation = &"custom-locomotion-pack/Jog Forward Right Diagonal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j5l2t"]
+animation = &"custom-locomotion-pack/Jog Forward Left Diagonal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_poc05"]
+animation = &"custom-locomotion-pack/Jog Backward Left Diagonal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hoej2"]
+animation = &"custom-locomotion-pack/Jog Backward Right Diagonal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cimc3"]
+animation = &"custom-locomotion-pack/Walking"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_wrr5g"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ju57s")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_tdjik")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_k4fbw")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_dt4ps")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_jbelp")
+blend_point_4/pos = Vector2(-1, 0)
+blend_point_5/node = SubResource("AnimationNodeAnimation_v2uje")
+blend_point_5/pos = Vector2(0.5, 0.5)
+blend_point_6/node = SubResource("AnimationNodeAnimation_j5l2t")
+blend_point_6/pos = Vector2(-0.5, 0.5)
+blend_point_7/node = SubResource("AnimationNodeAnimation_poc05")
+blend_point_7/pos = Vector2(-0.5, -0.5)
+blend_point_8/node = SubResource("AnimationNodeAnimation_hoej2")
+blend_point_8/pos = Vector2(0.5, -0.5)
+blend_point_9/node = SubResource("AnimationNodeAnimation_cimc3")
+blend_point_9/pos = Vector2(0, 0.5)
+blend_point_10/node = SubResource("AnimationNodeAnimation_hr32o")
+blend_point_10/pos = Vector2(0, -0.5)
+blend_point_11/node = SubResource("AnimationNodeAnimation_os1kb")
+blend_point_11/pos = Vector2(-0.5, 0)
+blend_point_12/node = SubResource("AnimationNodeAnimation_eg0ks")
+blend_point_12/pos = Vector2(0.5, 0)
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_uob51"]
+xfade_time = 0.2
+input_0/name = "motion"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "falling"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "dying"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_prrfv"]
+graph_offset = Vector2(-247.453, 6.40366)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0vc6e")
+nodes/Animation/position = Vector2(-240, 240)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_p14b4")
+"nodes/Animation 2/position" = Vector2(-260, 500)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_w7bmg")
+nodes/TimeScale/position = Vector2(60, 80)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_6s1cl")
+"nodes/TimeScale 2/position" = Vector2(280, 640)
+nodes/jump/node = SubResource("AnimationNodeOneShot_fnbg2")
+nodes/jump/position = Vector2(560, 260)
+nodes/jump_direction/node = SubResource("AnimationNodeBlendSpace2D_0pigd")
+nodes/jump_direction/position = Vector2(-60, 740)
+nodes/motion/node = SubResource("AnimationNodeBlendSpace2D_wrr5g")
+nodes/motion/position = Vector2(-220, 40)
+nodes/motion_state/node = SubResource("AnimationNodeTransition_uob51")
+nodes/motion_state/position = Vector2(380, 120)
+nodes/output/position = Vector2(800, 260)
+node_connections = [&"TimeScale", 0, &"motion", &"TimeScale 2", 0, &"jump_direction", &"jump", 0, &"motion_state", &"jump", 1, &"TimeScale 2", &"motion_state", 0, &"TimeScale", &"motion_state", 1, &"Animation", &"motion_state", 2, &"Animation 2", &"output", 0, &"jump"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xrp7"]
+radius = 0.522308
+height = 2.24918
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rgjuf"]
+height = 1.307
+radius = 4.74196
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6uh1o"]
+height = 1.36815
+radius = 1.15805
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x7jhx"]
+height = 1.00929
+radius = 3.39317
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rh5lm"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Character" type="CharacterBody3D"]
+script = ExtResource("1_viqmd")
+
+[node name="CharacterAnimations" parent="." instance=ExtResource("1_5ogck")]
+
+[node name="AnimationPlayer" parent="CharacterAnimations" index="0"]
+root_node = NodePath("../../Clara")
+root_motion_track = NodePath("%GeneralSkeleton:Root")
+
+[node name="AnimationTree" parent="CharacterAnimations" index="1"]
+root_node = NodePath("../../Clara")
+tree_root = SubResource("AnimationNodeBlendTree_prrfv")
+parameters/current_length = 0.666667
+parameters/current_position = 0.177991
+parameters/current_delta = 0.025509
+parameters/TimeScale/current_position = 0.177991
+parameters/TimeScale/current_delta = 0.025509
+parameters/TimeScale/scale = 1.5
+"parameters/TimeScale 2/current_delta" = 0.0465909
+"parameters/TimeScale 2/scale" = 1.5
+parameters/jump/current_length = 0.666667
+parameters/jump/current_position = 0.177991
+parameters/jump/current_delta = 0.025509
+parameters/jump_direction/current_delta = 0.0465909
+parameters/jump_direction/blend_position = Vector2(0.00143886, 0.00757575)
+parameters/jump_direction/3/current_length = 0.866667
+parameters/jump_direction/3/current_position = 0.866667
+parameters/jump_direction/3/current_delta = 0.0
+parameters/jump_direction/4/current_delta = 0.0465909
+parameters/motion/current_position = 0.177991
+parameters/motion/current_delta = 0.025509
+parameters/motion/blend_position = Vector2(-0.00141442, 1.06061)
+parameters/motion/0/current_position = 1.00915
+parameters/motion/0/current_delta = 0.025
+parameters/motion/1/current_position = 0.177991
+parameters/motion/1/current_delta = 0.025509
+parameters/motion/2/current_length = 0.666667
+parameters/motion/2/current_position = 0.121084
+parameters/motion/2/current_delta = 0.025
+parameters/motion/3/current_position = 0.316083
+parameters/motion/4/current_length = 0.7
+parameters/motion/4/current_position = 0.173608
+parameters/motion/4/current_delta = 0.025
+parameters/motion/5/current_position = 0.466809
+parameters/motion/5/current_delta = 0.025
+parameters/motion/6/current_position = 0.377994
+parameters/motion/6/current_delta = 0.025509
+parameters/motion/7/current_position = 0.723214
+parameters/motion/7/current_delta = 0.025
+parameters/motion/8/current_length = 0.766667
+parameters/motion/8/current_position = 0.00102753
+parameters/motion/8/current_delta = 0.025
+parameters/motion/9/current_position = 0.977987
+parameters/motion/9/current_delta = 0.025509
+parameters/motion/10/current_length = 1.23333
+parameters/motion/10/current_position = 0.367694
+parameters/motion/10/current_delta = 0.025
+parameters/motion/11/current_length = 1.06667
+parameters/motion/11/current_position = 0.108021
+parameters/motion/11/current_delta = 0.025
+parameters/motion/12/current_length = 1.06667
+parameters/motion/12/current_position = 0.475815
+parameters/motion/12/current_delta = 0.025
+parameters/motion_state/current_length = 0.666667
+parameters/motion_state/current_position = 0.177991
+parameters/motion_state/current_delta = 0.025509
+parameters/motion_state/current_state = "motion"
+parameters/motion_state/current_index = 0
+parameters/output/current_length = 0.666667
+parameters/output/current_position = 0.177991
+parameters/output/current_delta = 0.025509
+
+[node name="RootMotionView" type="RootMotionView" parent="."]
+animation_path = NodePath("../CharacterAnimations/AnimationTree")
+
+[node name="Clara" parent="." instance=ExtResource("2_uncqv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89682, 0)
+shape = SubResource("CapsuleShape3D_0xrp7")
+
+[node name="CameraLookAtPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48014, 0)
+
+[node name="FloorCheckRayCast" type="RayCast3D" parent="."]
+
+[node name="AlertArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712344, 0)
+shape = SubResource("CylinderShape3D_rgjuf")
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732465, 0.212281)
+shape = SubResource("CylinderShape3D_6uh1o")
+
+[node name="FollowArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FollowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.662804, 0)
+shape = SubResource("CylinderShape3D_x7jhx")
+
+[node name="HealthBar" parent="." instance=ExtResource("4_5agvn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89053, 0)
+texture = SubResource("ViewportTexture_rh5lm")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("9_ohuyf")]
+follow_node = NodePath("../CameraLookAtPoint")
+
+[editable path="CharacterAnimations"]

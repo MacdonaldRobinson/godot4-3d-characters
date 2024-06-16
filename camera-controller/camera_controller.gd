@@ -1,4 +1,5 @@
 extends SpringArm3D
+class_name CameraController
 
 @export var follow_node: Node3D
 @onready var camera: Camera3D = $Camera3D
@@ -8,6 +9,9 @@ func _ready() -> void:
 	self.top_level = true
 
 func _input(event: InputEvent) -> void:
+	if not camera.current:
+		return
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED	
 	
 	if event is InputEventMouseMotion:			
@@ -22,9 +26,9 @@ func _input(event: InputEvent) -> void:
 			camera.rotation.x = 1
 			
 	if event is InputEventMouseButton:
-		var tween: Tween = self.create_tween()
 		
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			var tween: Tween = self.create_tween()
 			var to_val = self.spring_length - 0.5
 			if to_val < 1:
 				to_val = 1
@@ -32,6 +36,7 @@ func _input(event: InputEvent) -> void:
 			tween.tween_property(self, "spring_length", to_val, 0.1)
 				
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			var tween: Tween = self.create_tween()
 			var to_val = self.spring_length + 0.5
 			
 			if to_val > 3:
@@ -40,21 +45,18 @@ func _input(event: InputEvent) -> void:
 			tween.tween_property(self, "spring_length", to_val, 0.1)
 			
 func _process(delta: float) -> void:
+	if not camera.current:
+		return
+	
 	self.global_position = follow_node.global_position
 	
 	var target_parent = follow_node.get_parent()
 	
-	if target_parent is Player:
-		if target_parent.character.is_dying:
+	if target_parent is Character:
+		if target_parent.is_dying:
 			return
 	
 	if Input.is_anything_pressed():
-		
-		if Input.is_action_pressed("left"):
-			return
-		
-		if Input.is_action_pressed("right"):
-			return
 		
 		follow_node.get_parent().look_at(camera.global_position)
 		follow_node.get_parent().rotation.x = 0

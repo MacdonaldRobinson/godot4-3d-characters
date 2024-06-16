@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb3t1tufdkhwr"]
+
+[ext_resource type="Script" path="res://ui/health-bar-3d/health_bar_3d.gd" id="1_0kn21"]
+[ext_resource type="PackedScene" uid="uid://cofew2kmghae0" path="res://ui/health-bar/health_bar.tscn" id="2_7nyn8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lrxly"]
+viewport_path = NodePath("SubViewport")
+
+[node name="HealthBar" type="Sprite3D"]
+pixel_size = 0.0025
+billboard = 2
+texture = SubResource("ViewportTexture_lrxly")
+script = ExtResource("1_0kn21")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+gui_disable_input = true
+size = Vector2i(100, 40)
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("2_7nyn8")]
