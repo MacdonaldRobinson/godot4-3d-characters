@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 		if node.name != self.name:
 			if node is Character:
 				if node.character_animations.is_dying():
-					break
+					continue
 					
 				follow_target = null
 				interact_target = null
@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 		if node.name != self.name:
 			if node is Character:
 				if node.character_animations.is_dying():
-					break
+					continue
 
 				interact_target = null
 				alert_target = null
@@ -72,7 +72,7 @@ func _process(delta: float) -> void:
 		if node.name != self.name:
 			if node is Character:
 				if node.character_animations.is_dying():
-					break
+					continue
 
 				alert_target = null
 				follow_target = null
