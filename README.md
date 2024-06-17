@@ -8,11 +8,11 @@ Demo: https://maconly.atwebpages.com/character-ai-test/Godot4-3D-Character-Anima
 - Shows how to create a health bar
 - Shows how to switch states and animations for enemies: alert, follow, attack, dying
 
-## Enamy AI - Alert and Follow
+## Enemy AI - Alert and Follow
 ![image](https://github.com/MacdonaldRobinson/godot4-3d-characters/assets/18366446/36be7883-1522-4569-b000-136f4c712baf)
 
 
-## Enemy AI - Attack Stance and Attack animations
+## Attack Stance and Attack animations
 ![image](https://github.com/MacdonaldRobinson/godot4-3d-characters/assets/18366446/f43d91cb-fe67-4110-8f08-b1d15d010c8b)
 
 
