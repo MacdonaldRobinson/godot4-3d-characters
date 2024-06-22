@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cfn7ocuss05kg"]
+[gd_scene load_steps=12 format=3 uid="uid://cfn7ocuss05kg"]
 
 [ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="1_5ogck"]
 [ext_resource type="Script" path="res://characters/character.gd" id="1_viqmd"]
 [ext_resource type="PackedScene" uid="uid://bsjopd8rbl3xg" path="res://characters/clara/Clara.glb" id="2_uncqv"]
 [ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="4_5agvn"]
-[ext_resource type="AudioStream" uid="uid://b73u3tpje4o5b" path="res://sound/effects/390758__d00121058__fx_003_footstep_gravel_l.wav" id="6_6sg77"]
 [ext_resource type="AudioStream" uid="uid://bnvpi1gr14gwf" path="res://sound/effects/dying/37823__the_bizniss__demon-dying.wav" id="7_fiubo"]
 [ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="9_ohuyf"]
 
@@ -27,8 +26,9 @@ radius = 3.39317
 [sub_resource type="ViewportTexture" id="ViewportTexture_rh5lm"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Character" type="CharacterBody3D"]
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("camera_lookat_point")]
 script = ExtResource("1_viqmd")
+camera_lookat_point = NodePath("Clara/Armature/GeneralSkeleton/BoneAttachment3D/CameraLookAtPoint")
 
 [node name="CharacterAnimations" parent="." instance=ExtResource("1_5ogck")]
 
@@ -38,33 +38,27 @@ root_motion_track = NodePath("%GeneralSkeleton:Root")
 
 [node name="AnimationTree" parent="CharacterAnimations" index="1"]
 root_node = NodePath("../../Clara")
-parameters/current_position = 1.98989
-parameters/current_delta = 0.03
+parameters/current_position = 4.0254
+parameters/current_delta = 0.022606
 "parameters/Animation 3/current_position" = 1.98989
 "parameters/Animation 3/current_delta" = 0.03
 "parameters/Animation 6/current_delta" = 0.0283028
-parameters/TimeScale/current_length = 0.666667
-parameters/TimeScale/current_position = 0.559374
-parameters/TimeScale/current_delta = 0.025
-parameters/TimeScale/scale = 1.5
+parameters/TimeScale/current_position = 4.0254
+parameters/TimeScale/current_delta = 0.022606
 "parameters/TimeScale 2/current_delta" = 0.0465909
-"parameters/TimeScale 2/scale" = 1.5
 parameters/attack_state/current_delta = 0.0283028
-parameters/jump/current_position = 1.98989
-parameters/jump/current_delta = 0.03
+parameters/jump/current_position = 4.0254
+parameters/jump/current_delta = 0.022606
 parameters/jump_direction/current_delta = 0.0465909
-parameters/jump_direction/blend_position = Vector2(0.00143886, 0.00757575)
 parameters/jump_direction/3/current_length = 0.866667
 parameters/jump_direction/3/current_position = 0.866667
 parameters/jump_direction/3/current_delta = 0.0
 parameters/jump_direction/4/current_delta = 0.0465909
-parameters/motion/current_length = 0.666667
-parameters/motion/current_position = 0.559374
-parameters/motion/current_delta = 0.025
-parameters/motion/blend_position = Vector2(-0.00141442, 1.06061)
-parameters/motion/0/current_position = 1.00915
-parameters/motion/0/current_delta = 0.025
-parameters/motion/1/current_position = 0.559374
+parameters/motion/current_position = 4.0254
+parameters/motion/current_delta = 0.022606
+parameters/motion/0/current_position = 4.0254
+parameters/motion/0/current_delta = 0.022606
+parameters/motion/1/current_position = 0.0717781
 parameters/motion/1/current_delta = 0.025
 parameters/motion/2/current_length = 0.666667
 parameters/motion/2/current_position = 0.121084
@@ -74,15 +68,15 @@ parameters/motion/4/current_length = 0.7
 parameters/motion/4/current_position = 0.173608
 parameters/motion/4/current_delta = 0.025
 parameters/motion/5/current_position = 0.466809
-parameters/motion/6/current_position = 0.492708
-parameters/motion/6/current_delta = 0.025
+parameters/motion/6/current_position = 0.558735
+parameters/motion/6/current_delta = 0.022606
 parameters/motion/7/current_position = 0.723214
 parameters/motion/7/current_delta = 0.025
 parameters/motion/8/current_length = 0.766667
 parameters/motion/8/current_position = 0.00102753
 parameters/motion/8/current_delta = 0.025
-parameters/motion/9/current_position = 0.159374
-parameters/motion/9/current_delta = 0.025
+parameters/motion/9/current_position = 0.825401
+parameters/motion/9/current_delta = 0.022606
 parameters/motion/10/current_length = 1.23333
 parameters/motion/10/current_position = 0.367694
 parameters/motion/10/current_delta = 0.025
@@ -94,22 +88,84 @@ parameters/motion/12/current_position = 0.475815
 parameters/motion/12/current_delta = 0.025
 parameters/motion_attack/current_position = 1.98989
 parameters/motion_attack/current_delta = 0.03
-parameters/motion_state/current_position = 1.98989
-parameters/motion_state/current_delta = 0.03
-parameters/output/current_position = 1.98989
-parameters/output/current_delta = 0.03
+parameters/motion_state/current_position = 4.0254
+parameters/motion_state/current_delta = 0.022606
+parameters/output/current_position = 4.0254
+parameters/output/current_delta = 0.022606
 
 [node name="RootMotionView" type="RootMotionView" parent="."]
 animation_path = NodePath("../CharacterAnimations/AnimationTree")
 
 [node name="Clara" parent="." instance=ExtResource("2_uncqv")]
 
+[node name="GeneralSkeleton" parent="Clara/Armature" index="0"]
+bones/1/position = Vector3(1.95032e-06, 0.829436, 3.32948e-07)
+bones/1/rotation = Quaternion(-0.0333212, -0.0697684, -0.0262013, 0.996662)
+bones/2/rotation = Quaternion(-0.0103674, -0.00112781, 0.0315506, 0.999448)
+bones/3/rotation = Quaternion(-0.0029231, -0.00737407, 0.0392126, 0.999199)
+bones/4/rotation = Quaternion(-0.00270572, -0.00883242, 0.0389704, 0.999198)
+bones/5/rotation = Quaternion(0.0343629, -0.000722507, -0.0226708, 0.999152)
+bones/6/rotation = Quaternion(0.114998, 0.0114244, -0.0807271, 0.990014)
+bones/17/rotation = Quaternion(0.552881, 0.445, 0.500227, -0.496054)
+bones/18/rotation = Quaternion(0.00570737, 0.77019, -0.620963, -0.145533)
+bones/19/rotation = Quaternion(0.144426, -0.692187, 0.144426, 0.692213)
+bones/20/rotation = Quaternion(0.0492047, 0.698511, -0.0368318, 0.712955)
+bones/21/rotation = Quaternion(-0.154906, 0.734731, 0.104903, 0.652051)
+bones/22/rotation = Quaternion(0.184734, 0.0561372, -0.0106077, 0.981127)
+bones/23/rotation = Quaternion(0.164727, 0.032396, 0.0383239, 0.985062)
+bones/24/scale = Vector3(1.00058, 1.00049, 1.00015)
+bones/25/rotation = Quaternion(0.0644482, -0.000422582, -0.00117481, 0.99792)
+bones/26/rotation = Quaternion(0.223099, -3.11434e-06, -0.0270291, 0.974421)
+bones/27/rotation = Quaternion(0.141237, -1.93715e-06, -0.0171112, 0.989828)
+bones/29/rotation = Quaternion(0.100137, -1.02073e-05, -0.012042, 0.994901)
+bones/30/rotation = Quaternion(0.247171, -2.38419e-06, -0.0299454, 0.968509)
+bones/31/rotation = Quaternion(0.193741, -1.98185e-06, -0.0234723, 0.980772)
+bones/33/rotation = Quaternion(0.120195, -0.000497315, -0.0104357, 0.992695)
+bones/34/rotation = Quaternion(0.271912, -4.8379e-06, -0.0329431, 0.961758)
+bones/35/rotation = Quaternion(0.204194, -3.63588e-06, -0.0247388, 0.978618)
+bones/37/rotation = Quaternion(0.128121, 0.00217953, -0.0318817, 0.991244)
+bones/38/rotation = Quaternion(0.170457, 0.00589106, 0.0147541, 0.985237)
+bones/39/rotation = Quaternion(0.359347, -1.28787e-06, -0.0435361, 0.932188)
+bones/45/rotation = Quaternion(0.541043, -0.449594, -0.547682, -0.45297)
+bones/46/rotation = Quaternion(0.0471131, 0.855427, -0.501613, 0.120041)
+bones/47/rotation = Quaternion(0.101416, 0.699805, -0.101416, 0.699787)
+bones/48/rotation = Quaternion(-0.0114567, -0.632834, 0.0428003, 0.773019)
+bones/49/rotation = Quaternion(-0.15829, -0.683777, -0.118614, 0.702371)
+bones/50/rotation = Quaternion(0.123759, -0.166684, 0.0212692, 0.977981)
+bones/51/rotation = Quaternion(0.144846, 0.0263016, 0.0299357, 0.988651)
+bones/52/scale = Vector3(1.00058, 1.00049, 1.00015)
+bones/53/rotation = Quaternion(0.0835684, -9.35463e-05, 0.0113119, 0.996438)
+bones/54/rotation = Quaternion(0.106902, -1.35316e-06, 0.0130748, 0.994184)
+bones/55/rotation = Quaternion(0.0935546, -1.23152e-06, 0.0114424, 0.995548)
+bones/57/rotation = Quaternion(0.0996404, 1.01092e-06, 0.0121641, 0.994949)
+bones/58/rotation = Quaternion(0.199028, -2.45088e-06, 0.0243426, 0.979691)
+bones/59/rotation = Quaternion(-0.0817953, -4.19219e-05, -0.0100006, 0.996599)
+bones/61/rotation = Quaternion(0.101146, 0.000159879, 0.0107761, 0.994813)
+bones/62/rotation = Quaternion(0.200815, -1.0438e-06, 0.0245613, 0.979321)
+bones/63/rotation = Quaternion(-0.0377039, -4.32545e-05, -0.00460977, 0.999278)
+bones/65/rotation = Quaternion(0.0768057, 0.000316804, 0.00524128, 0.997032)
+bones/66/rotation = Quaternion(0.199857, 6.52105e-07, 0.0244439, 0.97952)
+bones/67/rotation = Quaternion(-0.0732699, 1.31983e-06, -0.00896145, 0.997272)
+bones/72/rotation = Quaternion(0.137375, 0.156364, 0.971429, -0.114033)
+bones/73/rotation = Quaternion(-0.0275922, 0.990263, -0.134824, -0.0209717)
+bones/74/rotation = Quaternion(-0.0667501, 0.742672, -0.66475, 0.0457244)
+bones/75/rotation = Quaternion(0.00038794, 0.999799, -0.0200178, -0.000879199)
+bones/77/rotation = Quaternion(-0.0872547, 0.0198615, 0.995124, -0.0414818)
+bones/78/rotation = Quaternion(-0.00513237, 0.9806, -0.192518, -0.0365231)
+bones/79/rotation = Quaternion(-0.0132968, 0.598811, -0.800734, 0.00860578)
+bones/80/rotation = Quaternion(3.07266e-05, 0.999999, 0.00164827, -7.32691e-05)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Clara/Armature/GeneralSkeleton" index="4"]
+transform = Transform3D(0.991857, 0.00479247, -0.127269, -0.0300243, 0.979926, -0.197091, 0.123769, 0.199307, 0.97209, -0.0436416, 1.36329, -0.0638603)
+bone_name = "Head"
+bone_idx = 6
+
+[node name="CameraLookAtPoint" type="Node3D" parent="Clara/Armature/GeneralSkeleton/BoneAttachment3D"]
+transform = Transform3D(0.997102, -0.0172903, 0.0740864, 0.00976116, 0.994858, 0.100808, -0.0754484, -0.0997927, 0.992144, 0.0631784, 0.120076, 0.0120412)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884513, 0)
 shape = SubResource("CapsuleShape3D_0xrp7")
-
-[node name="CameraLookAtPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48014, 0)
 
 [node name="FloorCheckRayCast" type="RayCast3D" parent="."]
 
@@ -137,14 +193,19 @@ texture = SubResource("ViewportTexture_rh5lm")
 max_health = 100
 current_health = 100
 
-[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node") instance=ExtResource("9_ohuyf")]
-follow_node = NodePath("../CameraLookAtPoint")
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node", "character") instance=ExtResource("9_ohuyf")]
+follow_node = NodePath("../Clara/Armature/GeneralSkeleton/BoneAttachment3D/CameraLookAtPoint")
+character = NodePath("..")
+
+[node name="Camera3D" parent="CameraController" index="0"]
+current = true
 
 [node name="FootStepSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("6_6sg77")
 panning_strength = 0.5
 
 [node name="DyingSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_fiubo")
 
 [editable path="CharacterAnimations"]
+[editable path="Clara"]
+[editable path="CameraController"]

@@ -3,9 +3,10 @@ class_name Character
 
 var gravity: int = 9.8
 
+@export var camera_lookat_point: Node3D
+
 @onready var health_bar_3d: HealthBar3D = $HealthBar
 @onready var floor_check: RayCast3D = $FloorCheckRayCast
-@onready var camera_lookat_point: Node3D = $CameraLookAtPoint
 @onready var camera_controller: CameraController = $CameraController
 
 @onready var character_animations: CharacterAnimations = $CharacterAnimations
@@ -29,10 +30,10 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _physics_process(delta: float) -> void:
-	character_animations.set_is_on_floor(floor_check.is_colliding())
+	character_animations.set_is_on_floor(true)
 	
-	if !floor_check.is_colliding():
-		velocity.y -= gravity
+#	if !floor_check.is_colliding():
+	velocity.y -= gravity
 		
 	move_and_slide()	
 
@@ -117,7 +118,7 @@ func apply_root_motion():
 	var root_motion_rotation = character_animations.anim_tree.get_root_motion_rotation()
 	
 	var root_motion_rotation_normalized = root_motion_rotation.get_axis().normalized()
-
+	
 	self.translate_object_local(root_motion_position)
 	
 	if root_motion_rotation_normalized != Vector3.ZERO:

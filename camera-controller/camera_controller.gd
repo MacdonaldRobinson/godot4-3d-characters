@@ -2,6 +2,8 @@ extends SpringArm3D
 class_name CameraController
 
 @export var follow_node: Node3D
+@export var character: Character
+
 @onready var camera: Camera3D = $Camera3D
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +17,7 @@ func _input(event: InputEvent) -> void:
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED	
 	
-	if event is InputEventMouseMotion:			
+	if event is InputEventMouseMotion:
 		var normalized = event.screen_relative.normalized() / 30		
 		self.rotate_y(-normalized.x)		
 		camera.rotate_x(-normalized.y)
@@ -49,21 +51,25 @@ func _process(delta: float) -> void:
 	if not camera.current:
 		return
 	
-	var target_parent = follow_node.get_parent()
-
-			
-	var character_animation: CharacterAnimations = target_parent.character_animations
-			
-	self.global_position = follow_node.global_position
+	var character_animation: CharacterAnimations = character.character_animations
+	
+	var can_follow = false
+	
 	camera.look_at(follow_node.global_position)
+	
+	if self.global_position.distance_to(follow_node.global_position) > 0.05:
+		can_follow = true
+	
+	if character.character_animations.is_dying():
+		return
+					
+	self.global_position = follow_node.global_position
 
-	if target_parent is Character:
-		if target_parent.character_animations.is_dying():
-			return
-			
-	if Input.is_anything_pressed():
+	if Input.is_anything_pressed():		
+		character.look_at(camera.global_position)
+		character.rotation.x = 0
+		character.rotation.z = 0
 		
-		follow_node.get_parent().look_at(camera.global_position)
-		follow_node.get_parent().rotation.x = 0
-		follow_node.get_parent().rotation.z = 0			
-		
+	if can_follow:	
+		pass
+		#self.global_position = lerp(self.global_position, follow_node.global_position, 0.05)
