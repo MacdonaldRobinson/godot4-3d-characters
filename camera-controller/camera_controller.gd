@@ -69,8 +69,6 @@ func _process(delta: float) -> void:
 	
 	if  diff > 0.05:
 		can_follow = true
-
-	print(camera_distance)
 	
 	if character.character_animations.is_dying():
 		return
