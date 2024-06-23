@@ -4,7 +4,9 @@
 
 [node name="CameraController" type="SpringArm3D"]
 spring_length = 3.0
-margin = 0.001
 script = ExtResource("1_261hn")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="CharacterLookAtPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.4442)

@@ -5,9 +5,13 @@ class_name CameraController
 @export var character: Character
 
 @onready var camera: Camera3D = $Camera3D
+@onready var character_look_at_point: Node3D = $CharacterLookAtPoint
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void:	
+	self.add_excluded_object(camera)
+	self.add_excluded_object(Character)
+	self.add_excluded_object(self)
 	self.top_level = true
 
 func _input(event: InputEvent) -> void:
@@ -51,25 +55,31 @@ func _process(delta: float) -> void:
 	if not camera.current:
 		return
 	
+	self.add_excluded_object(character)
+	
 	var character_animation: CharacterAnimations = character.character_animations
 	
 	var can_follow = false
 	
 	camera.look_at(follow_node.global_position)
+	camera.global_position = camera.global_position + Vector3(0, 0.25, 0)
+
+	var camera_distance = self.global_position.direction_to(camera.global_position)
+	var diff = self.global_position.distance_to(follow_node.global_position)
 	
-	if self.global_position.distance_to(follow_node.global_position) > 0.05:
+	if  diff > 0.05:
 		can_follow = true
+
+	print(camera_distance)
 	
 	if character.character_animations.is_dying():
 		return
-					
-	self.global_position = follow_node.global_position
-
+	
 	if Input.is_anything_pressed():		
-		character.look_at(camera.global_position)
+		character.look_at(character_look_at_point.global_position)
 		character.rotation.x = 0
 		character.rotation.z = 0
+		pass
 		
 	if can_follow:	
-		pass
-		#self.global_position = lerp(self.global_position, follow_node.global_position, 0.05)
+		self.global_position = lerp(self.global_position, follow_node.global_position,0.05)
