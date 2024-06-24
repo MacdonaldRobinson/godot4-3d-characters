@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c0sxcuwv2unn1"]
+[gd_scene load_steps=20 format=3 uid="uid://c0sxcuwv2unn1"]
 
 [ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_gsgj3"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_6gwn7"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="10_a0ye1"]
 [ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="11_acv8u"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="12_6p8bv"]
-[ext_resource type="Script" path="res://characters/character_stats.gd" id="12_70ssd"]
 [ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/Warrok.tscn" id="12_hyi4l"]
 [ext_resource type="PackedScene" uid="uid://cfn7ocuss05kg" path="res://characters/character.tscn" id="12_vi2ih"]
 [ext_resource type="PackedScene" uid="uid://cjyuur1ra1ccx" path="res://ui/action-bar/hud/hud.tscn" id="14_hemow"]
@@ -33,15 +32,6 @@ sky_material = SubResource("ProceduralSkyMaterial_c0ht4")
 background_mode = 2
 sky = SubResource("Sky_m7l4b")
 fog_enabled = true
-
-[sub_resource type="Resource" id="Resource_e7giq"]
-script = ExtResource("12_70ssd")
-name = "Ememy 1"
-current_level = 1
-current_health = 1000
-max_health = 1000
-number_of_killes = 0
-experiance_points = 0
 
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music")]
 script = ExtResource("1_gsgj3")
@@ -92,7 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Enemy" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("12_hyi4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 3.37116, 0)
 level = NodePath("..")
-character_stats = SubResource("Resource_e7giq")
 
 [node name="Enemy2" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("12_hyi4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4333, 3.37116, 0)
@@ -136,4 +125,4 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Hud" parent="Control/MarginContainer" node_paths=PackedStringArray("character") instance=ExtResource("14_hemow")]
 layout_mode = 2
-character = NodePath("../../../Enemy")
+character = NodePath("../../../Character")
