@@ -1,0 +1,130 @@
+[gd_resource type="VisualShader" load_steps=13 format=3 uid="uid://d3rgds8175aw3"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_junq2"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_3icne"]
+parameter_name = "Texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_vba8y"]
+source = 5
+
+[sub_resource type="Gradient" id="Gradient_u3l5r"]
+offsets = PackedFloat32Array(0.0725076, 0.115813, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wqn4u"]
+gradient = SubResource("Gradient_u3l5r")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pvb3f"]
+expanded_output_ports = [0]
+texture = SubResource("GradientTexture2D_wqn4u")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_efkjh"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_g36c8"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_fws1f"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_djw5n"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vgj2w"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_5v8yq"]
+parameter_name = "Speed"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+
+uniform vec2 Speed;
+uniform sampler2D Texture;
+uniform sampler2D tex_frg_2 : source_color;
+
+
+
+void fragment() {
+// Input:3
+	vec4 n_out3p0 = COLOR;
+	float n_out3p4 = n_out3p0.a;
+
+
+// Vector2Parameter:9
+	vec2 n_out9p0 = Speed;
+
+
+// Input:8
+	float n_out8p0 = TIME;
+
+
+// VectorOp:10
+	vec2 n_out10p0 = n_out9p0 * vec2(n_out8p0);
+
+
+// UVFunc:7
+	vec2 n_in7p1 = vec2(1.00000, 1.00000);
+	vec2 n_out7p0 = n_out10p0 * n_in7p1 + UV;
+
+
+	vec4 n_out12p0;
+// Texture2D:12
+	n_out12p0 = texture(Texture, n_out7p0);
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// VectorOp:6
+	vec2 n_out6p0 = vec2(n_out12p0.xy) * vec2(n_out2p0.xy);
+
+
+// VectorOp:4
+	vec2 n_out4p0 = vec2(n_out3p4) * n_out6p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out4p0.x;
+
+
+}
+"
+modes/cull = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_pvb3f")
+nodes/fragment/2/position = Vector2(-680, 660)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_efkjh")
+nodes/fragment/3/position = Vector2(-320, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_g36c8")
+nodes/fragment/4/position = Vector2(20, 200)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_fws1f")
+nodes/fragment/6/position = Vector2(-320, 440)
+nodes/fragment/7/node = SubResource("VisualShaderNodeUVFunc_djw5n")
+nodes/fragment/7/position = Vector2(-1080, 400)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_vgj2w")
+nodes/fragment/8/position = Vector2(-1640, 380)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVec2Parameter_5v8yq")
+nodes/fragment/9/position = Vector2(-1660, 580)
+nodes/fragment/10/node = SubResource("VisualShaderNodeVectorOp_junq2")
+nodes/fragment/10/position = Vector2(-1300, 560)
+nodes/fragment/11/node = SubResource("VisualShaderNodeTexture2DParameter_3icne")
+nodes/fragment/11/position = Vector2(-1160, 660)
+nodes/fragment/12/node = SubResource("VisualShaderNodeTexture_vba8y")
+nodes/fragment/12/position = Vector2(-740, 340)
+nodes/fragment/connections = PackedInt32Array(3, 4, 4, 0, 4, 0, 0, 1, 3, 0, 0, 0, 2, 0, 6, 1, 6, 0, 4, 1, 9, 0, 10, 0, 8, 0, 10, 1, 10, 0, 7, 2, 11, 0, 12, 2, 7, 0, 12, 0, 12, 0, 6, 0)

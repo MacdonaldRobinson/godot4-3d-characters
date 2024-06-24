@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://56g5vjqj1xvc"]
+
+[ext_resource type="Texture2D" uid="uid://cc1slrppohqdx" path="res://icon.svg" id="1_u7ub2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrcye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34sed"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Slot" type="PanelContainer"]
+offset_right = 64.0
+offset_bottom = 32.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hrcye")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_34sed")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_u7ub2")
+expand_mode = 1
+stretch_mode = 5

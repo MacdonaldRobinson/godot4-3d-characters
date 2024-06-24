@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://7ggnui5whqw3"]
+
+[ext_resource type="PackedScene" uid="uid://56g5vjqj1xvc" path="res://ui/action-bar/action-bar/slot/slot.tscn" id="1_n1vj7"]
+
+[node name="ActionBar" type="GridContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -454.0
+offset_right = 454.0
+offset_bottom = 148.0
+grow_horizontal = 2
+columns = 8
+
+[node name="Slot" parent="." instance=ExtResource("1_n1vj7")]
+layout_mode = 2
+
+[node name="Slot2" parent="." instance=ExtResource("1_n1vj7")]
+layout_mode = 2
+
+[node name="Slot3" parent="." instance=ExtResource("1_n1vj7")]
+layout_mode = 2
+
+[node name="Slot4" parent="." instance=ExtResource("1_n1vj7")]
+layout_mode = 2
+
+[node name="Slot5" parent="." instance=ExtResource("1_n1vj7")]
+layout_mode = 2
+
+[node name="Slot6" parent="." instance=ExtResource("1_n1vj7")]
+layout_mode = 2

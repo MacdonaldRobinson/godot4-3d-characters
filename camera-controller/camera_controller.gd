@@ -6,11 +6,11 @@ class_name CameraController
 
 @onready var camera: Camera3D = $Camera3D
 @onready var character_look_at_point: Node3D = $CharacterLookAtPoint
+@onready var camera_floor_raycast: RayCast3D = $Camera3D/CameraFloorRayCast
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	self.add_excluded_object(camera)
-	self.add_excluded_object(Character)
 	self.add_excluded_object(self)
 	self.top_level = true
 
@@ -54,15 +54,24 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if not camera.current:
 		return
+		
+	camera.global_position.y += 1
+		
+	self.add_excluded_object(character)	
 	
-	self.add_excluded_object(character)
+	if character.alert_target:
+		self.add_excluded_object(character.alert_target)
+	
+	
+	if character.follow_target:
+		self.add_excluded_object(character.follow_target)
+		
+	if character.interact_target:		
+		self.add_excluded_object(character.interact_target)
 	
 	var character_animation: CharacterAnimations = character.character_animations
 	
-	var can_follow = false
-	
-	camera.look_at(follow_node.global_position)
-	camera.global_position = camera.global_position + Vector3(0, 0.25, 0)
+	var can_follow = false	
 
 	var camera_distance = self.global_position.direction_to(camera.global_position)
 	var diff = self.global_position.distance_to(follow_node.global_position)
@@ -81,3 +90,5 @@ func _process(delta: float) -> void:
 		
 	if can_follow:	
 		self.global_position = lerp(self.global_position, follow_node.global_position,0.05)
+
+	camera.look_at(follow_node.global_position)

@@ -1,51 +1,64 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2l1vj4n6hnhl"]
+[gd_scene load_steps=16 format=3 uid="uid://b2l1vj4n6hnhl"]
 
 [ext_resource type="Script" path="res://characters/character.gd" id="1_it3re"]
 [ext_resource type="PackedScene" uid="uid://b5ueref4pofyp" path="res://characters/warrok/warrok-t-post-with-root-bone.glb" id="2_6es7q"]
+[ext_resource type="Script" path="res://characters/character_stats.gd" id="2_atdus"]
 [ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="3_35rhl"]
 [ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="4_ddsfh"]
 [ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="5_svdwt"]
 [ext_resource type="AudioStream" uid="uid://bnvpi1gr14gwf" path="res://sound/effects/dying/37823__the_bizniss__demon-dying.wav" id="7_ahvch"]
+[ext_resource type="PackedScene" uid="uid://vkwy58ucg8xi" path="res://effects/level_up/level_up_effect.tscn" id="8_sjtxv"]
+
+[sub_resource type="Resource" id="Resource_htka7"]
+script = ExtResource("2_atdus")
+name = "Ememy 1"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xrp7"]
 radius = 0.522308
 height = 2.24918
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rgjuf"]
-height = 1.307
+height = 2.53433
 radius = 4.74196
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6uh1o"]
-height = 1.63078
-radius = 0.715021
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_06p8q"]
+radius = 0.792494
+height = 2.33979
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_x7jhx"]
-height = 1.00929
+height = 2.3645
 radius = 3.39317
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_rh5lm"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_n7duf"]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_phl2x"]
 
 [node name="Warrok" type="CharacterBody3D" node_paths=PackedStringArray("camera_lookat_point")]
 script = ExtResource("1_it3re")
 camera_lookat_point = NodePath("warrok-t-post-with-root-bone/Armature/GeneralSkeleton/BoneAttachment3D/CameraLookAtPoint")
+character_stats = SubResource("Resource_htka7")
 
 [node name="warrok-t-post-with-root-bone" parent="." instance=ExtResource("2_6es7q")]
 
 [node name="GeneralSkeleton" parent="warrok-t-post-with-root-bone/Armature" index="0"]
-bones/1/position = Vector3(2.19806e-06, 0.942747, 3.78117e-07)
-bones/1/rotation = Quaternion(-0.0342687, -0.0632648, -0.0199518, 0.997209)
-bones/2/rotation = Quaternion(-0.00943797, -0.000798474, 0.0356718, 0.999319)
-bones/3/rotation = Quaternion(0.000500941, -0.00750661, 0.0420737, 0.999086)
-bones/4/rotation = Quaternion(0.000790183, -0.00902499, 0.0417732, 0.999086)
-bones/5/rotation = Quaternion(0.0321815, 0.00195107, -0.0255584, 0.999153)
-bones/6/rotation = Quaternion(0.0803396, 0.0234898, -0.0914965, 0.992281)
-bones/11/rotation = Quaternion(0.550028, 0.447149, 0.507138, -0.490243)
-bones/12/rotation = Quaternion(0.00983231, 0.769668, -0.624427, -0.132687)
-bones/13/rotation = Quaternion(0.124617, -0.696028, 0.124616, 0.69605)
-bones/14/rotation = Quaternion(0.062227, 0.694358, -0.0140209, 0.716797)
+bones/0/position = Vector3(8.03551e-05, 3.75442e-12, 3.14943e-05)
+bones/1/position = Vector3(2.25186e-06, 0.942136, 3.78117e-07)
+bones/1/rotation = Quaternion(-0.0338394, -0.0602094, -0.0251058, 0.997296)
+bones/2/rotation = Quaternion(-0.00941877, -0.00140768, 0.0392155, 0.999186)
+bones/3/rotation = Quaternion(0.00267555, -0.00880478, 0.0467161, 0.998866)
+bones/4/rotation = Quaternion(0.00304006, -0.0103348, 0.0463802, 0.998866)
+bones/5/rotation = Quaternion(0.0379155, 0.00244863, -0.0245777, 0.998976)
+bones/6/rotation = Quaternion(0.0716825, 0.0276529, -0.0930821, 0.99269)
+bones/11/rotation = Quaternion(0.550323, 0.445941, 0.513502, -0.484353)
+bones/12/rotation = Quaternion(0.0301417, 0.763239, -0.630832, -0.136413)
+bones/13/rotation = Quaternion(0.0979706, -0.700278, 0.0979706, 0.700296)
+bones/14/rotation = Quaternion(0.0822926, 0.698787, 0.00803772, 0.710535)
 bones/15/rotation = Quaternion(-0.154906, 0.734731, 0.104903, 0.652051)
 bones/16/rotation = Quaternion(0.184734, 0.0561372, -0.0106077, 0.981127)
 bones/17/rotation = Quaternion(0.164727, 0.032396, 0.0383239, 0.985062)
@@ -56,73 +69,74 @@ bones/21/rotation = Quaternion(0.141237, -1.93715e-06, -0.0171112, 0.989828)
 bones/23/rotation = Quaternion(0.100137, -1.02073e-05, -0.012042, 0.994901)
 bones/24/rotation = Quaternion(0.247171, -2.38419e-06, -0.0299454, 0.968509)
 bones/25/rotation = Quaternion(0.193741, -1.98185e-06, -0.0234723, 0.980772)
-bones/27/rotation = Quaternion(0.123908, -0.000512771, -0.0108878, 0.992234)
-bones/28/rotation = Quaternion(0.288447, -5.28716e-06, -0.0349462, 0.956858)
-bones/29/rotation = Quaternion(0.221031, -3.84336e-06, -0.0267787, 0.974899)
-bones/31/rotation = Quaternion(0.138706, 0.00235876, -0.0331513, 0.989776)
-bones/32/rotation = Quaternion(0.190006, 0.00658489, 0.0122582, 0.981685)
-bones/33/rotation = Quaternion(0.377816, -1.33285e-06, -0.0457737, 0.924749)
-bones/35/rotation = Quaternion(0.541453, -0.449567, -0.544991, -0.455744)
-bones/36/rotation = Quaternion(0.0435948, 0.859265, -0.495549, 0.119139)
-bones/37/rotation = Quaternion(0.112006, 0.698189, -0.112006, 0.69817)
-bones/38/rotation = Quaternion(-0.0171751, -0.641799, 0.0516019, 0.764942)
-bones/39/rotation = Quaternion(-0.161226, -0.683959, -0.119303, 0.701408)
-bones/40/rotation = Quaternion(0.131969, -0.160377, 0.0151196, 0.978077)
-bones/41/rotation = Quaternion(0.141797, 0.018552, 0.0228918, 0.989457)
+bones/27/rotation = Quaternion(0.127452, -0.000527453, -0.0113195, 0.99178)
+bones/28/rotation = Quaternion(0.30421, -5.46338e-06, -0.036856, 0.951892)
+bones/29/rotation = Quaternion(0.237104, -4.19415e-06, -0.028726, 0.97106)
+bones/31/rotation = Quaternion(0.148842, 0.00253051, -0.0343651, 0.988261)
+bones/32/rotation = Quaternion(0.208657, 0.00724695, 0.00986317, 0.977912)
+bones/33/rotation = Quaternion(0.395407, -1.46919e-06, -0.0479049, 0.917256)
+bones/35/rotation = Quaternion(0.537556, -0.451469, -0.554587, -0.446814)
+bones/36/rotation = Quaternion(0.0445886, 0.862723, -0.48929, 0.119651)
+bones/37/rotation = Quaternion(0.105377, 0.69922, -0.105377, 0.699202)
+bones/38/rotation = Quaternion(-0.00904983, -0.640542, 0.049788, 0.766254)
+bones/39/rotation = Quaternion(-0.167288, -0.684407, -0.120644, 0.699318)
+bones/40/rotation = Quaternion(0.147184, -0.14873, 0.00320893, 0.977858)
+bones/41/rotation = Quaternion(0.135425, 0.00227904, 0.00908739, 0.990743)
 bones/42/scale = Vector3(1.00058, 1.00049, 1.00015)
-bones/43/rotation = Quaternion(0.0826216, -3.63382e-05, 0.010521, 0.996526)
-bones/44/rotation = Quaternion(0.114646, -1.39544e-06, 0.014022, 0.993307)
-bones/45/rotation = Quaternion(0.093412, -1.25351e-06, 0.011425, 0.995562)
-bones/47/rotation = Quaternion(0.0982738, 1.55729e-06, 0.0119912, 0.995087)
-bones/48/rotation = Quaternion(0.207722, -2.5536e-06, 0.0254059, 0.977858)
-bones/49/rotation = Quaternion(-0.0573399, -4.47972e-05, -0.00701045, 0.99833)
-bones/51/rotation = Quaternion(0.108159, 0.000104934, 0.0122414, 0.994058)
-bones/52/rotation = Quaternion(0.213882, -9.61929e-07, 0.0261593, 0.976509)
-bones/53/rotation = Quaternion(-0.00160075, -4.54332e-05, -0.000195671, 0.999999)
-bones/55/rotation = Quaternion(0.0900726, 0.000354043, 0.00706711, 0.99591)
-bones/56/rotation = Quaternion(0.207374, 6.93476e-07, 0.0253633, 0.977933)
-bones/57/rotation = Quaternion(-0.0176806, 2.37959e-07, -0.00216239, 0.999841)
-bones/64/rotation = Quaternion(0.136384, 0.148187, 0.973586, -0.107565)
-bones/65/rotation = Quaternion(-0.0268589, 0.991051, -0.128765, -0.0226969)
-bones/66/rotation = Quaternion(-0.0674737, 0.741451, -0.66602, 0.0459889)
-bones/67/rotation = Quaternion(0.000400735, 0.999786, -0.0206761, -0.000908147)
-bones/69/rotation = Quaternion(-0.0900398, 0.0118017, 0.995218, -0.0359941)
-bones/70/rotation = Quaternion(-0.00399964, 0.981373, -0.188061, -0.0390455)
-bones/71/rotation = Quaternion(-0.0116258, 0.595892, -0.802945, 0.00754814)
-bones/72/rotation = Quaternion(2.46696e-05, 0.999999, 0.00132343, -5.88416e-05)
+bones/43/rotation = Quaternion(0.0806296, 7.94664e-05, 0.00885682, 0.996705)
+bones/44/rotation = Quaternion(0.129177, -1.66556e-06, 0.0157992, 0.991496)
+bones/45/rotation = Quaternion(0.0929417, -1.28787e-06, 0.0113675, 0.995607)
+bones/47/rotation = Quaternion(0.0953133, 2.87434e-06, 0.0116165, 0.99538)
+bones/48/rotation = Quaternion(0.223786, -2.85924e-06, 0.0273707, 0.974254)
+bones/49/rotation = Quaternion(-0.0042458, -5.03722e-05, -0.000519045, 0.999991)
+bones/51/rotation = Quaternion(0.121244, -2.50231e-05, 0.0150113, 0.992509)
+bones/52/rotation = Quaternion(0.240764, -1.25211e-06, 0.0294473, 0.970137)
+bones/53/rotation = Quaternion(0.0765776, -4.90887e-05, 0.00936217, 0.99702)
+bones/55/rotation = Quaternion(0.1188, 0.000453671, 0.0107086, 0.99286)
+bones/56/rotation = Quaternion(0.222903, 6.51876e-07, 0.0272626, 0.974459)
+bones/57/rotation = Quaternion(0.102737, -1.79066e-06, 0.0125654, 0.994629)
+bones/64/rotation = Quaternion(0.136786, 0.157982, 0.971465, -0.112194)
+bones/65/rotation = Quaternion(-0.0260172, 0.989685, -0.138122, -0.0277343)
+bones/66/rotation = Quaternion(-0.066384, 0.741406, -0.666227, 0.0452961)
+bones/67/rotation = Quaternion(0.000401506, 0.999785, -0.0207158, -0.000909892)
+bones/69/rotation = Quaternion(-0.0866233, 0.0162875, 0.995205, -0.0423981)
+bones/70/rotation = Quaternion(-0.00222839, 0.980358, -0.191762, -0.0460618)
+bones/71/rotation = Quaternion(-0.0108241, 0.59649, -0.802515, 0.00722547)
+bones/72/rotation = Quaternion(3.21414e-05, 0.999999, 0.00172658, -7.67708e-05)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="warrok-t-post-with-root-bone/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.996199, 0.0140269, -0.0859686, -0.0257348, 0.990287, -0.136635, 0.083217, 0.138328, 0.986884, -0.154562, 1.91513, 0.192768)
+transform = Transform3D(0.997479, 0.000494808, -0.0709553, -0.0103432, 0.990309, -0.138497, 0.0701992, 0.138882, 0.987818, -0.162295, 1.9086, 0.199951)
 bone_name = "Head"
 bone_idx = 6
 
 [node name="CameraLookAtPoint" type="Node3D" parent="warrok-t-post-with-root-bone/Armature/GeneralSkeleton/BoneAttachment3D"]
 transform = Transform3D(0.997102, -0.0172903, 0.0740864, 0.00976116, 0.994858, 0.100808, -0.0754484, -0.0997927, 0.992144, 0.0631784, 0.120076, 0.0120412)
 
-[node name="CharacterAnimations" parent="." instance=ExtResource("3_35rhl")]
+[node name="CharacterAnimations" parent="." node_paths=PackedStringArray("dying_sound") instance=ExtResource("3_35rhl")]
+dying_sound = NodePath("../DyingSound")
 
 [node name="AnimationPlayer" parent="CharacterAnimations" index="0"]
 root_node = NodePath("../../warrok-t-post-with-root-bone")
 
 [node name="AnimationTree" parent="CharacterAnimations" index="1"]
 root_node = NodePath("../../warrok-t-post-with-root-bone")
-parameters/current_position = 0.963589
+parameters/current_position = 0.77911
 "parameters/Animation 3/current_position" = 2.04343
 "parameters/Animation 3/current_delta" = 0.0180556
-parameters/TimeScale/current_position = 0.963589
-parameters/jump/current_position = 0.963589
-parameters/motion/current_position = 0.963589
-parameters/motion/0/current_position = 0.963589
+parameters/TimeScale/current_position = 0.77911
+parameters/jump/current_position = 0.77911
+parameters/motion/current_position = 0.77911
+parameters/motion/0/current_position = 0.77911
 parameters/motion/1/current_position = 0.0
 parameters/motion/1/current_delta = 0.508954
 parameters/motion/5/current_position = 0.0
 parameters/motion/5/current_delta = 0.175622
-parameters/motion/6/current_position = 0.496926
-parameters/motion/9/current_position = 0.163582
+parameters/motion/6/current_position = 0.0457769
+parameters/motion/9/current_position = 1.04578
 parameters/motion_attack/current_position = 2.04343
 parameters/motion_attack/current_delta = 0.0180556
-parameters/motion_state/current_position = 0.963589
-parameters/output/current_position = 0.963589
+parameters/motion_state/current_position = 0.77911
+parameters/output/current_position = 0.77911
 
 [node name="RootMotionView" type="RootMotionView" parent="."]
 
@@ -135,19 +149,19 @@ shape = SubResource("CapsuleShape3D_0xrp7")
 [node name="AlertArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712344, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.938594, 0)
 shape = SubResource("CylinderShape3D_rgjuf")
 
 [node name="InteractArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.813596, 0.212281)
-shape = SubResource("CylinderShape3D_6uh1o")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16302, 0.212281)
+shape = SubResource("CapsuleShape3D_06p8q")
 
 [node name="FollowArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FollowArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.662804, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.856675, 0)
 shape = SubResource("CylinderShape3D_x7jhx")
 
 [node name="HealthBar" parent="." instance=ExtResource("4_ddsfh")]
@@ -161,11 +175,13 @@ follow_node = NodePath("../warrok-t-post-with-root-bone/Armature/GeneralSkeleton
 character = NodePath("..")
 
 [node name="FootStepSound" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamPolyphonic_n7duf")
+stream = SubResource("AudioStreamPolyphonic_phl2x")
 panning_strength = 0.5
 
 [node name="DyingSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_ahvch")
+
+[node name="LevelUpEffect" parent="." instance=ExtResource("8_sjtxv")]
 
 [editable path="warrok-t-post-with-root-bone"]
 [editable path="CharacterAnimations"]

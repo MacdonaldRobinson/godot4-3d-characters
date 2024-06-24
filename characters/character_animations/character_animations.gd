@@ -11,6 +11,8 @@ var is_on_floor: bool = false
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
+@export var dying_sound: AudioStreamPlayer3D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Clara.hide()	
@@ -69,7 +71,7 @@ func set_jumping(motion_direction: Vector2):
 	anim_tree.set("parameters/jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
 func set_dying():
-	anim_tree.set("parameters/motion_state/transition_request", "dying")	
+	anim_tree.set("parameters/motion_state/transition_request", "dying")
 	
 func set_motion(motion_direction: Vector2):
 	anim_tree.set("parameters/motion_state/transition_request", "motion")	
@@ -138,8 +140,10 @@ func attack_stance(auto_attack: bool):
 		var attack_state: Array[String] =["state_4"]
 		var random_attack_state: String = attack_state.pick_random()
 		attack(random_attack_state)
-		
 
 func attack(attack_state: String):
 	anim_tree.set("parameters/attack_state/transition_request", attack_state)
 	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)	
+
+func playing_dying_animation():
+	dying_sound.play()
