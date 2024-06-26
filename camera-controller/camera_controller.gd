@@ -14,12 +14,11 @@ func _ready() -> void:
 	self.add_excluded_object(self)
 	self.top_level = true
 
+
 func _input(event: InputEvent) -> void:
 	
 	if not camera.current:
 		return
-	
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED	
 	
 	if event is InputEventMouseMotion:
 		var normalized = event.screen_relative.normalized() / 30		
@@ -71,14 +70,6 @@ func _process(delta: float) -> void:
 	
 	var character_animation: CharacterAnimations = character.character_animations
 	
-	var can_follow = false	
-
-	var camera_distance = self.global_position.direction_to(camera.global_position)
-	var diff = self.global_position.distance_to(follow_node.global_position)
-	
-	if  diff > 0.05:
-		can_follow = true
-	
 	if character.character_animations.is_dying():
 		return
 	
@@ -87,8 +78,6 @@ func _process(delta: float) -> void:
 		character.rotation.x = 0
 		character.rotation.z = 0
 		pass
-		
-	if can_follow:	
-		self.global_position = lerp(self.global_position, follow_node.global_position,0.05)
-
+	
+	self.global_position = follow_node.global_position
 	camera.look_at(follow_node.global_position)

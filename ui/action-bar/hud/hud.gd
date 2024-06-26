@@ -1,6 +1,11 @@
 extends Control
+class_name HUD
 
-@export var character: Character
+@export var character: Character:
+	set(value):
+		character = value		
+		character.camera_controller.camera.current = true
+		
 
 @onready var character_name: Label = %NameValue
 @onready var character_level: Label = %LevelValue
@@ -8,8 +13,7 @@ extends Control
 @onready var character_level_progress: ProgressBar = %LevelProgress
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	character.camera_controller.camera.current = true
+func _ready() -> void:	
 	pass # Replace with function body.
 
 

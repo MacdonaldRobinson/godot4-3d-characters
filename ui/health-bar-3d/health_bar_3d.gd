@@ -3,32 +3,34 @@ class_name HealthBar3D
 
 @onready var health_bar: HealthBar = $SubViewport/HealthBar
 
-@export var max_health: int
-@export var current_health: int
+@export var character: Character:
+	set(value):
+		character = value
+		health_bar.progress_bar.value = character.character_stats.current_health
+		health_bar.progress_bar.max_value = character.character_stats.max_health
+		
+		var fill = health_bar.progress_bar.get_theme_stylebox("fill")
+		var new_fill = fill.duplicate()
+		
+		health_bar.progress_bar.add_theme_stylebox_override("fill", new_fill)
+				
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	health_bar.progress_bar.max_value = max_health
-	health_bar.progress_bar.value = current_health
-	
-	var fill = health_bar.progress_bar.get_theme_stylebox("fill")
-	var new_fill = fill.duplicate()
-	
-	health_bar.progress_bar.add_theme_stylebox_override("fill", new_fill)
-	
+func _ready() -> void:		
 	pass # Replace with function body.
 
 func decrease_health_by(damage: int):
-	current_health = current_health - damage
+	character.character_stats.current_health = character.character_stats.current_health - damage
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if max_health == 0:
+	if character.character_stats.max_health == 0:
 		return
-		
-	var percentage = float(current_health) / float(max_health) * 100
 	
-	health_bar.progress_bar.value = lerp(health_bar.progress_bar.value, percentage, 0.1) 
+	
+	var percentage = float(character.character_stats.current_health) / float(character.character_stats.max_health) * 100
+	
+	health_bar.progress_bar.value = lerp(health_bar.progress_bar.value, float(character.character_stats.current_health), 0.1) 
 	
 	var fill = health_bar.progress_bar.get_theme_stylebox("fill")
 

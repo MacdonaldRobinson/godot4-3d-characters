@@ -11,7 +11,7 @@ var is_on_floor: bool = false
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
-@export var dying_sound: AudioStreamPlayer3D
+@export var character: Character
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -72,6 +72,11 @@ func set_jumping(motion_direction: Vector2):
 	
 func set_dying():
 	anim_tree.set("parameters/motion_state/transition_request", "dying")
+	anim_tree.animation_finished.connect(
+		func(anim_name):
+			if is_dying():
+				character.process_mode = Node.PROCESS_MODE_DISABLED
+	)
 	
 func set_motion(motion_direction: Vector2):
 	anim_tree.set("parameters/motion_state/transition_request", "motion")	
@@ -146,4 +151,7 @@ func attack(attack_state: String):
 	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)	
 
 func playing_dying_animation():
-	dying_sound.play()
+	character.dying_sound.play()
+
+func attack_damage(damage_amount: int):
+	character.attack_damage(damage_amount)
