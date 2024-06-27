@@ -8,6 +8,8 @@ class_name CameraController
 @onready var character_look_at_point: Node3D = $CharacterLookAtPoint
 @onready var camera_floor_raycast: RayCast3D = $Camera3D/CameraFloorRayCast
 
+var last_event:InputEvent
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	self.add_excluded_object(camera)
@@ -16,7 +18,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	
+	last_event = event 
 	if not camera.current:
 		return
 	
@@ -73,11 +75,15 @@ func _process(delta: float) -> void:
 	if character.character_animations.is_dying():
 		return
 	
-	if Input.is_anything_pressed():		
+	if (Input.is_action_pressed("forward") or
+		Input.is_action_pressed("backward") or
+		Input.is_action_pressed("left") or 
+		Input.is_action_pressed("right")):
+			
 		character.look_at(character_look_at_point.global_position)
 		character.rotation.x = 0
 		character.rotation.z = 0
 		pass
 	
 	self.global_position = follow_node.global_position
-	camera.look_at(follow_node.global_position)
+	#camera.look_at(follow_node.global_position)

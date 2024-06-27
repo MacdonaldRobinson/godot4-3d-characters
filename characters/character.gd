@@ -90,15 +90,25 @@ func _process(delta: float) -> void:
 	if not character_animations.is_dying():
 		if not camera_controller.camera.current:
 			if alert_target:
-				look_at_target(alert_target)		
-			
+				look_at_target(alert_target)
+
 			if follow_target:
 				character_animations.lerp_motion_animation(Vector2(0, 1))
 			
 			if interact_target:	
 				character_animations.attack_stance(true)
 		else:
-			if interact_target:	
+			if interact_target:
+				var look_at_target = true
+				if (Input.is_action_pressed("forward") or
+					Input.is_action_pressed("backward") or
+					Input.is_action_pressed("left") or
+					Input.is_action_pressed("right")):						
+						look_at_target = false
+						
+				if look_at_target:
+					look_at_target(interact_target)
+					
 				character_animations.attack_stance(false)
 	
 		
@@ -117,10 +127,10 @@ func _process(delta: float) -> void:
 	
 
 				
-func look_at_target(target: Node3D):
+func look_at_target(target: Character):
 	if target.global_position == self.global_position:
 		return		
-		
+
 	self.look_at(target.global_position, Vector3.UP, true)
 	self.rotation.x = 0
 	self.rotation.z = 0	

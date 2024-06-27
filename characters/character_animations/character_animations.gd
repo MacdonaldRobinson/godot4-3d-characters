@@ -72,11 +72,6 @@ func set_jumping(motion_direction: Vector2):
 	
 func set_dying():
 	anim_tree.set("parameters/motion_state/transition_request", "dying")
-	anim_tree.animation_finished.connect(
-		func(anim_name):
-			if is_dying():
-				character.process_mode = Node.PROCESS_MODE_DISABLED
-	)
 	
 func set_motion(motion_direction: Vector2):
 	anim_tree.set("parameters/motion_state/transition_request", "motion")	

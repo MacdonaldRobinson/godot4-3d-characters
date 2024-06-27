@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 	if character.character_stats.max_health == 0:
 		return
 	
-	
 	var percentage = float(character.character_stats.current_health) / float(character.character_stats.max_health) * 100
 	
 	health_bar.progress_bar.value = lerp(health_bar.progress_bar.value, float(character.character_stats.current_health), 0.1) 

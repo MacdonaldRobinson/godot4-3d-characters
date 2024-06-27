@@ -84,8 +84,8 @@ experiance_points = 0
 script = ExtResource("12_2r2g8")
 name = "Player 1"
 current_level = 1
-current_health = 200
-max_health = 200
+current_health = 1000
+max_health = 1000
 number_of_killes = 0
 experiance_points = 0
 
@@ -130,7 +130,6 @@ environment = SubResource("Environment_7purq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_mudkg")
-autoplay = true
 parameters/looping = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

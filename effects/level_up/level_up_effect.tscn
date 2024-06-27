@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://vkwy58ucg8xi"]
+[gd_scene load_steps=31 format=3 uid="uid://vkwy58ucg8xi"]
 
 [ext_resource type="Script" path="res://effects/level_up/level_up_effect.gd" id="1_elnj0"]
 [ext_resource type="Shader" uid="uid://d3rgds8175aw3" path="res://shaders/levelup/level_up.tres" id="1_vn0hl"]
 [ext_resource type="Shader" uid="uid://d0e073tnelyhg" path="res://shaders/levelup/level_up_text.tres" id="3_1k202"]
+[ext_resource type="Shader" uid="uid://v7qy3nc1q2rq" path="res://shaders/levelup/level_up_effect_particals.tres" id="3_ormyy"]
 [ext_resource type="AudioStream" uid="uid://bxyp3gfboy2qc" path="res://sound/effects/level_up/625714__sonically_sound__achievement.wav" id="4_kk5kv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uvfl"]
@@ -33,32 +34,39 @@ point_count = 4
 [sub_resource type="CurveTexture" id="CurveTexture_s0uwu"]
 curve = SubResource("Curve_till0")
 
-[sub_resource type="Curve" id="Curve_u4bhl"]
-_data = [Vector2(0, 0.252747), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_kxopn"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_adct6"]
-_data = [Vector2(0, 0.274725), 0.0, 0.0, 0, 0, Vector2(0.990741, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_wt6cv"]
-curve_x = SubResource("Curve_u4bhl")
-curve_y = SubResource("Curve_kxopn")
-curve_z = SubResource("Curve_adct6")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jma0j"]
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveXYZTexture_wt6cv")
 color = Color(2, 1.20467, 0.308959, 1)
 alpha_curve = SubResource("CurveTexture_s0uwu")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hrh44"]
 cap_top = false
 cap_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sewku"]
+render_priority = 0
+shader = ExtResource("3_ormyy")
+
+[sub_resource type="Curve" id="Curve_dwu25"]
+_data = [Vector2(0.00609757, 0), 0.0, 0.0, 0, 0, Vector2(0.506098, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_avtmc"]
+curve = SubResource("Curve_dwu25")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1opdf"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+gravity = Vector3(0, 1, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_avtmc")
+color = Color(4, 2, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_mgy8t"]
 
 [sub_resource type="Curve" id="Curve_6fpvl"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.333333, 1), 0.0, 0.0, 0, 0, Vector2(0.736111, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -130,6 +138,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelUpEffectParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_j8es4"]
 length = 0.001
@@ -157,6 +177,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelUpEffectParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_840jx"]
 _data = {
@@ -172,6 +204,7 @@ script = ExtResource("1_elnj0")
 environment = SubResource("Environment_551jy")
 
 [node name="LevelUpEffect1" type="GPUParticles3D" parent="."]
+visible = false
 material_override = SubResource("ShaderMaterial_m862h")
 emitting = false
 amount = 1
@@ -180,6 +213,16 @@ one_shot = true
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_jma0j")
 draw_pass_1 = SubResource("CylinderMesh_hrh44")
+
+[node name="LevelUpEffectParticles" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_sewku")
+emitting = false
+amount = 100
+lifetime = 2.0
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1opdf")
+draw_pass_1 = SubResource("QuadMesh_mgy8t")
 
 [node name="LevelUpText" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55402, 0)
