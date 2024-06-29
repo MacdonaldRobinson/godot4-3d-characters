@@ -198,7 +198,9 @@ func switch_to_character_selecter():
 	GameState.remove_player.rpc(multiplayer.get_unique_id())
 	GameState.all_players_info.clear()	
 	
-	get_tree().change_scene_to_packed(GameState.character_selecter)
+	GameState.game.load_character_selector()
+	
+	#get_tree().change_scene_to_packed(GameState.character_selecter)
 	#get_current_scene().queue_free()
 
 func get_current_scene() -> Node3D:

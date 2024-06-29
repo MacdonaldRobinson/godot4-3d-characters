@@ -17,9 +17,15 @@ func _ready() -> void:
 
 	load_character_selector()
 	
+	GameState.OnPlayerAdded.connect(
+		func(playerInfo: PlayerInfo):
+			add_player(playerInfo)
+	)
+	
 	pass
 
 func load_lobby():
+	print(GameState.all_players_info)
 	for node in multiplayer_spawn_scene.get_children():
 		multiplayer_spawn_scene.remove_child(node)
 
@@ -36,10 +42,14 @@ func load_character_selector():
 
 	multiplayer_spawn_scene.add_child(character_selector)
 	
-func add_player_to_lobby():
-	pass
-	#var character: Character = create_character()
-	#lobby.players_container.add_child(character)
+func add_player(player_info: PlayerInfo):
+	var character: Character = GameState.create_character()
+	character.character_stats = player_info.character_stats
+	
+	var first_node = multiplayer_spawn_scene.get_child(0)
+	
+	if first_node is Lobby:
+		first_node.add_child(character)
 	
 	
 func add_player_to_level():

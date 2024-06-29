@@ -70,4 +70,4 @@ func lookat_character(character: Character):
 
 func _on_select_pressed():
 	GameState.set_my_player_character(selected_character)		
-	GameState.switch_to_scene(GameState.game.lobby_scene.resource_path)
+	GameState.game.load_lobby()
