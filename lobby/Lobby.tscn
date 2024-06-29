@@ -1,0 +1,245 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyo5ay57gsh7i"]
+
+[ext_resource type="Script" path="res://lobby/Lobby.gd" id="1_ugqrq"]
+[ext_resource type="Texture2D" uid="uid://cc1slrppohqdx" path="res://icon.svg" id="2_ap4kl"]
+[ext_resource type="PackedScene" uid="uid://cfn7ocuss05kg" path="res://characters/character.tscn" id="2_vk7aj"]
+[ext_resource type="PackedScene" uid="uid://cquyprb3f0o57" path="res://ui/Overlays/ChatOverlay/ChatOverlay.tscn" id="4_f7ucu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_372o4"]
+albedo_texture = ExtResource("2_ap4kl")
+uv1_triplanar = true
+
+[sub_resource type="Environment" id="Environment_xww1p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dmtd7"]
+size = Vector3(8.78439, 1, 8.56184)
+
+[node name="Lobby" type="Node3D"]
+script = ExtResource("1_ugqrq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.41856, 0, 0, 0, 1, 0, 0, 0)
+use_collision = true
+size = Vector3(13.9984, 1, 11.708)
+material = SubResource("StandardMaterial3D_372o4")
+
+[node name="PlayersContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15176, 0)
+
+[node name="Character" parent="PlayersContainer" instance=ExtResource("2_vk7aj")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7)
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSelecter" type="Button" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "< Character Selecter"
+
+[node name="HostJoinContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = -118.0
+offset_right = 83.5
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostContainer" type="PanelContainer" parent="CanvasLayer/Control/HostJoinContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/HostJoinContainer/HostContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Port"
+horizontal_alignment = 1
+
+[node name="HostPort" type="TextEdit" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "54210"
+
+[node name="Host" type="Button" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Host"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "External IP"
+horizontal_alignment = 1
+
+[node name="HostExternalIP" type="TextEdit" parent="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+
+[node name="JoinContainer" type="PanelContainer" parent="CanvasLayer/Control/HostJoinContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Port"
+horizontal_alignment = 1
+
+[node name="JoinPort" type="TextEdit" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "54210"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "External IP"
+horizontal_alignment = 1
+
+[node name="JoinExternalIP" type="TextEdit" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 2
+text = "127.0.0.1"
+
+[node name="Join" type="Button" parent="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Join"
+
+[node name="WorldSelecter" type="VBoxContainer" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/Control/WorldSelecter"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/WorldSelecter/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/WorldSelecter/Control/VBoxContainer"]
+layout_mode = 2
+text = "Select World"
+
+[node name="WorldList" type="ItemList" parent="CanvasLayer/Control/WorldSelecter/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 2
+item_0/text = "World1"
+item_1/text = "World2"
+
+[node name="StartGame" type="Button" parent="CanvasLayer/Control/WorldSelecter"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Start Game"
+
+[node name="ChatOverlay" parent="CanvasLayer/Control" instance=ExtResource("4_f7ucu")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = 312.0
+offset_right = -600.0
+theme = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xww1p")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216, 1.55935)
+
+[node name="SpawnArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05177)
+shape = SubResource("BoxShape3D_dmtd7")
+
+[connection signal="pressed" from="CanvasLayer/Control/CharacterSelecter" to="." method="_on_character_selecter_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HostJoinContainer/HostContainer/MarginContainer/VBoxContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HostJoinContainer/JoinContainer/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Control/WorldSelecter/Control/VBoxContainer/WorldList" to="." method="_on_world_list_item_selected"]
+[connection signal="pressed" from="CanvasLayer/Control/WorldSelecter/StartGame" to="." method="_on_start_game_pressed"]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=3 uid="uid://do3hofyp52jsn"]
+
+[ext_resource type="Script" path="res://ui/Overlays/WeaponOverlay/WeaponOverlay.gd" id="1_v14yx"]
+[ext_resource type="Texture2D" uid="uid://c8msjstmyesvc" path="res://textures/kenney_crosshair-pack/White/crosshair007.png" id="2_syxve"]
+[ext_resource type="Texture2D" uid="uid://bvolrmtykyoux" path="res://textures/guns/Alternative color/pistol.png" id="3_pglt2"]
+
+[node name="WeaponOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_v14yx")
+
+[node name="CrossHair" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_syxve")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -103.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="WeaponName" type="Label" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="WeaponTexture" type="TextureRect" parent="MarginContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_pglt2")
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="Ammo" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ammo"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AmmoCurrentAmount" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "20"
+
+[node name="Seperater" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="AmmoMaxCapacity" type="Label" parent="MarginContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"

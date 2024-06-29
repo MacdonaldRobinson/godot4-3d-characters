@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://by45l4tevn24p"]
+
+[ext_resource type="Script" path="res://character-selector/CharacterSelector.gd" id="1_bhs8g"]
+[ext_resource type="PackedScene" uid="uid://c75hd2d4c1wk6" path="res://animated-characters/Kaya/Kaya.tscn" id="2_etqcv"]
+[ext_resource type="PackedScene" uid="uid://wh6yvkwenk0p" path="res://animated-characters/Clara/Clara.tscn" id="3_t042r"]
+
+[sub_resource type="Environment" id="Environment_w1heg"]
+
+[node name="CharacterSelector" type="Node3D"]
+script = ExtResource("1_bhs8g")
+
+[node name="Stage" type="CSGBox3D" parent="."]
+size = Vector3(4.48068, 0.248474, 3.50318)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30641, 2.10138)
+
+[node name="CharactersContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21477, 0)
+
+[node name="Kaya" parent="CharactersContainer" instance=ExtResource("2_etqcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57961, 0, 0)
+
+[node name="Clara" parent="CharactersContainer" instance=ExtResource("3_t042r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58595, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216, 1.55935)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w1heg")

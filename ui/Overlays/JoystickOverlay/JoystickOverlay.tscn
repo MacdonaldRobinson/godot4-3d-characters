@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc5q3n2fjhtj1"]
+
+[ext_resource type="Script" path="res://ui/Overlays/JoystickOverlay/JoystickOverlay.gd" id="1_rnxco"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="2_d03gh"]
+
+[node name="JoystickOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rnxco")
+
+[node name="PlayerJoystick" parent="." instance=ExtResource("2_d03gh")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -150.0
+offset_bottom = 150.0
+grow_vertical = 2
+visibility_mode = 1
+action_left = "left"
+action_right = "right"
+action_up = "forward"
+action_down = "backward"
+
+[node name="CameraJoystick" parent="." instance=ExtResource("2_d03gh")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 0.0
+offset_bottom = 150.0
+grow_horizontal = 0
+grow_vertical = 2
+visibility_mode = 1
+
+[connection signal="visibility_changed" from="PlayerJoystick" to="." method="_on_player_joystick_visibility_changed"]
+[connection signal="gui_input" from="CameraJoystick" to="." method="_on_camera_joystick_gui_input"]

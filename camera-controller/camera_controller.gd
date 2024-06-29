@@ -86,4 +86,4 @@ func _process(delta: float) -> void:
 		pass
 	
 	self.global_position = follow_node.global_position
-	#camera.look_at(follow_node.global_position)
+	camera.look_at(follow_node.global_position)

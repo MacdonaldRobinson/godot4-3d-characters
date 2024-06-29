@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://horck4dael68"]
+
+[ext_resource type="PackedScene" uid="uid://blebsaub6ahb7" path="res://meshes/Weapons/Pistol/pistol.glb" id="1_dgmmi"]
+[ext_resource type="Script" path="res://interactables/collectables/weapons/pistol/Pistol.gd" id="2_yvf4t"]
+[ext_resource type="PackedScene" uid="uid://dt8g0ht0660ck" path="res://interactables/collectables/weapons/pistol/PistolAmmo/PistolAmmo.tscn" id="3_23vwk"]
+[ext_resource type="Texture2D" uid="uid://ct4k8o08ksh37" path="res://textures/particals/spark_02.png" id="3_iaunv"]
+[ext_resource type="Texture2D" uid="uid://b8nq0007rfua1" path="res://textures/guns/pistol.png" id="3_qerss"]
+[ext_resource type="PackedScene" uid="uid://dwavcinrffiff" path="res://interactables/collectables/weapons/pistol/Effects/HitPointEffect/HitPointEffect.tscn" id="4_uidw8"]
+[ext_resource type="AudioStream" uid="uid://n3a8gstp05p" path="res://interactables/collectables/weapons/pistol/pistol-shot.wav" id="6_ghexv"]
+[ext_resource type="AudioStream" uid="uid://d2cjbnvxgicft" path="res://interactables/collectables/weapons/pistol/pistol-reload.wav" id="7_jigao"]
+[ext_resource type="AudioStream" uid="uid://bcyxf4u45iy0r" path="res://interactables/collectables/weapons/pistol/pistol-empty.wav" id="8_anq5d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmemi"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("3_iaunv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ba8pd"]
+direction = Vector3(0, 0, 1)
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+linear_accel_min = 10.0
+linear_accel_max = 10.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_hqtuv"]
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w8g8h"]
+size = Vector3(1, 3, 5)
+
+[node name="Pistol" instance=ExtResource("1_dgmmi")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+script = ExtResource("2_yvf4t")
+has_ammo = true
+ammo_max_capacity = 100
+ammo_current_amount = 20
+ammo_reload_amount = 10
+ammo_scene = ExtResource("3_23vwk")
+hit_point_effect = ExtResource("4_uidw8")
+max_collectable_amount = 1
+item_name = "Pistol"
+item_texture = ExtResource("3_qerss")
+
+[node name="Flash" type="Node3D" parent="BarrelLock" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20707, 2.52119)
+
+[node name="Spark" type="GPUParticles3D" parent="BarrelLock/Flash" index="0"]
+material_override = SubResource("StandardMaterial3D_wmemi")
+emitting = false
+amount = 50
+lifetime = 0.1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ba8pd")
+draw_pass_1 = SubResource("QuadMesh_hqtuv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="16"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_w8g8h")
+
+[node name="FireSound" type="AudioStreamPlayer3D" parent="." index="17"]
+unique_name_in_owner = true
+transform = Transform3D(14.2857, 0, 0, 0, 14.2857, 0, 0, 0, 14.2857, 0, 0, 0)
+stream = ExtResource("6_ghexv")
+
+[node name="ReloadSound" type="AudioStreamPlayer3D" parent="." index="18"]
+unique_name_in_owner = true
+stream = ExtResource("7_jigao")
+
+[node name="EmptySound" type="AudioStreamPlayer3D" parent="." index="19"]
+unique_name_in_owner = true
+stream = ExtResource("8_anq5d")

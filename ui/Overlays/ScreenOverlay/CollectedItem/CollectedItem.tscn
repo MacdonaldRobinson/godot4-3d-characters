@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1osvu3x6yvsy"]
+
+[ext_resource type="Texture2D" uid="uid://b2xqwqnytrx6q" path="res://textures/guns/Alternative color/assaultrifle.png" id="1_5h53y"]
+[ext_resource type="Script" path="res://ui/Overlays/ScreenOverlay/CollectedItem/CollectedItem.gd" id="1_kiw33"]
+
+[sub_resource type="Animation" id="Animation_r81ly"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2wqh"]
+_data = {
+"FadeOut": SubResource("Animation_r81ly")
+}
+
+[node name="CollectedItem" type="PanelContainer"]
+size_flags_horizontal = 8
+script = ExtResource("1_kiw33")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+
+[node name="ItemTexture" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("1_5h53y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ItemName" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Item 1"
+
+[node name="ItemQuantity" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+10"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y2wqh")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

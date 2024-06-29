@@ -7,6 +7,7 @@ class_name CharacterStats
 @export var max_health: int
 @export var number_of_killes: int
 @export var experiance_points: int
+@export var photo: Texture2D
 
 signal LeveledUp
 

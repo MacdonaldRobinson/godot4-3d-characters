@@ -6,6 +6,14 @@ class_name LevelUpEffect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$LevelUpEffectParticles.one_shot = true
+	$LevelUpEffectParticles2.one_shot = true
+	$LevelUpText.one_shot = true
+	
+	$LevelUpEffectParticles.emitting = false
+	$LevelUpEffectParticles2.emitting = false	
+	$LevelUpText.emitting = false
+	
 	animation_player.stop()
 	pass # Replace with function body.
 

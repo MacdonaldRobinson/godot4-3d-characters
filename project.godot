@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Godot4-3D-Character-Animations"
-run/main_scene="res://levels/Level1.tscn"
+run/main_scene="res://game/Game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+NetworkState="*res://auto-loads/NetworkState/NetworkState.tscn"
+GameState="*res://auto-loads/GameState/GameState.tscn"
 
 [editor_plugins]
 

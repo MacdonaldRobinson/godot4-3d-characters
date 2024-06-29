@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=3 uid="uid://cquyprb3f0o57"]
+
+[ext_resource type="Script" path="res://ui/Overlays/ChatOverlay/ChatOverlay.gd" id="1_7tpqe"]
+[ext_resource type="Theme" uid="uid://ctly6v5xdcdqo" path="res://ui/Theme.tres" id="1_e6ios"]
+
+[node name="ChatOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_e6ios")
+script = ExtResource("1_7tpqe")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PlayerList" type="Panel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PlayerList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PlayerList/VBoxContainer"]
+layout_mode = 2
+text = "Players:"
+
+[node name="PlayersList" type="ItemList" parent="MarginContainer/HBoxContainer/PlayerList/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Chat" type="Panel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Chat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Chat/VBoxContainer"]
+layout_mode = 2
+text = "Chat Messages:"
+
+[node name="ChatMessages" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Chat/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+bbcode_enabled = true
+text = "This is some text"
+scroll_following = true
+selection_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Chat/VBoxContainer"]
+layout_mode = 2
+
+[node name="Message" type="LineEdit" parent="MarginContainer/HBoxContainer/Chat/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Send" type="Button" parent="MarginContainer/HBoxContainer/Chat/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send"
+
+[connection signal="text_changed" from="MarginContainer/HBoxContainer/Chat/VBoxContainer/HBoxContainer/Message" to="." method="_on_message_text_changed"]
+[connection signal="text_submitted" from="MarginContainer/HBoxContainer/Chat/VBoxContainer/HBoxContainer/Message" to="." method="_on_message_text_submitted"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Chat/VBoxContainer/HBoxContainer/Send" to="." method="_on_send_pressed"]

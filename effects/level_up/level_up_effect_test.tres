@@ -1,0 +1,59 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://iyw0eepwjd1q"]
+
+[ext_resource type="Texture2D" uid="uid://b5fncndb4gmnj" path="res://textures/Particles/PNG (Transparent)/circle_03.png" id="1_12gos"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_fj18n"]
+texture = ExtResource("1_12gos")
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_swbc0"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_1wa5b"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_pcqfg"]
+constant = Color(0, 0, 4, 1)
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// ColorConstant:5
+	vec4 n_out5p0 = vec4(0.000000, 0.000000, 4.000000, 1.000000);
+
+
+// Input:4
+	float n_out4p0 = TIME;
+
+
+// UVFunc:3
+	vec2 n_in3p1 = vec2(1.00000, 1.00000);
+	vec2 n_out3p0 = vec2(n_out4p0) * n_in3p1 + UV;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out3p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out5p0.xyz);
+	ALPHA = n_out2p0.x;
+
+
+}
+"
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_fj18n")
+nodes/fragment/2/position = Vector2(-60, 140)
+nodes/fragment/3/node = SubResource("VisualShaderNodeUVFunc_swbc0")
+nodes/fragment/3/position = Vector2(-494.41, 260.662)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_1wa5b")
+nodes/fragment/4/position = Vector2(-880, 240)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorConstant_pcqfg")
+nodes/fragment/5/position = Vector2(-20, -40)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 1, 3, 0, 2, 0, 4, 0, 3, 2, 5, 0, 0, 0)

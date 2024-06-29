@@ -1,0 +1,73 @@
+[gd_scene load_steps=14 format=3 uid="uid://dh675y5n05vdq"]
+
+[ext_resource type="Script" path="res://ui/Overlays/Overlays.gd" id="1_cexaf"]
+[ext_resource type="Theme" uid="uid://ctly6v5xdcdqo" path="res://ui/Theme.tres" id="1_ypt5t"]
+[ext_resource type="PackedScene" uid="uid://jwwqrowp2n5s" path="res://ui/Overlays/DeadOverlay/DeadOverlay.tscn" id="2_sy8jo"]
+[ext_resource type="PackedScene" uid="uid://ba6wjd1xbqo5a" path="res://ui/Overlays/MiniMapOverlay/MiniMap.tscn" id="3_0fpug"]
+[ext_resource type="PackedScene" uid="uid://dj4lu7oeb1sxq" path="res://ui/Overlays/InteractOverlay/InteractOverlay.tscn" id="4_0cgha"]
+[ext_resource type="PackedScene" uid="uid://dc5q3n2fjhtj1" path="res://ui/Overlays/JoystickOverlay/JoystickOverlay.tscn" id="5_57n0d"]
+[ext_resource type="PackedScene" uid="uid://b2kcx0c5nifr0" path="res://ui/Overlays/MessageOverlay/MessageOverlay.tscn" id="6_ktd1u"]
+[ext_resource type="PackedScene" uid="uid://cquyprb3f0o57" path="res://ui/Overlays/ChatOverlay/ChatOverlay.tscn" id="8_7ho4t"]
+[ext_resource type="PackedScene" uid="uid://c3iuby3rmb7vn" path="res://ui/Overlays/MainMenu/MainMenu.tscn" id="9_ejgin"]
+[ext_resource type="PackedScene" uid="uid://dbkc82jdcovr6" path="res://ui/Overlays/InventoryOverlay/InventoryOverlay.tscn" id="10_48r7n"]
+[ext_resource type="PackedScene" uid="uid://do3hofyp52jsn" path="res://ui/Overlays/WeaponOverlay/WeaponOverlay.tscn" id="11_0cw3x"]
+[ext_resource type="PackedScene" uid="uid://bpqgmgcyowome" path="res://ui/Overlays/ScreenOverlay/ScreenOverlay.tscn" id="11_l385d"]
+[ext_resource type="PackedScene" uid="uid://8r5uv00kxiqn" path="res://ui/Overlays/PlayerOverlay/PlayerOverlay.tscn" id="12_0xfm4"]
+
+[node name="Overlays" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ypt5t")
+script = ExtResource("1_cexaf")
+
+[node name="DeadOverlay" parent="." instance=ExtResource("2_sy8jo")]
+visible = false
+layout_mode = 1
+
+[node name="MiniMapOverlay" parent="." instance=ExtResource("3_0fpug")]
+visible = false
+layout_mode = 1
+offset_left = -180.0
+offset_top = 21.0
+offset_right = -180.0
+offset_bottom = 21.0
+
+[node name="InteractOverly" parent="." instance=ExtResource("4_0cgha")]
+visible = false
+layout_mode = 1
+
+[node name="MessageOverlay" parent="." instance=ExtResource("6_ktd1u")]
+visible = false
+layout_mode = 1
+
+[node name="WeaponOverlay" parent="." instance=ExtResource("11_0cw3x")]
+visible = false
+layout_mode = 1
+
+[node name="InventoryOverlay" parent="." instance=ExtResource("10_48r7n")]
+visible = false
+layout_mode = 1
+
+[node name="PlayerOverlay" parent="." instance=ExtResource("12_0xfm4")]
+visible = false
+layout_mode = 1
+
+[node name="ScreenOverlay" parent="." instance=ExtResource("11_l385d")]
+layout_mode = 1
+mouse_filter = 0
+
+[node name="JoystickOverlay" parent="." instance=ExtResource("5_57n0d")]
+layout_mode = 1
+
+[node name="MainMenu" parent="." instance=ExtResource("9_ejgin")]
+visible = false
+layout_mode = 1
+
+[node name="ChatOverlay" parent="." instance=ExtResource("8_7ho4t")]
+layout_mode = 1
+offset_top = 283.0
+offset_right = -528.0

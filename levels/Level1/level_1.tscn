@@ -1,0 +1,153 @@
+[gd_scene load_steps=25 format=3 uid="uid://d26a4ioes2a6h"]
+
+[ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_e0jkn"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_iowi3"]
+[ext_resource type="Resource" path="res://height-maps/terrain1/terrain1-data/data.hterrain" id="3_6f76u"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_qtiv0"]
+[ext_resource type="Texture2D" uid="uid://pfb6rpxkkjpg" path="res://height-maps/terrain1/textures/OpenfootageNETgrass2jpg/OpenfootageNETgrassIItif2 copy.jpg" id="5_qvvvk"]
+[ext_resource type="Texture2D" uid="uid://co8fwe7dhef7q" path="res://height-maps/terrain1/textures/OpenfootageNETgrass2jpg/OpenfootageNETgrassIItif6 copy.jpg" id="6_hmv5u"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="7_1mbtt"]
+[ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="8_fraqo"]
+[ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="9_vw1kj"]
+[ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/Warrok.tscn" id="10_xanl0"]
+[ext_resource type="Script" path="res://characters/character_stats.gd" id="11_3hhfl"]
+[ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="12_2blv2"]
+[ext_resource type="PackedScene" uid="uid://bm6xell5h21fg" path="res://ui/screen.tscn" id="13_wx3uv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5oexm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o8621"]
+
+[sub_resource type="Resource" id="Resource_xaxds"]
+script = ExtResource("4_qtiv0")
+mode = 0
+textures = [[ExtResource("5_qvvvk"), ExtResource("5_qvvvk"), ExtResource("6_hmv5u")], [SubResource("CompressedTexture2D_5oexm"), SubResource("CompressedTexture2D_o8621"), null]]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0ht4"]
+
+[sub_resource type="Sky" id="Sky_m7l4b"]
+sky_material = SubResource("ProceduralSkyMaterial_c0ht4")
+
+[sub_resource type="Environment" id="Environment_7purq"]
+background_mode = 2
+sky = SubResource("Sky_m7l4b")
+glow_enabled = true
+fog_enabled = true
+
+[sub_resource type="Resource" id="Resource_aa4hr"]
+script = ExtResource("11_3hhfl")
+name = "Ememy 1"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+
+[sub_resource type="Resource" id="Resource_s40rb"]
+script = ExtResource("11_3hhfl")
+name = "Enemy 2"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+
+[sub_resource type="Resource" id="Resource_b4eou"]
+script = ExtResource("11_3hhfl")
+name = "Enemy 5"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+
+[sub_resource type="Resource" id="Resource_hag5m"]
+script = ExtResource("11_3hhfl")
+name = "Enemy 5"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+
+[sub_resource type="Resource" id="Resource_loml2"]
+script = ExtResource("11_3hhfl")
+name = "Enemy 5"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui")]
+script = ExtResource("1_e0jkn")
+level_music = NodePath("BackgroundMusic")
+screen_ui = NodePath("ScreenUI")
+
+[node name="Terrain1" type="Node3D" parent="."]
+script = ExtResource("2_iowi3")
+ambient_wind = 0.1
+centered = true
+_terrain_data = ExtResource("3_6f76u")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_xaxds")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+
+[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain1"]
+script = ExtResource("7_1mbtt")
+texture = ExtResource("8_fraqo")
+density = 10.0
+shader_params/u_globalmap_tint_bottom = null
+shader_params/u_globalmap_tint_top = null
+shader_params/u_bottom_ao = null
+shader_params/u_instance_scale = null
+shader_params/u_roughness = null
+metadata/_editor_icon = ExtResource("9_vw1kj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7purq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 0)
+
+[node name="Enemy1" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 3.37116, 0)
+character_stats = SubResource("Resource_aa4hr")
+
+[node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, 0)
+character_stats = SubResource("Resource_s40rb")
+
+[node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, 2.67093)
+character_stats = SubResource("Resource_b4eou")
+
+[node name="Enemy4" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, -5.81529)
+character_stats = SubResource("Resource_hag5m")
+
+[node name="Enemy5" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4527, 3.37116, -5.81529)
+character_stats = SubResource("Resource_loml2")
+
+[node name="Players" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, 0)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_2blv2")
+parameters/looping = true
+
+[node name="ScreenUI" parent="." node_paths=PackedStringArray("level") instance=ExtResource("13_wx3uv")]
+level = NodePath("..")

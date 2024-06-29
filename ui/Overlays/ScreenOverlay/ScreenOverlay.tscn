@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpqgmgcyowome"]
+
+[ext_resource type="Script" path="res://ui/Overlays/ScreenOverlay/ScreenOverlay.gd" id="1_wg07v"]
+[ext_resource type="PackedScene" uid="uid://d1osvu3x6yvsy" path="res://ui/Overlays/ScreenOverlay/CollectedItem/CollectedItem.tscn" id="2_wuyuj"]
+
+[sub_resource type="Animation" id="Animation_aockw"]
+resource_name = "FlashScreen"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.380392, 0.00784314, 0.0117647, 0.384314), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4k80r"]
+_data = {
+"TakingDamage": SubResource("Animation_aockw")
+}
+
+[node name="ScreenOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_wg07v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4k80r")
+}
+
+[node name="CollectedItems" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -33.0
+offset_bottom = 33.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="Item" parent="CollectedItems" instance=ExtResource("2_wuyuj")]
+layout_mode = 2

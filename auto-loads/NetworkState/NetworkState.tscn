@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqni5vdcvmu8p"]
+
+[ext_resource type="Script" path="res://auto-loads/NetworkState/NetworkState.gd" id="1_eaw74"]
+
+[node name="NetworkState" type="Node"]
+script = ExtResource("1_eaw74")

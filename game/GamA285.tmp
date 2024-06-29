@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0sxcuwv2unn1"]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_yl3ns"]
+[ext_resource type="PackedScene" uid="uid://bqni5vdcvmu8p" path="res://auto-loads/NetworkState/NetworkState.tscn" id="4_bndg2"]
+[ext_resource type="PackedScene" uid="uid://bm6xell5h21fg" path="res://ui/screen.tscn" id="13_2853v"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_yl3ns")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://characters/character.tscn")
+spawn_path = NodePath("../MultiPlayerScene")
+
+[node name="ScreenUI" parent="." instance=ExtResource("13_2853v")]
+unique_name_in_owner = true
+
+[node name="NetworkState" parent="." instance=ExtResource("4_bndg2")]
+
+[node name="MultiPlayerScene" type="Node" parent="."]
+unique_name_in_owner = true

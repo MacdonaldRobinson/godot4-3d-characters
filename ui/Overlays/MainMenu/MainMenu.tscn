@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3iuby3rmb7vn"]
+
+[ext_resource type="Script" path="res://ui/Overlays/MainMenu/MainMenu.gd" id="1_k0p8w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pjrj"]
+bg_color = Color(0.6, 0.6, 0.6, 0.12549)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k0p8w")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7pjrj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = -33.0
+offset_right = 75.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSelecter" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Character Selecter"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/CharacterSelecter" to="." method="_on_character_selecter_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

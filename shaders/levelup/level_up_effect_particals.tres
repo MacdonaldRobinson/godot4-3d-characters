@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://v7qy3nc1q2rq"]
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://v7qy3nc1q2rq"]
 
 [ext_resource type="Texture2D" uid="uid://dmtye20es0cpj" path="res://textures/Particles/PNG (Transparent)/star_01.png" id="1_uohwe"]
 
@@ -6,7 +6,13 @@
 texture = ExtResource("1_uohwe")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_xgeh6"]
+expanded_output_ports = [0]
 input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_5g5cx"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
 
 [sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_dvueq"]
 keep_scale = true
@@ -38,20 +44,24 @@ void vertex() {
 void fragment() {
 // Input:3
 	vec4 n_out3p0 = COLOR;
+	float n_out3p4 = n_out3p0.a;
 
 
 // Texture2D:2
 	vec4 n_out2p0 = texture(tex_frg_2, UV);
 
 
+// VectorOp:4
+	vec2 n_out4p0 = vec2(n_out3p4) * vec2(n_out2p0.xy);
+
+
 // Output:0
 	ALBEDO = vec3(n_out3p0.xyz);
-	ALPHA = n_out2p0.x;
+	ALPHA = n_out4p0.x;
 
 
 }
 "
-graph_offset = Vector2(-245.737, 5.4888)
 flags/unshaded = true
 flags/shadows_disabled = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_dvueq")
@@ -61,4 +71,6 @@ nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_0n48g")
 nodes/fragment/2/position = Vector2(-100, 320)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_xgeh6")
 nodes/fragment/3/position = Vector2(-140, 120)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 1, 3, 0, 0, 0)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_5g5cx")
+nodes/fragment/4/position = Vector2(180, 240)
+nodes/fragment/connections = PackedInt32Array(4, 0, 0, 1, 2, 0, 4, 1, 3, 0, 0, 0, 3, 4, 4, 0)

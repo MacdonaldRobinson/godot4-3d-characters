@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspwr8ncana77"]
+
+[ext_resource type="Script" path="res://interactables/chair/Chair.gd" id="1_8hth6"]
+
+[node name="Chair" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.382378, 0)
+layers = 2
+use_collision = true
+size = Vector3(2.46563, 1, 1)
+script = ExtResource("1_8hth6")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.358321, 0.133949)
+operation = 2
+size = Vector3(2.08759, 1, 1)
+
+[node name="InteractionPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.118641, 0.337419)

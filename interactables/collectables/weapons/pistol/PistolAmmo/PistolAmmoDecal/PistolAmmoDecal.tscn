@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://djgngp1muveb5"]
+
+[ext_resource type="Texture2D" uid="uid://cky7e7c7ci4i3" path="res://textures/particals/scorch_01.png" id="1_pbt84"]
+[ext_resource type="Script" path="res://interactables/collectables/weapons/pistol/PistolAmmo/PistolAmmoDecal/PistolAmmoDecal.gd" id="2_826vs"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mmx87"]
+
+[node name="PistolAmmoDecal" type="Decal"]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("1_pbt84")
+modulate = Color(0, 0, 0, 1)
+upper_fade = 0.000386575
+lower_fade = 0.000800414
+script = ExtResource("2_826vs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_mmx87")

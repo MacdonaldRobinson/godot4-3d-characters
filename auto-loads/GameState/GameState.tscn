@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu3v57i25inrg"]
+
+[ext_resource type="Script" path="res://auto-loads/GameState/GameState.gd" id="1_34wm6"]
+[ext_resource type="PackedScene" uid="uid://b326m28aal5ys" path="res://ui/SceneLoader/SceneLoader.tscn" id="2_breuc"]
+
+[node name="GameState" type="Node"]
+script = ExtResource("1_34wm6")
+
+[node name="SceneLoader" parent="." instance=ExtResource("2_breuc")]
+unique_name_in_owner = true
+visible = false
