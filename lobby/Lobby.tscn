@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyo5ay57gsh7i"]
+[gd_scene load_steps=7 format=3 uid="uid://cyo5ay57gsh7i"]
 
 [ext_resource type="Script" path="res://lobby/Lobby.gd" id="1_ugqrq"]
 [ext_resource type="Texture2D" uid="uid://cc1slrppohqdx" path="res://icon.svg" id="2_ap4kl"]
-[ext_resource type="PackedScene" uid="uid://cfn7ocuss05kg" path="res://characters/character.tscn" id="2_vk7aj"]
 [ext_resource type="PackedScene" uid="uid://cquyprb3f0o57" path="res://ui/Overlays/ChatOverlay/ChatOverlay.tscn" id="4_f7ucu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_372o4"]
@@ -14,8 +13,9 @@ uv1_triplanar = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_dmtd7"]
 size = Vector3(8.78439, 1, 8.56184)
 
-[node name="Lobby" type="Node3D"]
+[node name="Lobby" type="Node3D" node_paths=PackedStringArray("players_container")]
 script = ExtResource("1_ugqrq")
+players_container = NodePath("PlayersContainer")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.41856, 0, 0, 0, 1, 0, 0, 0)
@@ -26,8 +26,6 @@ material = SubResource("StandardMaterial3D_372o4")
 [node name="PlayersContainer" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15176, 0)
-
-[node name="Character" parent="PlayersContainer" instance=ExtResource("2_vk7aj")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7)

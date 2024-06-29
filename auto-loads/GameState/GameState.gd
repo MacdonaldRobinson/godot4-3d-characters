@@ -22,7 +22,7 @@ func _ready():
 	if is_headless_server():
 		print("headless server mode, starting server on port 54210 ...")
 		var character:Character = load("res://animated-characters/Clara/Clara.tscn").instantiate()
-		GameState.set_my_player_character(character, "Server")
+		GameState.set_my_player_character(character)
 		var ip = NetworkState.create_server(54210)
 		print("Hosting on: " + str(ip))
 		
@@ -30,7 +30,7 @@ func create_character() -> Character:
 	var character: Character = player_scene.instantiate()
 	character.character_stats = CharacterStats.new()
 	character.character_stats.name = "Player 1"
-	character.character_stats.current_health = 100
+	character.character_stats.current_health = 10
 	character.character_stats.current_level = 1
 	character.character_stats.max_health = 100
 
@@ -75,6 +75,7 @@ func switch_to_scene(new_scene_path: String, callback: Callable = func(arg): pas
 		
 @rpc("call_remote", "any_peer")
 func remove_player(peer_id: int):
+	print("Remove from:", multiplayer.get_unique_id(), ": peer: ", peer_id)
 	var existing_player_info: PlayerInfo = get_player_info(peer_id)
 	
 	if existing_player_info:
@@ -172,11 +173,13 @@ func add_or_update_player_in_container(player_info: PlayerInfo, players_containe
 	
 	if(not players_container.has_node(str_peer_id)):
 		player = GameState.player_scene.instantiate()
+		player.name = str(player_info.peer_id)
+		player.set_multiplayer_authority(player_info.peer_id)
 		players_container.add_child(player)		
 	else:
 		player = players_container.get_node(str_peer_id)	
 	
-	player.set_player_info(player_info)
+	player.character_stats = player_info.character_stats
 			
 	return player
 				
@@ -193,22 +196,29 @@ func add_chat_message(sender_name: String, message: String):
 				
 func _process(delta):
 	pass
-
+	
+func get_current_scene() -> MultiplayerScene:
+	if game.multiplayer_spawn_scene:
+		var current_scene: MultiplayerScene = game.multiplayer_spawn_scene.get_child(0)
+		return current_scene
+		
+	return null
+	
+func remove_all_players_from_current_scene():
+	var current_scene: MultiplayerScene = get_current_scene()
+	if current_scene:
+		for node in current_scene.players_container.get_children():
+			current_scene.players_container.remove_child(node)
+		
 func switch_to_character_selecter():
 	GameState.remove_player.rpc(multiplayer.get_unique_id())
-	GameState.all_players_info.clear()	
+	GameState.remove_all_players_from_current_scene()
+	GameState.all_players_info.clear()
 	
 	GameState.game.load_character_selector()
 	
 	#get_tree().change_scene_to_packed(GameState.character_selecter)
 	#get_current_scene().queue_free()
-
-func get_current_scene() -> Node3D:
-	for scene in multiplayer_spawn_scene.get_children():
-		if scene is Node3D:
-			return scene
-			
-	return null
 	
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	

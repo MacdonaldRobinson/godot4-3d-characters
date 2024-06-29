@@ -1,9 +1,7 @@
-extends MultiplayerScene
-class_name Level
+extends Node3D
+class_name MultiplayerScene
 
-@export var level_music: AudioStreamPlayer
-@export var screen_ui: ScreenUI
-@onready var players: Node3D = %Players
+@export var players_container:Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

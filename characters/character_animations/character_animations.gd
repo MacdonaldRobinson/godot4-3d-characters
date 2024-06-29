@@ -20,11 +20,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if not multiplayer.has_multiplayer_peer():
+		return
+		
+	if not is_multiplayer_authority():
+		return	
+
+	if not character:
+		return
+		
+	var my_player_info = GameState.get_my_player_info()
 	
-	var parent = self.get_parent()
-	if parent is Character:
-		if not parent.camera_controller.camera.current:
-			return		
+	if not my_player_info or str(my_player_info.peer_id) != character.name:
+		return
 
 	if is_dying():
 		return

@@ -12,6 +12,7 @@ character_selector_scene = ExtResource("3_jpja3")
 level_scene = ExtResource("4_awbn7")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
 _spawnable_scenes = PackedStringArray("res://characters/character.tscn")
 spawn_path = NodePath("../MultiPlayerSpawnScene")
 

@@ -6,25 +6,33 @@ class_name HealthBar3D
 @export var character: Character:
 	set(value):
 		character = value
-		health_bar.progress_bar.value = character.character_stats.current_health
-		health_bar.progress_bar.max_value = character.character_stats.max_health
 		
-		var fill = health_bar.progress_bar.get_theme_stylebox("fill")
-		var new_fill = fill.duplicate()
+		if not is_inside_tree():
+			await ready
 		
-		health_bar.progress_bar.add_theme_stylebox_override("fill", new_fill)
+		if character.character_stats:
+			health_bar.progress_bar.value = character.character_stats.current_health
+			health_bar.progress_bar.max_value = character.character_stats.max_health
+			
+			var fill = health_bar.progress_bar.get_theme_stylebox("fill")
+			var new_fill = fill.duplicate()
+			
+			health_bar.progress_bar.add_theme_stylebox_override("fill", new_fill)
 				
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:		
 	pass # Replace with function body.
 
 func decrease_health_by(damage: int):
-	character.character_stats.current_health = character.character_stats.current_health - damage
+	if character and character.character_stats:
+		character.character_stats.current_health = character.character_stats.current_health - damage
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if character.character_stats.max_health == 0:
+	if not character:
+		return
+		
+	if !character.character_stats or character.character_stats.max_health == 0:
 		return
 	
 	var percentage = float(character.character_stats.current_health) / float(character.character_stats.max_health) * 100

@@ -1,10 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://by45l4tevn24p"]
+[gd_scene load_steps=7 format=3 uid="uid://by45l4tevn24p"]
 
 [ext_resource type="Script" path="res://character-selector/CharacterSelector.gd" id="1_bhs8g"]
 [ext_resource type="PackedScene" uid="uid://cfn7ocuss05kg" path="res://characters/character.tscn" id="2_2od0v"]
+[ext_resource type="Script" path="res://characters/character_stats.gd" id="3_v7arc"]
 [ext_resource type="Theme" path="res://ui/Theme.tres" id="4_vpy62"]
 
 [sub_resource type="Environment" id="Environment_w1heg"]
+
+[sub_resource type="Resource" id="Resource_wmgt2"]
+script = ExtResource("3_v7arc")
+name = "Clara"
+current_level = 1
+current_health = 1000
+max_health = 1000
+number_of_killes = 0
+experiance_points = 0
+is_auto_play = false
 
 [node name="CharacterSelector" type="Node3D"]
 script = ExtResource("1_bhs8g")
@@ -23,6 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30641, 2.10138)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21477, 0)
 
 [node name="Character" parent="CharactersContainer" instance=ExtResource("2_2od0v")]
+character_stats = SubResource("Resource_wmgt2")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216, 1.55935)

@@ -1,7 +1,6 @@
 extends Node3D
 class_name LevelUpEffect
 
-@onready var levelup_effect_1: GPUParticles3D = $LevelUpEffect1
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.

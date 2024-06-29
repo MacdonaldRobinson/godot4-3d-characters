@@ -24,18 +24,24 @@ var follow_target: Character = null
 var interact_target: Character = null
 
 @export var level: Level
-@export var character_stats: CharacterStats = CharacterStats.new()
+@export var character_stats: CharacterStats:
+	set(value):
+		character_stats = value
+		
+		if not health_bar_3d:
+			await ready
+						
+		if health_bar_3d and character_stats:
+			health_bar_3d.character = self
+			health_bar_3d.health_bar.progress_bar.value = character_stats.current_health
+			health_bar_3d.health_bar.progress_bar.max_value = character_stats.max_health
+			
+			character_name.text = character_stats.name
+			
+			if not character_stats.LeveledUp.is_connected(character_leveled_up):
+				character_stats.LeveledUp.connect(character_leveled_up)
+		
 @export var dying_sound: AudioStreamPlayer3D
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	health_bar_3d.character = self
-	health_bar_3d.health_bar.progress_bar.value = character_stats.current_health
-	health_bar_3d.health_bar.progress_bar.max_value = character_stats.max_health
-	
-	character_name.text = character_stats.name
-	character_stats.LeveledUp.connect(character_leveled_up)
-	pass # Replace with function body.
 
 func character_leveled_up():		
 	if level.level_music.playing:
@@ -48,9 +54,15 @@ func character_leveled_up():
 			if level.screen_ui.settings.background_music.button_pressed:
 				level.level_music.play()			
 	)
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not multiplayer.has_multiplayer_peer():
+		return
+		
+	if not is_multiplayer_authority():
+		return
+								
 	follow_target = null
 	interact_target = null
 	alert_target = null
@@ -88,7 +100,7 @@ func _process(delta: float) -> void:
 				interact_target = node
 				
 	if not character_animations.is_dying():
-		if not camera_controller.camera.current:
+		if character_stats.is_auto_play:
 			if alert_target:
 				look_at_target(alert_target)
 
@@ -108,7 +120,7 @@ func _process(delta: float) -> void:
 						
 				if look_at_target:
 					look_at_target(interact_target)
-					
+				
 				character_animations.attack_stance(false)
 	
 		
@@ -126,8 +138,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 
-				
-func look_at_target(target: Character):
+func look_at_target(target: Character):	
 	if target.global_position == self.global_position:
 		return		
 
@@ -141,8 +152,6 @@ func apply_root_motion():
 	
 	var root_motion_rotation_normalized = root_motion_rotation.get_axis().normalized()
 	
-	#velocity = (self.quaternion * root_motion_position * 50)
-	
 	self.translate_object_local(root_motion_position)
 	
 	if root_motion_rotation_normalized != Vector3.ZERO:
@@ -150,12 +159,14 @@ func apply_root_motion():
 	
 
 func take_damage(damage_amount: int):
-	health_bar_3d.decrease_health_by(damage_amount)
+	if health_bar_3d.character:
+		health_bar_3d.decrease_health_by(damage_amount)
 
 func attack_damage(damage_amount: int):
 	if interact_target:
 		interact_target.take_damage(damage_amount)
 		character_stats.experiance_points += damage_amount
 
-		if interact_target.character_stats.current_health == 0:
-			character_stats.number_of_killes += 1
+		if interact_target.character_stats:
+			if interact_target.character_stats.current_health == 0:
+				character_stats.number_of_killes += 1

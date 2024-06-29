@@ -8,6 +8,7 @@ class_name CharacterStats
 @export var number_of_killes: int
 @export var experiance_points: int
 @export var photo: Texture2D
+@export var is_auto_play: bool = false
 
 signal LeveledUp
 

@@ -18,6 +18,12 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not multiplayer.has_multiplayer_peer():
+		return
+	
+	if not is_multiplayer_authority():
+		return	
+			
 	last_event = event 
 	if not camera.current:
 		return
@@ -53,6 +59,12 @@ func _input(event: InputEvent) -> void:
 			tween.tween_property(self, "spring_length", to_val, 0.1)
 			
 func _process(delta: float) -> void:
+	if not multiplayer.has_multiplayer_peer():
+		return
+	
+	if not is_multiplayer_authority():
+		return	
+			
 	if not camera.current:
 		return
 		

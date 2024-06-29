@@ -42,6 +42,7 @@ current_health = 100
 max_health = 100
 number_of_killes = 0
 experiance_points = 0
+is_auto_play = true
 
 [sub_resource type="Resource" id="Resource_s40rb"]
 script = ExtResource("11_3hhfl")
@@ -51,6 +52,7 @@ current_health = 100
 max_health = 100
 number_of_killes = 0
 experiance_points = 0
+is_auto_play = true
 
 [sub_resource type="Resource" id="Resource_b4eou"]
 script = ExtResource("11_3hhfl")
@@ -60,6 +62,7 @@ current_health = 100
 max_health = 100
 number_of_killes = 0
 experiance_points = 0
+is_auto_play = true
 
 [sub_resource type="Resource" id="Resource_hag5m"]
 script = ExtResource("11_3hhfl")
@@ -69,6 +72,7 @@ current_health = 100
 max_health = 100
 number_of_killes = 0
 experiance_points = 0
+is_auto_play = true
 
 [sub_resource type="Resource" id="Resource_loml2"]
 script = ExtResource("11_3hhfl")
@@ -78,11 +82,13 @@ current_health = 100
 max_health = 100
 number_of_killes = 0
 experiance_points = 0
+is_auto_play = true
 
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui")]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui", "players_container")]
 script = ExtResource("1_e0jkn")
 level_music = NodePath("BackgroundMusic")
 screen_ui = NodePath("ScreenUI")
+players_container = NodePath("Players")
 
 [node name="Terrain1" type="Node3D" parent="."]
 script = ExtResource("2_iowi3")
@@ -121,24 +127,29 @@ environment = SubResource("Environment_7purq")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 0)
 
-[node name="Enemy1" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+[node name="Enemy1" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 3.37116, 0)
+level = NodePath("..")
 character_stats = SubResource("Resource_aa4hr")
 
-[node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+[node name="Enemy2" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, 0)
+level = NodePath("..")
 character_stats = SubResource("Resource_s40rb")
 
-[node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+[node name="Enemy3" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, 2.67093)
+level = NodePath("..")
 character_stats = SubResource("Resource_b4eou")
 
-[node name="Enemy4" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+[node name="Enemy4" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, -5.81529)
+level = NodePath("..")
 character_stats = SubResource("Resource_hag5m")
 
-[node name="Enemy5" parent="." groups=["enemy"] instance=ExtResource("10_xanl0")]
+[node name="Enemy5" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4527, 3.37116, -5.81529)
+level = NodePath("..")
 character_stats = SubResource("Resource_loml2")
 
 [node name="Players" type="Node3D" parent="."]

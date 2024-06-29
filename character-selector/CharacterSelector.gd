@@ -69,5 +69,6 @@ func lookat_character(character: Character):
 	tween.tween_property(camera, "global_position", new_camera_position, 1)
 
 func _on_select_pressed():
-	GameState.set_my_player_character(selected_character)		
+	selected_character.character_stats.name = character_name.text
+	GameState.set_my_player_character(selected_character)
 	GameState.game.load_lobby()
