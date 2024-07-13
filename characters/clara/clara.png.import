@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bl4qu02r7bqrl"
 path.s3tc="res://.godot/imported/clara.png-cb466a98ea25208f01aae94f4d2f9b38.s3tc.ctex"
+path.etc2="res://.godot/imported/clara.png-cb466a98ea25208f01aae94f4d2f9b38.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://characters/clara/clara.png"
-dest_files=["res://.godot/imported/clara.png-cb466a98ea25208f01aae94f4d2f9b38.s3tc.ctex"]
+dest_files=["res://.godot/imported/clara.png-cb466a98ea25208f01aae94f4d2f9b38.s3tc.ctex", "res://.godot/imported/clara.png-cb466a98ea25208f01aae94f4d2f9b38.etc2.ctex"]
 
 [params]
 

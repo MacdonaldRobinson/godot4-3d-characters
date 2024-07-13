@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b741rp1esyes0"
 path.s3tc="res://.godot/imported/slash_04.png-ef7175f1a063e5a5058493359eabe49b.s3tc.ctex"
+path.etc2="res://.godot/imported/slash_04.png-ef7175f1a063e5a5058493359eabe49b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/Particles/PNG (Transparent)/slash_04.png"
-dest_files=["res://.godot/imported/slash_04.png-ef7175f1a063e5a5058493359eabe49b.s3tc.ctex"]
+dest_files=["res://.godot/imported/slash_04.png-ef7175f1a063e5a5058493359eabe49b.s3tc.ctex", "res://.godot/imported/slash_04.png-ef7175f1a063e5a5058493359eabe49b.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnhyk8xx5cjqp"
 path.s3tc="res://.godot/imported/twirl_02.png-78ce3b04ab8a367b6f8158baf2ef92aa.s3tc.ctex"
+path.etc2="res://.godot/imported/twirl_02.png-78ce3b04ab8a367b6f8158baf2ef92aa.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/Particles/PNG (Transparent)/twirl_02.png"
-dest_files=["res://.godot/imported/twirl_02.png-78ce3b04ab8a367b6f8158baf2ef92aa.s3tc.ctex"]
+dest_files=["res://.godot/imported/twirl_02.png-78ce3b04ab8a367b6f8158baf2ef92aa.s3tc.ctex", "res://.godot/imported/twirl_02.png-78ce3b04ab8a367b6f8158baf2ef92aa.etc2.ctex"]
 
 [params]
 

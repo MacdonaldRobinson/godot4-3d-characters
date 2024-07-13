@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://co8fwe7dhef7q"
 path.s3tc="res://.godot/imported/OpenfootageNETgrassIItif6 copy.jpg-92c7655fe5dfcdf328c2339e1e768d57.s3tc.ctex"
+path.etc2="res://.godot/imported/OpenfootageNETgrassIItif6 copy.jpg-92c7655fe5dfcdf328c2339e1e768d57.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://height-maps/terrain1/textures/OpenfootageNETgrass2jpg/OpenfootageNETgrassIItif6 copy.jpg"
-dest_files=["res://.godot/imported/OpenfootageNETgrassIItif6 copy.jpg-92c7655fe5dfcdf328c2339e1e768d57.s3tc.ctex"]
+dest_files=["res://.godot/imported/OpenfootageNETgrassIItif6 copy.jpg-92c7655fe5dfcdf328c2339e1e768d57.s3tc.ctex", "res://.godot/imported/OpenfootageNETgrassIItif6 copy.jpg-92c7655fe5dfcdf328c2339e1e768d57.etc2.ctex"]
 
 [params]
 

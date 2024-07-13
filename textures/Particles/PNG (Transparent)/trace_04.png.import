@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxvkkjbx4w00t"
 path.s3tc="res://.godot/imported/trace_04.png-ee6ceb0e4a68c4e1f283d02e76305402.s3tc.ctex"
+path.etc2="res://.godot/imported/trace_04.png-ee6ceb0e4a68c4e1f283d02e76305402.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/Particles/PNG (Transparent)/trace_04.png"
-dest_files=["res://.godot/imported/trace_04.png-ee6ceb0e4a68c4e1f283d02e76305402.s3tc.ctex"]
+dest_files=["res://.godot/imported/trace_04.png-ee6ceb0e4a68c4e1f283d02e76305402.s3tc.ctex", "res://.godot/imported/trace_04.png-ee6ceb0e4a68c4e1f283d02e76305402.etc2.ctex"]
 
 [params]
 
