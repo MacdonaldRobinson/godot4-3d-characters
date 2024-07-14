@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 		
 	if not is_multiplayer_authority():
 		return
-								
+		
 	follow_target = null
 	interact_target = null
 	alert_target = null

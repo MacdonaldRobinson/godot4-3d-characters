@@ -97,5 +97,5 @@ func _process(delta: float) -> void:
 		character.rotation.z = 0
 		pass
 	
-	self.global_position = follow_node.global_position
-	camera.look_at(follow_node.global_position)
+	self.global_position = lerp(self.global_position, follow_node.global_position, 0.1) 
+	camera.look_at(self.global_position)

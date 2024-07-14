@@ -11,8 +11,8 @@
 script = ExtResource("3_v7arc")
 name = "Clara"
 current_level = 1
-current_health = 1000
-max_health = 1000
+current_health = 10
+max_health = 10
 number_of_killes = 0
 experiance_points = 0
 is_auto_play = false

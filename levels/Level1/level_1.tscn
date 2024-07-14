@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://d26a4ioes2a6h"]
+[gd_scene load_steps=29 format=3 uid="uid://d26a4ioes2a6h"]
 
 [ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_e0jkn"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_iowi3"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bm6xell5h21fg" path="res://ui/screen.tscn" id="13_wx3uv"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="14_mvnhx"]
 [ext_resource type="Shader" uid="uid://8t3dh1s4g5ha" path="res://shaders/portal/portal.tres" id="15_8pbup"]
-[ext_resource type="Texture2D" uid="uid://b1auwyke642r5" path="res://textures/Particles/PNG (Transparent)/star_07.png" id="16_f24vm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5oexm"]
 
@@ -92,50 +91,6 @@ render_priority = 0
 shader = ExtResource("15_8pbup")
 
 [sub_resource type="QuadMesh" id="QuadMesh_2dsgi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oahhx"]
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(0.074, 0.59, 4, 1)
-albedo_texture = ExtResource("16_f24vm")
-use_particle_trails = true
-
-[sub_resource type="Curve" id="Curve_jp1qg"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
-point_count = 1
-
-[sub_resource type="Curve" id="Curve_upqnv"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
-point_count = 1
-
-[sub_resource type="Curve" id="Curve_jur3c"]
-min_value = -2.0
-max_value = 2.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_v7kff"]
-curve_x = SubResource("Curve_jp1qg")
-curve_y = SubResource("Curve_upqnv")
-curve_z = SubResource("Curve_jur3c")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fbdo5"]
-emission_shape_scale = Vector3(0.5, 0.5, 0)
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 1.0
-emission_ring_inner_radius = 0.0
-orbit_velocity_min = 0.5
-orbit_velocity_max = 0.5
-orbit_velocity_curve = SubResource("CurveXYZTexture_v7kff")
-radial_velocity_min = 0.199978
-radial_velocity_max = 0.199978
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_j8iyw"]
-size = 0.2
 
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui", "players_container")]
 script = ExtResource("1_e0jkn")
@@ -225,17 +180,8 @@ action_up = "forward"
 action_down = "backward"
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.24088, 5.28163, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10819, 3.50646, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 material_override = SubResource("ShaderMaterial_o4ke1")
 mesh = SubResource("QuadMesh_2dsgi")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0058156)
-material_override = SubResource("StandardMaterial3D_oahhx")
-amount = 100
-trail_enabled = true
-trail_lifetime = 0.5
-process_material = SubResource("ParticleProcessMaterial_fbdo5")
-draw_pass_1 = SubResource("RibbonTrailMesh_j8iyw")

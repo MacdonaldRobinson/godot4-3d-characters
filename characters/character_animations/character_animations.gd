@@ -43,28 +43,18 @@ func _physics_process(delta: float) -> void:
 		set_falling()	
 		
 	elif is_on_floor and not is_dying():
-		if Input.is_action_pressed("forward"):
-			motion_direction = lerp_vector(motion_direction, Vector2(0, 1))
-			set_motion(motion_direction)
-			
-		elif Input.is_action_pressed("backward"):
-			motion_direction = lerp_vector(motion_direction, Vector2(0, -1))
-			set_motion(motion_direction)
-			
-		if Input.is_action_pressed("left"):
-			motion_direction = lerp_vector(motion_direction, Vector2(-1, 0))
-			set_motion(motion_direction)
-			
-		elif Input.is_action_pressed("right"):
-			motion_direction = lerp_vector(motion_direction, Vector2(1, 0))
-			set_motion(motion_direction)
+		var input_dir := Input.get_vector("left", "right", "forward", "backward")
+		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()		
+
+		motion_direction = lerp_vector(motion_direction, Vector2(direction.x, -direction.z))
+		set_motion(motion_direction)
 		
 		if Input.is_action_just_pressed("jump"):
 			set_jumping(motion_direction)
 			
 		if not Input.is_anything_pressed():
 			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
-			set_motion(motion_direction)			
+			set_motion(motion_direction)
 		
 	AnimationChanged.emit(self, delta)	
 	
@@ -152,7 +142,7 @@ func attack_stance(auto_attack: bool):
 func attack(attack_state: String):
 	anim_tree.set("parameters/attack_state/transition_request", attack_state)
 	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)	
-
+	
 func playing_dying_animation():
 	character.dying_sound.play()
 

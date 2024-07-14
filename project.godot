@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 NetworkState="*res://auto-loads/NetworkState/NetworkState.tscn"
 GameState="*res://auto-loads/GameState/GameState.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/zylann.hterrain/plugin.cfg")
@@ -81,6 +86,12 @@ main_menu_toggle={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
