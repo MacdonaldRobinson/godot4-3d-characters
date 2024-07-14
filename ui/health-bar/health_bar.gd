@@ -6,7 +6,7 @@ class_name HealthBar
 func _ready() -> void:
 	pass # Replace with function body.
 
-func decrease_health_by(damage: int):	
+func decrease_health_by(damage: int):
 	progress_bar.value -= damage
 	
 

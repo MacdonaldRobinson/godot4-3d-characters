@@ -14,11 +14,13 @@ func create_server(port: int):
 	peer.create_server(port)
 	multiplayer.set_multiplayer_peer(peer)
 	
-	var my_player_info: PlayerInfo = GameState.get_my_player_info()		
-	my_player_info.peer_id = multiplayer.get_unique_id()
+	var my_player_info: PlayerInfo = GameState.get_my_player_info()
 	
-	GameState.all_players_info.clear()
-	GameState._add_or_update_player_info(my_player_info)
+	if my_player_info:
+		my_player_info.peer_id = multiplayer.get_unique_id()
+		
+		GameState.all_players_info.clear()
+		GameState._add_or_update_player_info(my_player_info)
 	
 	multiplayer.peer_connected.connect(_on_peer_connected)		
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)

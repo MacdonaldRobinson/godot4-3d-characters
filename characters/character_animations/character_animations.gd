@@ -21,6 +21,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		return
+		
 	if not multiplayer.has_multiplayer_peer():
 		return
 		
@@ -118,9 +121,9 @@ func get_current_motion_state():
 
 @rpc("call_local", "any_peer")
 func attack_stance(auto_attack: bool):
-	if character.name != str(multiplayer.get_remote_sender_id()):
+	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
-			
+		
 	anim_tree.set("parameters/motion_state/transition_request", "attacking")
 	
 	if !is_attacking() and auto_attack:
@@ -153,7 +156,7 @@ func attack_stance(auto_attack: bool):
 
 @rpc("call_local", "any_peer")
 func attack(attack_state: String):
-	if character.name != str(multiplayer.get_remote_sender_id()):
+	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
 			
 	anim_tree.set("parameters/attack_state/transition_request", attack_state)
@@ -163,4 +166,4 @@ func playing_dying_animation():
 	character.dying_sound.play()
 
 func attack_damage(damage_amount: int):
-	character.attack_damage(damage_amount)
+	character.attack_damage.rpc(damage_amount)

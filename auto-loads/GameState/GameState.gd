@@ -21,8 +21,8 @@ func _ready():
 	
 	if is_headless_server():
 		print("headless server mode, starting server on port 54210 ...")
-		var character:Character = load("res://animated-characters/Clara/Clara.tscn").instantiate()
-		GameState.set_my_player_character(character)
+		#var character:Character = load("res://animated-characters/Clara/Clara.tscn").instantiate()
+		#GameState.set_my_player_character(character)
 		var ip = NetworkState.create_server(54210)
 		print("Hosting on: " + str(ip))
 		

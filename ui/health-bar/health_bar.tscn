@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cofew2kmghae0"]
+[gd_scene load_steps=4 format=3 uid="uid://cofew2kmghae0"]
 
 [ext_resource type="Script" path="res://ui/health-bar/health_bar.gd" id="1_57wpf"]
 
@@ -7,11 +7,6 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52qjq"]
 bg_color = Color(0, 0.671875, 0.268681, 1)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k8td0"]
-properties/0/path = NodePath("ProgressBar:value")
-properties/0/spawn = true
-properties/0/replication_mode = 2
 
 [node name="HealthBar" type="Control"]
 layout_mode = 3
@@ -38,6 +33,3 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_pufs8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_52qjq")
 value = 50.0
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_k8td0")

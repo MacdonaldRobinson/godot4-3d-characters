@@ -108,19 +108,21 @@ func _process(delta: float) -> void:
 				character_animations.lerp_motion_animation(Vector2(0, 1))
 			
 			if interact_target:	
-				character_animations.attack_stance.rpc(true)
-		else:
+				character_animations.attack_stance.rpc(true)			
+		else:		
+			var look_at_target = true
+			
 			if interact_target:
-				var look_at_target = true
+				character_animations.attack_stance.rpc(false)
+			
 				if (Input.is_action_pressed("forward") or
 					Input.is_action_pressed("backward") or
 					Input.is_action_pressed("left") or
 					Input.is_action_pressed("right")):						
 						look_at_target = false
+						
 				if look_at_target:
 					look_at_target(interact_target)
-
-				character_animations.attack_stance.rpc(false)
 				
 	if !interact_target:
 		character_animations.idle.rpc()
@@ -134,7 +136,6 @@ func _process(delta: float) -> void:
 	velocity.y -= gravity
 	
 	move_and_slide()
-	
 
 func look_at_target(target: Character):	
 	if target.global_position == self.global_position:
@@ -154,7 +155,6 @@ func apply_root_motion():
 	
 	if root_motion_rotation_normalized != Vector3.ZERO:
 		self.rotate_object_local(root_motion_rotation_normalized, root_motion_rotation.get_angle())		
-	
 
 func take_damage(damage_amount: int):
 	if health_bar_3d.character:
