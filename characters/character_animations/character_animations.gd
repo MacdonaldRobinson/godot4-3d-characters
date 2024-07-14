@@ -12,6 +12,7 @@ var is_on_floor: bool = false
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 @export var character: Character
+@export var animation_tree: AnimationTree = anim_tree
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -85,7 +86,11 @@ func lerp_motion_animation(new_value: Vector2):
 	var lerp_val = lerp(current_value, new_value, 0.1)
 	anim_tree.set("parameters/motion/blend_position", lerp_val)
 
+@rpc("call_local", "any_peer")
 func idle():
+	if character.name != str(multiplayer.get_remote_sender_id()):
+		return
+		
 	anim_tree.set("parameters/motion_state/transition_request", "motion")	
 	lerp_motion_animation(Vector2(0, 0))	
 
@@ -105,16 +110,23 @@ func is_falling():
 	return current_motion_state == "falling"
 	
 func get_current_motion_state():
+	if not anim_tree:
+		return
+		
 	var current_motion_state = anim_tree.get("parameters/motion_state/current_state")
 	return current_motion_state
 
+@rpc("call_local", "any_peer")
 func attack_stance(auto_attack: bool):
+	if character.name != str(multiplayer.get_remote_sender_id()):
+		return
+			
 	anim_tree.set("parameters/motion_state/transition_request", "attacking")
 	
 	if !is_attacking() and auto_attack:
 		var attack_state: Array[String] =["state_0", "state_1", "state_2", "state_3"]
 		var random_attack_state: String = attack_state.pick_random()
-		attack(random_attack_state)
+		attack.rpc(random_attack_state)
 			
 	if auto_attack:
 		return
@@ -123,7 +135,7 @@ func attack_stance(auto_attack: bool):
 		Input.is_action_pressed("backward") or
 		Input.is_action_pressed("left") or
 		Input.is_action_pressed("right")):
-			idle()
+			idle.rpc()
 			return
 	
 	if is_attacking():
@@ -132,14 +144,18 @@ func attack_stance(auto_attack: bool):
 	if Input.is_action_pressed("attack1"):
 		var attack_state: Array[String] =["state_0", "state_1", "state_2", "state_3"]
 		var random_attack_state: String = attack_state.pick_random()
-		attack(random_attack_state)
+		attack.rpc(random_attack_state)
 		
 	elif Input.is_action_pressed("attack2"):	
 		var attack_state: Array[String] =["state_4"]
 		var random_attack_state: String = attack_state.pick_random()
-		attack(random_attack_state)
+		attack.rpc(random_attack_state)
 
+@rpc("call_local", "any_peer")
 func attack(attack_state: String):
+	if character.name != str(multiplayer.get_remote_sender_id()):
+		return
+			
 	anim_tree.set("parameters/attack_state/transition_request", attack_state)
 	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)	
 	

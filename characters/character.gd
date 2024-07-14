@@ -108,7 +108,7 @@ func _process(delta: float) -> void:
 				character_animations.lerp_motion_animation(Vector2(0, 1))
 			
 			if interact_target:	
-				character_animations.attack_stance(true)
+				character_animations.attack_stance.rpc(true)
 		else:
 			if interact_target:
 				var look_at_target = true
@@ -117,15 +117,13 @@ func _process(delta: float) -> void:
 					Input.is_action_pressed("left") or
 					Input.is_action_pressed("right")):						
 						look_at_target = false
-						
 				if look_at_target:
 					look_at_target(interact_target)
+
+				character_animations.attack_stance.rpc(false)
 				
-				character_animations.attack_stance(false)
-	
-		
-	if !interact_target and !alert_target and !follow_target:
-		character_animations.idle()
+	if !interact_target:
+		character_animations.idle.rpc()
 	
 	if health_bar_3d.health_bar.progress_bar.value == 0:
 		character_animations.set_dying()
