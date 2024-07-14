@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d26a4ioes2a6h"]
+[gd_scene load_steps=22 format=3 uid="uid://d26a4ioes2a6h"]
 
 [ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_e0jkn"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_iowi3"]
@@ -9,8 +9,6 @@
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="7_1mbtt"]
 [ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="8_fraqo"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="9_vw1kj"]
-[ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/Warrok.tscn" id="10_xanl0"]
-[ext_resource type="Script" path="res://characters/character_stats.gd" id="11_3hhfl"]
 [ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="12_2blv2"]
 [ext_resource type="PackedScene" uid="uid://bm6xell5h21fg" path="res://ui/screen.tscn" id="13_wx3uv"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="14_mvnhx"]
@@ -35,56 +33,6 @@ background_mode = 2
 sky = SubResource("Sky_m7l4b")
 glow_enabled = true
 fog_enabled = true
-
-[sub_resource type="Resource" id="Resource_aa4hr"]
-script = ExtResource("11_3hhfl")
-name = "Ememy 1"
-current_level = 1
-current_health = 100
-max_health = 100
-number_of_killes = 0
-experiance_points = 0
-is_auto_play = true
-
-[sub_resource type="Resource" id="Resource_s40rb"]
-script = ExtResource("11_3hhfl")
-name = "Enemy 2"
-current_level = 1
-current_health = 100
-max_health = 100
-number_of_killes = 0
-experiance_points = 0
-is_auto_play = true
-
-[sub_resource type="Resource" id="Resource_b4eou"]
-script = ExtResource("11_3hhfl")
-name = "Enemy 5"
-current_level = 1
-current_health = 100
-max_health = 100
-number_of_killes = 0
-experiance_points = 0
-is_auto_play = true
-
-[sub_resource type="Resource" id="Resource_hag5m"]
-script = ExtResource("11_3hhfl")
-name = "Enemy 5"
-current_level = 1
-current_health = 100
-max_health = 100
-number_of_killes = 0
-experiance_points = 0
-is_auto_play = true
-
-[sub_resource type="Resource" id="Resource_loml2"]
-script = ExtResource("11_3hhfl")
-name = "Enemy 5"
-current_level = 1
-current_health = 100
-max_health = 100
-number_of_killes = 0
-experiance_points = 0
-is_auto_play = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o4ke1"]
 render_priority = 0
@@ -135,34 +83,13 @@ environment = SubResource("Environment_7purq")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 0)
 
-[node name="Enemy1" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45327, 3.37116, 0)
-level = NodePath("..")
-character_stats = SubResource("Resource_aa4hr")
-
-[node name="Enemy2" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, 0)
-level = NodePath("..")
-character_stats = SubResource("Resource_s40rb")
-
-[node name="Enemy3" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, 2.67093)
-level = NodePath("..")
-character_stats = SubResource("Resource_b4eou")
-
-[node name="Enemy4" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6672, 3.37116, -5.81529)
-level = NodePath("..")
-character_stats = SubResource("Resource_hag5m")
-
-[node name="Enemy5" parent="." node_paths=PackedStringArray("level") groups=["enemy"] instance=ExtResource("10_xanl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4527, 3.37116, -5.81529)
-level = NodePath("..")
-character_stats = SubResource("Resource_loml2")
-
 [node name="Players" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, 0)
+
+[node name="NPCs" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.155, 5.19764, 0)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_2blv2")
@@ -185,3 +112,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10819, 3.50646, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 material_override = SubResource("ShaderMaterial_o4ke1")
 mesh = SubResource("QuadMesh_2dsgi")
+
+[node name="NpcSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("res://enemy/Warrok.tscn")
+spawn_path = NodePath("../NPCs")

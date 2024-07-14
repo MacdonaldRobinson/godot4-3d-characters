@@ -57,6 +57,9 @@ func character_leveled_up():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		return
+	
 	if not multiplayer.has_multiplayer_peer():
 		return
 		
@@ -107,8 +110,11 @@ func _process(delta: float) -> void:
 			if follow_target:
 				character_animations.lerp_motion_animation(Vector2(0, 1))
 			
-			if interact_target:	
-				character_animations.attack_stance.rpc(true)			
+			
+			if interact_target:					
+				character_animations.attack_stance.rpc(true)
+			else:
+				character_animations.idle.rpc()
 		else:		
 			var look_at_target = true
 			
@@ -124,11 +130,11 @@ func _process(delta: float) -> void:
 				if look_at_target:
 					look_at_target(interact_target)
 				
-	if !interact_target:
-		character_animations.idle.rpc()
-	
-	if health_bar_3d.health_bar.progress_bar.value == 0:
-		character_animations.set_dying()
+		if !interact_target:
+			character_animations.idle.rpc()
+		
+		if health_bar_3d.health_bar.progress_bar.value == 0:
+			character_animations.set_dying.rpc()
 
 	apply_root_motion()
 	
@@ -136,6 +142,7 @@ func _process(delta: float) -> void:
 	velocity.y -= gravity
 	
 	move_and_slide()
+	
 
 func look_at_target(target: Character):	
 	if target.global_position == self.global_position:
@@ -156,15 +163,16 @@ func apply_root_motion():
 	if root_motion_rotation_normalized != Vector3.ZERO:
 		self.rotate_object_local(root_motion_rotation_normalized, root_motion_rotation.get_angle())		
 
+@rpc("call_local","any_peer")
 func take_damage(damage_amount: int):
 	if health_bar_3d.character:
 		health_bar_3d.decrease_health_by(damage_amount)
 
 func attack_damage(damage_amount: int):
 	if interact_target:
-		interact_target.take_damage(damage_amount)
+		interact_target.take_damage.rpc(damage_amount)
 		character_stats.experiance_points += damage_amount
-
+				
 		if interact_target.character_stats:
 			if interact_target.character_stats.current_health == 0:
 				character_stats.number_of_killes += 1

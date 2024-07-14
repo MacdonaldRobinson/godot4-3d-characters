@@ -72,7 +72,11 @@ func set_jumping(motion_direction: Vector2):
 	anim_tree.set("parameters/jump_direction/blend_position", motion_direction)
 	anim_tree.set("parameters/jump/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
+@rpc("call_local", "any_peer")
 func set_dying():
+	if character.name != str(multiplayer.get_remote_sender_id()):
+		return
+			
 	anim_tree.set("parameters/motion_state/transition_request", "dying")
 	
 func set_motion(motion_direction: Vector2):
@@ -123,6 +127,7 @@ func get_current_motion_state():
 func attack_stance(auto_attack: bool):
 	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
+
 		
 	anim_tree.set("parameters/motion_state/transition_request", "attacking")
 	

@@ -3,6 +3,7 @@ class_name Game
 
 @onready var multiplayer_spawner: MultiplayerSpawner = %MultiplayerSpawner
 @onready var multiplayer_spawn_scene: Node = %MultiPlayerSpawnScene
+@onready var npc_spawner: MultiplayerSpawner = %NpcSpawner
 
 @export var lobby_scene: PackedScene
 @export var character_selector_scene: PackedScene

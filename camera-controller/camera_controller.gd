@@ -59,6 +59,9 @@ func _input(event: InputEvent) -> void:
 			tween.tween_property(self, "spring_length", to_val, 0.1)
 			
 func _process(delta: float) -> void:
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		return
+			
 	if not multiplayer.has_multiplayer_peer():
 		return
 	

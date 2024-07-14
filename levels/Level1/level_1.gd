@@ -13,6 +13,14 @@ func _ready() -> void:
 	GameState.OnPlayerAdded.connect(add_or_update_player)
 	GameState.OnPlayerUpdated.connect(add_or_update_player)
 
+	if multiplayer.is_server():
+		spawn_npc.call_deferred()
+
+func spawn_npc():
+	var warrok: Character = preload("res://enemy/Warrok.tscn").instantiate()	
+	warrok.character_stats.is_auto_play = true
+	npcs_container.add_child(warrok, true)	
+
 func add_or_update_player(player_info: PlayerInfo):
 	GameState.add_or_update_player_in_container(player_info, players_container)
 	

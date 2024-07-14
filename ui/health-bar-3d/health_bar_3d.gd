@@ -26,7 +26,7 @@ func _ready() -> void:
 func decrease_health_by(damage: int):
 	if character and character.character_stats:
 		character.character_stats.current_health = character.character_stats.current_health - damage
-
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not character:

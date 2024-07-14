@@ -6,10 +6,6 @@ class_name HealthBar
 func _ready() -> void:
 	pass # Replace with function body.
 
-func decrease_health_by(damage: int):
-	progress_bar.value -= damage
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
