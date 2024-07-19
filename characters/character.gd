@@ -57,9 +57,6 @@ func character_leveled_up():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		return
-	
 	if not multiplayer.has_multiplayer_peer():
 		return
 		

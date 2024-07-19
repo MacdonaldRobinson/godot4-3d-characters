@@ -21,9 +21,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		return
-		
 	if not multiplayer.has_multiplayer_peer():
 		return
 		
@@ -74,9 +71,6 @@ func set_jumping(motion_direction: Vector2):
 	
 @rpc("call_local", "any_peer")
 func set_dying():
-	if character.name != str(multiplayer.get_remote_sender_id()):
-		return
-			
 	anim_tree.set("parameters/motion_state/transition_request", "dying")
 	
 func set_motion(motion_direction: Vector2):
