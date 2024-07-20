@@ -47,15 +47,16 @@ func _physics_process(delta: float) -> void:
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()		
 
-		motion_direction = lerp_vector(motion_direction, Vector2(direction.x, -direction.z))
-		set_motion(motion_direction)
+		if Input.is_anything_pressed():
+			motion_direction = lerp_vector(motion_direction, Vector2(direction.x, -direction.z))
+			set_motion(motion_direction)
 		
 		if Input.is_action_just_pressed("jump"):
 			set_jumping(motion_direction)
 			
-		if not Input.is_anything_pressed():
-			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
-			set_motion(motion_direction)
+		#if not Input.is_anything_pressed():
+			#motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
+			#set_motion(motion_direction)
 		
 	AnimationChanged.emit(self, delta)	
 	
@@ -72,6 +73,15 @@ func set_jumping(motion_direction: Vector2):
 @rpc("call_local", "any_peer")
 func set_dying():
 	anim_tree.set("parameters/motion_state/transition_request", "dying")
+	
+@rpc("call_local", "any_peer")
+func set_up_steps():
+	anim_tree.set("parameters/motion_state/transition_request", "up_steps")	
+	print("set_up_stairs", get_current_motion_state())
+	
+@rpc("call_local", "any_peer")
+func set_down_stairs():
+	anim_tree.set("parameters/motion_state/transition_request", "down_steps")
 	
 func set_motion(motion_direction: Vector2):
 	anim_tree.set("parameters/motion_state/transition_request", "motion")	
@@ -105,14 +115,18 @@ func is_attacking():
 func is_dying():
 	var current_motion_state = get_current_motion_state()
 	return current_motion_state == "dying"
+	
+func is_steps():
+	var current_motion_state = get_current_motion_state()
+	return current_motion_state.contains("steps")
 
 func is_falling():
 	var current_motion_state = get_current_motion_state()
 	return current_motion_state == "falling"
 	
-func get_current_motion_state():
+func get_current_motion_state() -> String:
 	if not anim_tree:
-		return
+		return ""
 		
 	var current_motion_state = anim_tree.get("parameters/motion_state/current_state")
 	return current_motion_state
@@ -121,7 +135,6 @@ func get_current_motion_state():
 func attack_stance(auto_attack: bool):
 	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
-
 		
 	anim_tree.set("parameters/motion_state/transition_request", "attacking")
 	

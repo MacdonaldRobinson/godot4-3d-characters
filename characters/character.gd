@@ -19,10 +19,6 @@ var nodes_in_alert_area: Array[Node3D] = []
 var nodes_in_interact_area: Array[Node3D] = []
 var nodes_in_follow_area: Array[Node3D] = []
 
-var alert_target: Character = null
-var follow_target: Character = null
-var interact_target: Character = null
-
 @export var level: Level
 @export var character_stats: CharacterStats:
 	set(value):
@@ -62,43 +58,24 @@ func _process(delta: float) -> void:
 		
 	if not is_multiplayer_authority():
 		return
-		
-	follow_target = null
-	interact_target = null
-	alert_target = null
-	
+			
 	nodes_in_alert_area = alert_area.get_overlapping_bodies()
 	nodes_in_interact_area = interact_area.get_overlapping_bodies()
 	nodes_in_follow_area = follow_area.get_overlapping_bodies()
-
-	for node in nodes_in_alert_area:
-		if node.name != self.name:
-			if node is Character:
-				if node.character_animations.is_dying():
-					break
-					
-				alert_target = node				
-				
-				
-	for node in nodes_in_follow_area:
-		if node.name != self.name:
-			if node is Character:
-				if node.character_animations.is_dying():
-					continue
-				
-				alert_target = node
-				follow_target = node	
-				
-	for node in nodes_in_interact_area:
-		if node.name != self.name:
-			if node is Character:
-				if node.character_animations.is_dying():
-					break
-
-				alert_target = node
-				follow_target = node
-				interact_target = node
-				
+	
+	for area in alert_area.get_overlapping_areas():
+		nodes_in_alert_area.push_back(area)
+	
+	for area in interact_area.get_overlapping_areas():
+		nodes_in_interact_area.push_back(area)
+	
+	for area in follow_area.get_overlapping_areas():
+		nodes_in_follow_area.push_back(area)
+		
+	var alert_target = get_node_in_alert_area()
+	var follow_target = get_node_in_follow_area()
+	var interact_target = get_node_in_interact_area()
+	
 	if not character_animations.is_dying():
 		if character_stats.is_auto_play:
 			if alert_target:
@@ -107,15 +84,14 @@ func _process(delta: float) -> void:
 			if follow_target:
 				character_animations.lerp_motion_animation(Vector2(0, 1))
 			
-			
-			if interact_target:					
+			if interact_target and interact_target is Character:
 				character_animations.attack_stance.rpc(true)
 			else:
 				character_animations.idle.rpc()
-		else:		
+		else:
 			var look_at_target = true
 			
-			if interact_target:
+			if interact_target and interact_target is Character:
 				character_animations.attack_stance.rpc(false)
 			
 				if (Input.is_action_pressed("forward") or
@@ -126,20 +102,68 @@ func _process(delta: float) -> void:
 						
 				if look_at_target:
 					look_at_target(interact_target)
-				
-		if !interact_target:
+					
+		if not Input.is_anything_pressed():
 			character_animations.idle.rpc()
 		
 		if health_bar_3d.health_bar.progress_bar.value == 0:
 			character_animations.set_dying.rpc()
-
+		
 	apply_root_motion()
 	
 	character_animations.set_is_on_floor(true)
-	velocity.y -= gravity
+	
+	if not get_node_in_interact_area("up_steps"):
+		velocity.y -= gravity
 	
 	move_and_slide()
+
+func get_node_in_alert_area(group_name:String = ""):
+	if nodes_in_alert_area.size() > 0:
+		for node in nodes_in_alert_area:
+			if node == self:
+				continue
+				
+			if node is Character:
+				if node.character_animations.is_dying():
+					continue			
+				
+			if node.is_in_group("interactable"):
+				if node.is_in_group(group_name):
+					return node		
+	return null
 	
+func get_node_in_interact_area(group_name:String = ""):	
+	if nodes_in_interact_area.size() > 0:	
+		for node in nodes_in_interact_area:
+			if node.is_in_group("interactable"):
+				if node == self:
+					continue
+
+			if node is Character:
+				if node.character_animations.is_dying():
+					continue			
+					
+			if node.is_in_group(group_name):
+				return node
+
+	return null	
+	
+func get_node_in_follow_area(group_name:String = ""):
+	if nodes_in_follow_area.size() > 0:
+		for node in nodes_in_follow_area:
+			if node == self:
+				continue
+				
+			if node is Character:
+				if node.character_animations.is_dying():
+					continue			
+				
+			if node.is_in_group("interactable"):
+				if node.is_in_group(group_name):
+					return node
+		
+	return null		
 
 func look_at_target(target: Character):	
 	if target.global_position == self.global_position:
@@ -166,7 +190,9 @@ func take_damage(damage_amount: int):
 		health_bar_3d.decrease_health_by(damage_amount)
 
 func attack_damage(damage_amount: int):
-	if interact_target:
+	var interact_target = get_node_in_interact_area()
+	
+	if interact_target and interact_target is Character:
 		interact_target.take_damage.rpc(damage_amount)
 		character_stats.experiance_points += damage_amount
 				

@@ -72,15 +72,15 @@ func _process(delta: float) -> void:
 		
 	self.add_excluded_object(character)	
 	
-	if character.alert_target:
-		self.add_excluded_object(character.alert_target)
+	if character.get_node_in_alert_area():
+		self.add_excluded_object(character.get_node_in_alert_area())
 	
 	
-	if character.follow_target:
-		self.add_excluded_object(character.follow_target)
+	if character.get_node_in_follow_area():
+		self.add_excluded_object(character.get_node_in_follow_area())
 		
-	if character.interact_target:		
-		self.add_excluded_object(character.interact_target)
+	if character.get_node_in_interact_area():		
+		self.add_excluded_object(character.get_node_in_interact_area())
 	
 	var character_animation: CharacterAnimations = character.character_animations
 	

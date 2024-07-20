@@ -20,7 +20,8 @@ class_name Lobby
 @onready var chat_overlay: ChatOverlay = %ChatOverlay
 
 var worlds: Dictionary = {
-	"Level1" = "res://levels/Level1/level_1.tscn",
+	"Grass Lands" = "res://levels/Level1/level_1.tscn",
+	"House" = "res://levels/Level2/level_2.tscn",
 }
 
 @onready var camera: Camera3D = $Camera3D

@@ -1,0 +1,205 @@
+[gd_scene load_steps=16 format=3 uid="uid://cfn7ocuss05kg"]
+
+[ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="1_5ogck"]
+[ext_resource type="Script" path="res://characters/character.gd" id="1_viqmd"]
+[ext_resource type="Script" path="res://characters/character_stats.gd" id="2_85ra8"]
+[ext_resource type="PackedScene" uid="uid://bsjopd8rbl3xg" path="res://characters/clara/Clara.glb" id="2_uncqv"]
+[ext_resource type="AudioStream" uid="uid://pmcht61tl7qt" path="res://sound/effects/dying/386030__taramg__deathgroan003.wav" id="3_r2hkv"]
+[ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="4_5agvn"]
+[ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="9_ohuyf"]
+[ext_resource type="PackedScene" uid="uid://vkwy58ucg8xi" path="res://effects/level_up/level_up_effect.tscn" id="10_p3had"]
+
+[sub_resource type="Resource" id="Resource_ibe1a"]
+script = ExtResource("2_85ra8")
+name = ""
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+is_auto_play = false
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xrp7"]
+radius = 0.522308
+height = 1.90797
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rgjuf"]
+height = 1.307
+radius = 4.74196
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6uh1o"]
+height = 1.69743
+radius = 0.648288
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x7jhx"]
+height = 1.00929
+radius = 3.39317
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rh5lm"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cpgjw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("dying_sound")]
+script = ExtResource("1_viqmd")
+character_stats = SubResource("Resource_ibe1a")
+dying_sound = NodePath("DyingSound")
+
+[node name="CharacterAnimations" parent="." node_paths=PackedStringArray("character") instance=ExtResource("1_5ogck")]
+character = NodePath("..")
+
+[node name="AnimationPlayer" parent="CharacterAnimations" index="0"]
+root_node = NodePath("../../Clara")
+root_motion_track = NodePath("%GeneralSkeleton:Root")
+
+[node name="AnimationTree" parent="CharacterAnimations" index="1"]
+root_node = NodePath("../../Clara")
+parameters/current_position = 8.60873
+parameters/current_delta = 0.0208333
+parameters/TimeScale/current_position = 8.60873
+parameters/TimeScale/current_delta = 0.0208333
+parameters/jump/current_position = 8.60873
+parameters/jump/current_delta = 0.0208333
+parameters/motion/current_position = 8.60873
+parameters/motion/current_delta = 0.0208333
+parameters/motion/0/current_position = 8.60873
+parameters/motion/0/current_delta = 0.0208333
+parameters/motion/6/current_position = 0.0087698
+parameters/motion/6/current_delta = 0.0208333
+parameters/motion/9/current_position = 0.0753105
+parameters/motion/9/current_delta = 0.0208333
+parameters/motion_state/current_position = 8.60873
+parameters/motion_state/current_delta = 0.0208333
+parameters/output/current_position = 8.60873
+parameters/output/current_delta = 0.0208333
+
+[node name="RootMotionView" type="RootMotionView" parent="."]
+animation_path = NodePath("../CharacterAnimations/AnimationTree")
+
+[node name="Clara" parent="." instance=ExtResource("2_uncqv")]
+
+[node name="GeneralSkeleton" parent="Clara/Armature" index="0"]
+bones/0/position = Vector3(0.00331922, 4.80989e-10, 0.00403483)
+bones/1/position = Vector3(2.13581e-06, 0.827325, 3.33181e-07)
+bones/1/rotation = Quaternion(-0.0283843, -0.0553157, -0.0393449, 0.99729)
+bones/2/rotation = Quaternion(-0.0191803, -0.0058589, 0.0438571, 0.998837)
+bones/3/rotation = Quaternion(-0.00171248, -0.0154082, 0.056902, 0.998259)
+bones/4/rotation = Quaternion(-0.00113554, -0.0165955, 0.0565733, 0.99826)
+bones/5/rotation = Quaternion(0.0410339, 0.00486818, -0.0234199, 0.998871)
+bones/6/rotation = Quaternion(0.0137127, 0.0393919, -0.0885683, 0.995197)
+bones/17/rotation = Quaternion(0.553399, 0.439589, 0.531737, -0.466656)
+bones/18/rotation = Quaternion(0.0507014, 0.761812, -0.629797, -0.142926)
+bones/19/rotation = Quaternion(0.0815926, -0.702376, 0.0815925, 0.702391)
+bones/20/rotation = Quaternion(0.092447, 0.722554, 0.0265213, 0.684592)
+bones/21/rotation = Quaternion(-0.154906, 0.734731, 0.104903, 0.652051)
+bones/22/rotation = Quaternion(0.184734, 0.0561372, -0.0106077, 0.981127)
+bones/23/rotation = Quaternion(0.164727, 0.032396, 0.0383239, 0.985062)
+bones/24/scale = Vector3(1.00058, 1.00049, 1.00015)
+bones/25/rotation = Quaternion(0.0644482, -0.000422582, -0.00117481, 0.99792)
+bones/26/rotation = Quaternion(0.223099, -3.11434e-06, -0.0270291, 0.974421)
+bones/27/rotation = Quaternion(0.141237, -1.93715e-06, -0.0171112, 0.989828)
+bones/29/rotation = Quaternion(0.100137, -1.02073e-05, -0.012042, 0.994901)
+bones/30/rotation = Quaternion(0.247171, -2.38419e-06, -0.0299454, 0.968509)
+bones/31/rotation = Quaternion(0.193741, -1.98185e-06, -0.0234723, 0.980772)
+bones/33/rotation = Quaternion(0.137236, -0.000568093, -0.0125113, 0.990459)
+bones/34/rotation = Quaternion(0.347375, -6.10381e-06, -0.0420857, 0.936781)
+bones/35/rotation = Quaternion(0.281212, -5.05468e-06, -0.0340699, 0.959041)
+bones/37/rotation = Quaternion(0.176795, 0.00300546, -0.0377033, 0.983521)
+bones/38/rotation = Quaternion(0.259874, 0.0090656, 0.00321559, 0.965595)
+bones/39/rotation = Quaternion(0.443166, -1.51035e-06, -0.0536911, 0.89483)
+bones/45/rotation = Quaternion(0.529408, -0.452612, -0.582029, -0.419657)
+bones/46/rotation = Quaternion(0.0486975, 0.875075, -0.467601, 0.114987)
+bones/47/rotation = Quaternion(0.069077, 0.703731, -0.0690771, 0.703719)
+bones/48/rotation = Quaternion(0.0144908, -0.636148, 0.0245048, 0.771042)
+bones/49/rotation = Quaternion(-0.18555, -0.686081, -0.124362, 0.692385)
+bones/50/rotation = Quaternion(0.192583, -0.115832, -0.0350349, 0.97379)
+bones/51/rotation = Quaternion(0.113782, -0.0455618, -0.0318175, 0.99195)
+bones/52/scale = Vector3(1.00058, 1.00049, 1.00015)
+bones/53/rotation = Quaternion(0.0741808, 0.000412093, 0.00346773, 0.997239)
+bones/54/rotation = Quaternion(0.172254, -2.23517e-06, 0.0210679, 0.984827)
+bones/55/rotation = Quaternion(0.0912223, -1.16206e-06, 0.0111571, 0.995768)
+bones/57/rotation = Quaternion(0.0858563, 6.0202e-06, 0.0104196, 0.996253)
+bones/58/rotation = Quaternion(0.271195, -3.30806e-06, 0.0331692, 0.961953)
+bones/59/rotation = Quaternion(0.155116, -6.706e-05, 0.0189614, 0.987714)
+bones/61/rotation = Quaternion(0.160031, -0.000637321, 0.0234682, 0.986833)
+bones/62/rotation = Quaternion(0.31952, -1.5749e-06, 0.0390797, 0.946773)
+bones/63/rotation = Quaternion(0.307326, -5.86476e-05, 0.0375695, 0.950863)
+bones/65/rotation = Quaternion(0.204593, 0.000709913, 0.0216045, 0.978608)
+bones/66/rotation = Quaternion(0.268648, 9.08971e-07, 0.0328576, 0.962678)
+bones/67/rotation = Quaternion(0.44937, -8.16377e-06, 0.0549614, 0.891654)
+bones/72/rotation = Quaternion(0.137673, 0.180418, 0.965719, -0.126022)
+bones/73/rotation = Quaternion(-0.0272061, 0.987236, -0.151242, -0.0418486)
+bones/74/rotation = Quaternion(-0.0675438, 0.743016, -0.664243, 0.0463182)
+bones/75/rotation = Quaternion(0.000381106, 0.999806, -0.019669, -0.000863905)
+bones/77/rotation = Quaternion(-0.0745719, 0.0258969, 0.994859, -0.0634354)
+bones/78/rotation = Quaternion(0.000832334, 0.979345, -0.191777, -0.0640694)
+bones/79/rotation = Quaternion(-0.0113166, 0.600096, -0.799809, 0.0079038)
+bones/80/rotation = Quaternion(5.03142e-05, 0.999996, 0.00271233, -0.0001206)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Clara/Armature/GeneralSkeleton" index="4"]
+transform = Transform3D(0.997037, -0.0196828, -0.0743616, 0.0197601, 0.999805, 0.000303103, 0.0743411, -0.00177158, 0.997231, -0.0609464, 1.35638, -0.0624363)
+bone_name = "Head"
+bone_idx = 6
+
+[node name="CameraLookAtPoint" type="Node3D" parent="Clara/Armature/GeneralSkeleton/BoneAttachment3D"]
+transform = Transform3D(0.997102, -0.0172903, 0.0740864, 0.00976116, 0.994858, 0.100808, -0.0754484, -0.0997927, 0.992144, 0.0631784, 0.120076, 0.0120412)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884513, 0)
+shape = SubResource("CapsuleShape3D_0xrp7")
+
+[node name="FloorCheckRayCast" type="RayCast3D" parent="."]
+
+[node name="AlertArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712344, 0)
+shape = SubResource("CylinderShape3D_rgjuf")
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.813782, 0.212281)
+shape = SubResource("CylinderShape3D_6uh1o")
+
+[node name="FollowArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FollowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.662804, 0)
+shape = SubResource("CylinderShape3D_x7jhx")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_5agvn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89053, 0)
+texture = SubResource("ViewportTexture_rh5lm")
+character = NodePath("..")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node", "character") instance=ExtResource("9_ohuyf")]
+process_mode = 3
+follow_node = NodePath("../Clara/Armature/GeneralSkeleton/BoneAttachment3D/CameraLookAtPoint")
+character = NodePath("..")
+
+[node name="FootStepSound" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.5
+
+[node name="DyingSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_r2hkv")
+
+[node name="LevelUpEffect" parent="." instance=ExtResource("10_p3had")]
+
+[node name="Name" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08608, 0)
+billboard = 2
+text = "Name"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_cpgjw")
+
+[editable path="CharacterAnimations"]
+[editable path="Clara"]

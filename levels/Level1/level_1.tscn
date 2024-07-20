@@ -25,12 +25,12 @@ textures = [[ExtResource("5_qvvvk"), ExtResource("5_qvvvk"), ExtResource("6_hmv5
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0ht4"]
 
-[sub_resource type="Sky" id="Sky_m7l4b"]
+[sub_resource type="Sky" id="Sky_8bfeh"]
 sky_material = SubResource("ProceduralSkyMaterial_c0ht4")
 
 [sub_resource type="Environment" id="Environment_7purq"]
 background_mode = 2
-sky = SubResource("Sky_m7l4b")
+sky = SubResource("Sky_8bfeh")
 glow_enabled = true
 fog_enabled = true
 
@@ -108,6 +108,7 @@ action_down = "backward"
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10819, 3.50646, 0)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
 material_override = SubResource("ShaderMaterial_o4ke1")
