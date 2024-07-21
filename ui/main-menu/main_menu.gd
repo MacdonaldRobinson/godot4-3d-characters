@@ -38,3 +38,7 @@ func _on_visibility_changed() -> void:
 		get_tree().paused = true
 	else:
 		get_tree().paused = false
+
+
+func _on_character_selecter_pressed() -> void:
+	GameState.switch_to_character_selecter()

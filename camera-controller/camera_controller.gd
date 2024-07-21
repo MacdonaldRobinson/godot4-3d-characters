@@ -6,7 +6,6 @@ class_name CameraController
 
 @onready var camera: Camera3D = $Camera3D
 @onready var character_look_at_point: Node3D = $CharacterLookAtPoint
-@onready var camera_floor_raycast: RayCast3D = $Camera3D/CameraFloorRayCast
 
 var last_event:InputEvent
 
@@ -29,7 +28,7 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseMotion:
-		var normalized = event.screen_relative.normalized() / 30		
+		var normalized = event.screen_relative / 800
 		self.rotate_y(-normalized.x)		
 		camera.rotate_x(-normalized.y)
 		

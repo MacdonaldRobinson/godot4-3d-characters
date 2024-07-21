@@ -1,28 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdxfq0dsupr3v"]
+[gd_scene load_steps=2 format=3 uid="uid://bdxfq0dsupr3v"]
 
 [ext_resource type="Script" path="res://camera-controller/camera_controller.gd" id="1_261hn"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_vj70f"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_vd7v7"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_x5g32"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="5_1mdkq"]
-
-[sub_resource type="Resource" id="Resource_t2nen"]
-script = ExtResource("4_x5g32")
-duration = 1.0
-transition = 0
-ease = 2
-
-[sub_resource type="Resource" id="Resource_fpo4d"]
-script = ExtResource("5_1mdkq")
-cull_mask = 1048575
-h_offset = 0.0
-v_offset = 0.0
-projection = 0
-fov = 75.0
-size = 1.0
-frustum_offset = Vector2(0, 0)
-near = 0.05
-far = 4000.0
 
 [node name="CameraController" type="SpringArm3D"]
 spring_length = 3.0
@@ -32,12 +10,3 @@ script = ExtResource("1_261hn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.4442)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-
-[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
-script = ExtResource("2_vj70f")
-
-[node name="PhantomCamera3D" type="Node3D" parent="."]
-script = ExtResource("3_vd7v7")
-follow_mode = 6
-tween_resource = SubResource("Resource_t2nen")
-camera_3d_resource = SubResource("Resource_fpo4d")

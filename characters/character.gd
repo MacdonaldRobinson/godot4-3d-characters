@@ -109,7 +109,7 @@ func _process(delta: float) -> void:
 		if health_bar_3d.health_bar.progress_bar.value == 0:
 			character_animations.set_dying.rpc()
 		
-	apply_root_motion()
+	apply_root_motion(delta)
 	
 	character_animations.set_is_on_floor(true)
 	
@@ -173,14 +173,14 @@ func look_at_target(target: Character):
 	self.rotation.x = 0
 	self.rotation.z = 0	
 
-func apply_root_motion():
+func apply_root_motion(delta):
 	var root_motion_position =  character_animations.anim_tree.get_root_motion_position()
 	var root_motion_rotation = character_animations.anim_tree.get_root_motion_rotation()
 	
 	var root_motion_rotation_normalized = root_motion_rotation.get_axis().normalized()
-	
-	self.translate_object_local(root_motion_position)
-	
+
+	self.translate_object_local(root_motion_position)	
+
 	if root_motion_rotation_normalized != Vector3.ZERO:
 		self.rotate_object_local(root_motion_rotation_normalized, root_motion_rotation.get_angle())		
 

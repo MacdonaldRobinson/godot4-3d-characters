@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn8c5d4ypm88n"]
+
+[ext_resource type="Script" path="res://assets/DoorArea/DoorArea.gd" id="1_m86w8"]
+[ext_resource type="Texture2D" uid="uid://samac17mcxpq" path="res://textures/Particles/PNG (Transparent)/magic_03.png" id="2_kh2nv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qtv3"]
+size = Vector3(0.00912353, 0.01, 0.0237415)
+
+[node name="DoorArea" type="Area3D" groups=["door", "interactable"]]
+script = ExtResource("1_m86w8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, -0.00406006, 0, 0.000794679)
+shape = SubResource("BoxShape3D_5qtv3")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_kh2nv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

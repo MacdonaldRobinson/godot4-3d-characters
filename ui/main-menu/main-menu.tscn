@@ -34,6 +34,11 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CharacterSelecter" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Character Selecter"
+
 [node name="GameSettings" type="Button" parent="Panel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -51,6 +56,7 @@ size = Vector2i(320, 100)
 dialog_text = "Are you sure you want to exit the game"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/CharacterSelecter" to="." method="_on_character_selecter_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/GameSettings" to="." method="_on_game_settings_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/ExitGame" to="." method="_on_exit_game_pressed"]
 [connection signal="canceled" from="Panel/VBoxContainer/ExitGame/ExitConfirmationDialog" to="." method="_on_exit_confirmation_dialog_canceled"]
