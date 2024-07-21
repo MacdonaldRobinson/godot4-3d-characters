@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn8c5d4ypm88n"]
+
+[ext_resource type="Script" path="res://ui/InteractionArea/InteractionArea.gd" id="1_tlh2s"]
+[ext_resource type="Shader" uid="uid://pr2smpopv4nw" path="res://ui/InteractionArea/InteractionArea.tres" id="2_70eql"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hmbmq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tk6v"]
+render_priority = 0
+shader = ExtResource("2_70eql")
+
+[sub_resource type="BoxMesh" id="BoxMesh_gf86b"]
+size = Vector3(0.0110449, 0.01, 0.0292944)
+
+[node name="InteractionArea" type="Area3D" groups=["door", "interactable"]]
+script = ExtResource("1_tlh2s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hmbmq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_0tk6v")
+mesh = SubResource("BoxMesh_gf86b")

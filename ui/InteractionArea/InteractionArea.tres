@@ -1,0 +1,68 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://pr2smpopv4nw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ef5xw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_asfbo"]
+noise = SubResource("FastNoiseLite_ef5xw")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4igcg"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_asfbo")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_55fmb"]
+default_input_values = [1, Vector2(0, 1), 2, Vector2(0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_eq6uu"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_bqyl2"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0.1, 0, 0, 0.1)]
+op_type = 2
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+
+uniform sampler2D tex_frg_2 : source_color;
+
+
+
+void fragment() {
+// Input:7
+	float n_out7p0 = TIME;
+
+
+// UVFunc:6
+	vec2 n_in6p1 = vec2(0.00000, 1.00000);
+	vec2 n_out6p0 = vec2(n_out7p0) * n_in6p1 + UV;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out6p0);
+
+
+// VectorOp:9
+	vec4 n_in9p1 = vec4(0.10000, 0.00000, 0.00000, 0.10000);
+	vec4 n_out9p0 = n_out2p0 * n_in9p1;
+
+
+// Output:0
+	ALPHA = n_out9p0.x;
+
+
+}
+"
+graph_offset = Vector2(31.4526, -0.179993)
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_4igcg")
+nodes/fragment/2/position = Vector2(-160, 180)
+nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_55fmb")
+nodes/fragment/6/position = Vector2(-460, 160)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_eq6uu")
+nodes/fragment/7/position = Vector2(-800, 180)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_bqyl2")
+nodes/fragment/9/position = Vector2(140, 120)
+nodes/fragment/connections = PackedInt32Array(6, 0, 2, 0, 7, 0, 6, 2, 2, 0, 9, 0, 9, 0, 0, 1)
