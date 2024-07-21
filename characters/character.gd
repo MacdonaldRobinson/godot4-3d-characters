@@ -46,8 +46,8 @@ func character_leveled_up():
 	levelup_effect.play_levelup_effect()
 	
 	levelup_effect.animation_player.animation_finished.connect(
-		func(anim):
-			if level.screen_ui.settings.background_music.button_pressed:
+		func(anim):			
+			if GameState.game.overlays.settings_overlay.settings_ui.background_music.button_pressed:
 				level.level_music.play()			
 	)
 	
@@ -126,7 +126,9 @@ func get_node_in_alert_area(group_name:String = ""):
 				
 			if node is Character:
 				if node.character_animations.is_dying():
-					continue			
+					continue
+				else:
+					return node		
 				
 			if node.is_in_group("interactable"):
 				if node.is_in_group(group_name):
@@ -142,7 +144,9 @@ func get_node_in_interact_area(group_name:String = ""):
 
 			if node is Character:
 				if node.character_animations.is_dying():
-					continue			
+					continue	
+				else:
+					return node								
 					
 			if node.is_in_group(group_name):
 				return node
@@ -157,7 +161,9 @@ func get_node_in_follow_area(group_name:String = ""):
 				
 			if node is Character:
 				if node.character_animations.is_dying():
-					continue			
+					continue
+				else:
+					return node						
 				
 			if node.is_in_group("interactable"):
 				if node.is_in_group(group_name):

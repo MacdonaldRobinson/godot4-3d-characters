@@ -1,8 +1,10 @@
-extends Node
+extends Node3D
 class_name Game
 
 @onready var multiplayer_spawner: MultiplayerSpawner = %MultiplayerSpawner
-@onready var multiplayer_spawn_scene: Node = %MultiPlayerSpawnScene
+@onready var multiplayer_spawn_scene: Node3D = %MultiPlayerSpawnScene
+@onready var local_spawn_scene: Node3D = %LocalSpawnScene
+@onready var overlays: Overlays = %Overlays
 
 @export var lobby_scene: PackedScene
 @export var character_selector_scene: PackedScene
@@ -10,7 +12,6 @@ class_name Game
 
 @onready var lobby: Lobby = lobby_scene.instantiate()
 @onready var character_selector: CharacterSelecter = character_selector_scene.instantiate()
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
@@ -20,17 +21,35 @@ func _ready() -> void:
 	pass
 
 func load_lobby():
+	local_spawn_scene.show()
+	multiplayer_spawn_scene.hide()
+		
+	for node in local_spawn_scene.get_children():
+		local_spawn_scene.remove_child(node)
+
 	for node in multiplayer_spawn_scene.get_children():
 		multiplayer_spawn_scene.remove_child(node)
 
-	multiplayer_spawn_scene.add_child(lobby)	
+	if not lobby:
+		lobby = lobby_scene.instantiate()
 	
-	NetworkState.peer = null	
-	
-	lobby.reset_lobby()
+	if lobby:	
+		local_spawn_scene.add_child(lobby)		
+		NetworkState.peer = null	
+		lobby.reset_lobby()
 	
 
 func load_character_selector():	
+	local_spawn_scene.show()
+	multiplayer_spawn_scene.hide()
+	
+	for node in local_spawn_scene.get_children():
+		local_spawn_scene.remove_child(node)
+
+	for node in multiplayer_spawn_scene.get_children():
+		multiplayer_spawn_scene.remove_child(node)
+	
+	
 	var my_player_info: PlayerInfo = GameState.get_my_player_info()
 	
 	if my_player_info:
@@ -38,10 +57,10 @@ func load_character_selector():
 	
 	GameState.all_players_info.clear()
 	
-	for node in multiplayer_spawn_scene.get_children():
-		multiplayer_spawn_scene.remove_child(node)
+	for node in local_spawn_scene.get_children():
+		local_spawn_scene.remove_child(node)
 			
-	multiplayer_spawn_scene.add_child(character_selector)
+	local_spawn_scene.add_child(character_selector)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1osvu3x6yvsy"]
+[gd_scene load_steps=4 format=3 uid="uid://d1osvu3x6yvsy"]
 
-[ext_resource type="Texture2D" uid="uid://b2xqwqnytrx6q" path="res://textures/guns/Alternative color/assaultrifle.png" id="1_5h53y"]
 [ext_resource type="Script" path="res://ui/Overlays/ScreenOverlay/CollectedItem/CollectedItem.gd" id="1_kiw33"]
 
 [sub_resource type="Animation" id="Animation_r81ly"]
@@ -50,7 +49,6 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("1_5h53y")
 expand_mode = 1
 stretch_mode = 5
 

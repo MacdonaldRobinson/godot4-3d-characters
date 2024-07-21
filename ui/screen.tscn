@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bm6xell5h21fg"]
 
-[ext_resource type="PackedScene" uid="uid://cjyuur1ra1ccx" path="res://ui/action-bar/hud/hud.tscn" id="1_ebaua"]
+[ext_resource type="PackedScene" uid="uid://cjyuur1ra1ccx" path="res://ui/Overlays/HudOverlay/HudOverlay.tscn" id="1_ebaua"]
 [ext_resource type="Script" path="res://ui/screen_ui.gd" id="1_h1vdp"]
-[ext_resource type="PackedScene" uid="uid://ceq4m7qrfl8nv" path="res://windows/settings/settings.tscn" id="2_2qdce"]
+[ext_resource type="PackedScene" uid="uid://ceq4m7qrfl8nv" path="res://ui/Overlays/windows/settings/settings.tscn" id="2_2qdce"]
 [ext_resource type="PackedScene" uid="uid://sugg2fid7v5j" path="res://ui/main-menu/main-menu.tscn" id="4_qx4le"]
 
 [node name="ScreenUI" type="Control"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d26a4ioes2a6h"]
+[gd_scene load_steps=20 format=3 uid="uid://d26a4ioes2a6h"]
 
 [ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_e0jkn"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_iowi3"]
@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="8_fraqo"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="9_vw1kj"]
 [ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="12_2blv2"]
-[ext_resource type="PackedScene" uid="uid://bm6xell5h21fg" path="res://ui/screen.tscn" id="13_wx3uv"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="14_mvnhx"]
 [ext_resource type="Shader" uid="uid://8t3dh1s4g5ha" path="res://shaders/portal/portal.tres" id="15_8pbup"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5oexm"]
@@ -43,7 +41,7 @@ shader = ExtResource("15_8pbup")
 [node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui", "players_container")]
 script = ExtResource("1_e0jkn")
 level_music = NodePath("BackgroundMusic")
-screen_ui = NodePath("ScreenUI")
+screen_ui = NodePath("")
 players_container = NodePath("Players")
 
 [node name="Terrain1" type="Node3D" parent="."]
@@ -94,17 +92,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.155, 5.19764, 0)
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_2blv2")
 parameters/looping = true
-
-[node name="ScreenUI" parent="." node_paths=PackedStringArray("level") instance=ExtResource("13_wx3uv")]
-level = NodePath("..")
-
-[node name="Virtual Joystick" parent="." instance=ExtResource("14_mvnhx")]
-process_mode = 3
-z_index = 1000
-action_left = "left"
-action_right = "right"
-action_up = "forward"
-action_down = "backward"
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10819, 3.50646, 0)

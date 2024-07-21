@@ -6,7 +6,6 @@ var chat_messages: Array[ChatMessage]
 
 @export var all_players_info: Array[PlayerInfo]
 @onready var scene_loader: SceneLoader = %SceneLoader
-@export var multiplayer_spawn_scene: Node 
 @export var game: Game
 
 var player_scene: PackedScene = preload("res://characters/character.tscn")
@@ -65,7 +64,10 @@ func switch_to_scene(new_scene_path: String, callback: Callable = func(arg): pas
 		new_scene_path, 
 		func(new_scene: Node):
 					
-			new_scene.reparent(multiplayer_spawn_scene)
+			new_scene.reparent(game.multiplayer_spawn_scene)
+			game.multiplayer_spawn_scene.show()
+			game.local_spawn_scene.hide()
+			
 			scene_loader.hide()
 			
 			callback.call(new_scene)
@@ -198,9 +200,24 @@ func _process(delta):
 	pass
 	
 func get_current_scene() -> MultiplayerScene:
-	if game.multiplayer_spawn_scene:
-		var current_scene: MultiplayerScene = game.multiplayer_spawn_scene.get_child(0)
-		return current_scene
+	if not game:
+		return null
+		
+	if (game.local_spawn_scene and 
+		game.local_spawn_scene.visible and 
+		game.local_spawn_scene.get_child_count() > 0):
+			var local_current_scene: Node3D = game.local_spawn_scene.get_child(0)
+			
+			if local_current_scene is MultiplayerScene and game.local_spawn_scene.get_child_count() > 0:
+				return local_current_scene
+
+	if (game.multiplayer_spawn_scene and 
+		game.multiplayer_spawn_scene.visible and 
+		game.multiplayer_spawn_scene.get_child_count() > 0):
+			
+			var multiplayer_current_scene: MultiplayerScene = game.multiplayer_spawn_scene.get_child(0)
+			if multiplayer_current_scene:
+				return multiplayer_current_scene	
 		
 	return null
 	
@@ -215,10 +232,7 @@ func switch_to_character_selecter():
 	GameState.remove_all_players_from_current_scene()
 	GameState.all_players_info.clear()
 	
-	GameState.game.load_character_selector()
-	
-	#get_tree().change_scene_to_packed(GameState.character_selecter)
-	#get_current_scene().queue_free()
+	GameState.game.load_character_selector()	
 	
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	

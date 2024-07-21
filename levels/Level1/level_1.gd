@@ -7,6 +7,14 @@ func _ready() -> void:
 	
 	if multiplayer.is_server():
 		spawn_npc.call_deferred()
+	
+func _process(delta: float) -> void:
+	var my_player: Character = GameState.get_my_player_in_container(players_container)
+	
+	if my_player:
+		GameState.game.overlays.hud_overlay.character = my_player
+		GameState.game.overlays.hud_overlay.show()
+		
 
 func spawn_npc():
 	var warrok: Character = preload("res://enemy/Warrok.tscn").instantiate()	

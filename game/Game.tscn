@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0sxcuwv2unn1"]
+[gd_scene load_steps=6 format=3 uid="uid://c0sxcuwv2unn1"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_yl3ns"]
 [ext_resource type="PackedScene" uid="uid://cyo5ay57gsh7i" path="res://lobby/Lobby.tscn" id="2_grax1"]
 [ext_resource type="PackedScene" uid="uid://by45l4tevn24p" path="res://character-selector/CharacterSelector.tscn" id="3_jpja3"]
 [ext_resource type="PackedScene" uid="uid://d26a4ioes2a6h" path="res://levels/Level1/level_1.tscn" id="4_awbn7"]
+[ext_resource type="PackedScene" uid="uid://dh675y5n05vdq" path="res://ui/Overlays/Overlays.tscn" id="5_lrkgw"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node3D"]
 script = ExtResource("1_yl3ns")
 lobby_scene = ExtResource("2_grax1")
 character_selector_scene = ExtResource("3_jpja3")
@@ -16,5 +17,11 @@ unique_name_in_owner = true
 _spawnable_scenes = PackedStringArray("res://characters/character.tscn")
 spawn_path = NodePath("../MultiPlayerSpawnScene")
 
-[node name="MultiPlayerSpawnScene" type="Node" parent="."]
+[node name="MultiPlayerSpawnScene" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="LocalSpawnScene" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Overlays" parent="." instance=ExtResource("5_lrkgw")]
 unique_name_in_owner = true

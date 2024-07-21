@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://uvce12ljhrui"]
+[gd_scene load_steps=7 format=3 uid="uid://uvce12ljhrui"]
 
 [ext_resource type="Script" path="res://levels/Level2/level_2.gd" id="1_1elke"]
 [ext_resource type="PackedScene" uid="uid://ebp2bd8blawb" path="res://levels/Level2/House/house.tscn" id="2_wdhxp"]
 [ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="2_yc7ql"]
-[ext_resource type="PackedScene" uid="uid://bm6xell5h21fg" path="res://ui/screen.tscn" id="3_x30l2"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="4_ns86l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c3juw"]
 
@@ -17,10 +15,9 @@ sky = SubResource("Sky_m7l4b")
 glow_enabled = true
 fog_enabled = true
 
-[node name="Level2" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui", "players_container")]
+[node name="Level2" type="Node3D" node_paths=PackedStringArray("level_music", "players_container")]
 script = ExtResource("1_1elke")
 level_music = NodePath("BackgroundMusic")
-screen_ui = NodePath("ScreenUI")
 players_container = NodePath("Players")
 
 [node name="House" parent="." instance=ExtResource("2_wdhxp")]
@@ -42,16 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.155, 5.19764, 0)
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_yc7ql")
 parameters/looping = true
-
-[node name="ScreenUI" parent="." instance=ExtResource("3_x30l2")]
-
-[node name="Virtual Joystick" parent="." instance=ExtResource("4_ns86l")]
-process_mode = 3
-z_index = 1000
-action_left = "left"
-action_right = "right"
-action_up = "forward"
-action_down = "backward"
 
 [node name="NpcSpawner" type="MultiplayerSpawner" parent="."]
 unique_name_in_owner = true

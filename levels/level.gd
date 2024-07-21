@@ -14,7 +14,7 @@ func spawn_players() -> void:
 
 	var my_player_character:Character = GameState.get_my_player_in_container(players_container)
 	my_player_character.level = self
-	screen_ui.character = my_player_character
+	#screen_ui.character = my_player_character
 		
 	GameState.OnPlayerAdded.connect(add_or_update_player)
 	GameState.OnPlayerUpdated.connect(add_or_update_player)

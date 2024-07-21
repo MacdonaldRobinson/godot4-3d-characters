@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://xhcac2qi7y8c"]
+
+[ext_resource type="Script" path="res://ui/Overlays/windows/SettingsOverlay/SettingsOverlay.gd" id="1_o40hy"]
+[ext_resource type="PackedScene" uid="uid://ceq4m7qrfl8nv" path="res://ui/Overlays/windows/settings/settings.tscn" id="2_kgthb"]
+
+[node name="SettingsOverlay" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_o40hy")
+
+[node name="SettingsWindowPopup" type="Window" parent="."]
+auto_translate_mode = 1
+title = "Settings"
+initial_position = 1
+size = Vector2i(200, 200)
+visible = false
+popup_window = true
+
+[node name="Settings" parent="SettingsWindowPopup" instance=ExtResource("2_kgthb")]
+unique_name_in_owner = true
+offset_right = 0.0
+offset_bottom = 0.0
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="close_requested" from="SettingsWindowPopup" to="." method="_on_settings_window_popup_close_requested"]

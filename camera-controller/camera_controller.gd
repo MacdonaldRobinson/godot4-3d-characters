@@ -11,21 +11,42 @@ var last_event:InputEvent
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
+	if not is_multiplayer_authority():
+		return
+		
+	if character.name != str(multiplayer.get_unique_id()):
+		return
+			
 	self.add_excluded_object(camera)
 	self.add_excluded_object(self)
 	self.top_level = true
-
-
+	
+	var current_scene = GameState.get_current_scene()
+	
+	if current_scene is MultiplayerScene:
+		camera.current = true
+		GameState.capture_mouse()
+		
 func _input(event: InputEvent) -> void:
 	if not multiplayer.has_multiplayer_peer():
 		return
 	
 	if not is_multiplayer_authority():
 		return	
-			
-	last_event = event 
-	if not camera.current:
+		
+	if character.name != str(multiplayer.get_unique_id()):
 		return
+		
+	last_event = event 
+		
+	if not camera.current:
+		return		
+	
+	if Input.is_action_just_pressed("mouse_capture"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			GameState.release_mouse()
+		else:
+			GameState.capture_mouse()
 	
 	if event is InputEventMouseMotion:
 		var normalized = event.screen_relative / 800

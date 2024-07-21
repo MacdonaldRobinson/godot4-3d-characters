@@ -37,6 +37,10 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Settings" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
 [node name="CharacterSelecter" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Character Selecter"
@@ -45,5 +49,7 @@ text = "Character Selecter"
 layout_mode = 2
 text = "Quit"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/CharacterSelecter" to="." method="_on_character_selecter_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

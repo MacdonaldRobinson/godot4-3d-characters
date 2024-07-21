@@ -1,7 +1,7 @@
 extends Control
 class_name ScreenUI
 
-@onready var hud:HUD = %Hud
+@onready var hud:HudOverlay = %Hud
 @onready var settings:SettingsUI = %Settings
 @onready var main_menu:MainMenuUI = %MainMenu
 

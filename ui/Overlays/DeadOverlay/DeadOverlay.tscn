@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://jwwqrowp2n5s"]
 
 [ext_resource type="Script" path="res://ui/Overlays/DeadOverlay/DeadOverlay.gd" id="1_7l2rl"]
-[ext_resource type="AudioStream" uid="uid://w4ijhsswamvu" path="res://sound-effects/drum/139506__robertmcdonald__drum-hit-2.wav" id="2_h752g"]
+[ext_resource type="AudioStream" uid="uid://w4ijhsswamvu" path="res://sound/effects/drum/139506__robertmcdonald__drum-hit-2.wav" id="2_h752g"]
 
 [sub_resource type="Animation" id="Animation_m6fn0"]
 resource_name = "Overlay"

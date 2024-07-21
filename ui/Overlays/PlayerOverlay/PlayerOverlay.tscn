@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://8r5uv00kxiqn"]
 
-[ext_resource type="PackedScene" uid="uid://y4i6u4bfgs8w" path="res://ui/Hud/Hud.tscn" id="1_ah7ns"]
+[ext_resource type="PackedScene" uid="uid://cjyuur1ra1ccx" path="res://ui/Overlays/HudOverlay/HudOverlay.tscn" id="1_ah7ns"]
 [ext_resource type="Script" path="res://ui/Overlays/PlayerOverlay/PlayerOverlay.gd" id="1_ihb8l"]
 
 [node name="PlayerOverlay" type="Control"]
