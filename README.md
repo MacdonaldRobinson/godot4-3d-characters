@@ -23,6 +23,9 @@ Demo: https://maconly.atwebpages.com/character-ai-test/Godot4-3D-Character-Anima
 ## Map showing how to load a Map and interact with the Models
 ![image](https://github.com/user-attachments/assets/6a295199-7bb0-4e88-97de-03fae9542366)
 
+![image](https://github.com/user-attachments/assets/0cf2362a-044b-4543-830e-30765d484214)
+
+
 
 ## Open Door and Interior
 ![image](https://github.com/user-attachments/assets/0cc59a74-f39d-4427-a469-b0af5f78728b)
