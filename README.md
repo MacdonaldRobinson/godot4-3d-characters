@@ -12,11 +12,11 @@ Demo: https://maconly.atwebpages.com/character-ai-test/Godot4-3D-Character-Anima
 ![image](https://github.com/user-attachments/assets/db5ba308-d296-42c9-8f2e-0dcc625bab6c)
 
 
-## Multiplayer Networking, Lobby and Chat
+## Multiplayer Networking
 ![image](https://github.com/user-attachments/assets/1099099c-81d6-41b2-8a77-7c2987bc1c3d)
 
 
-## Select Map to Play
+## Lobby, Chat, Select the Map to Play and Start the Game
 ![image](https://github.com/user-attachments/assets/c613aade-364b-4f62-9be9-f74470435bcf)
 
 
