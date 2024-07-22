@@ -7,7 +7,13 @@ Demo: https://maconly.atwebpages.com/character-ai-test/Godot4-3D-Character-Anima
 - Shows how to create an enemy AI
 - Shows how to create a health bar
 - Shows how to switch states and animations for enemies: alert, follow, attack, dying
-
+- Shows how to work with the AnimationTree and AnimationPlayer
+- Shows how MultiPlayerSync and MultiPlayerSpawner work
+- Shows how you use Miximo characters and animations
+- Shows how you can share animations between characters
+- Shows how you can load and use Models
+- Shows how to use Visual Shaders
+  
 ## Character Selecter
 ![image](https://github.com/user-attachments/assets/db5ba308-d296-42c9-8f2e-0dcc625bab6c)
 
