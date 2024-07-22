@@ -12,7 +12,7 @@ Demo: https://maconly.atwebpages.com/character-ai-test/Godot4-3D-Character-Anima
 ![image](https://github.com/user-attachments/assets/db5ba308-d296-42c9-8f2e-0dcc625bab6c)
 
 
-## Multiplayer Networking and Lobby
+## Multiplayer Networking, Lobby and Chat
 ![image](https://github.com/user-attachments/assets/1099099c-81d6-41b2-8a77-7c2987bc1c3d)
 
 
