@@ -32,7 +32,6 @@ enabled=PackedStringArray("res://addons/zylann.hterrain/plugin.cfg")
 [global_group]
 
 interactable=""
-door=""
 
 [input]
 

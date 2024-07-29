@@ -1,44 +1,70 @@
-@tool
 extends Area3D
+class_name InteractionArea
 
-@export var door_hindge: Node3D
-@onready var interaction_indicator: Sprite3D = $InteractionIndicator
-@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@export var incoming_mesh_instance: MeshInstance3D
 
-var is_opened: bool = false
+@onready var template_mesh: MeshInstance3D = $MeshInstance3D
+
+var self_mesh_instance: MeshInstance3D 
+var self_collision_shape: CollisionShape3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
+	
+func get_overlapping_area_in_group(group_name: String = ""):
+	var found_items = []
+	
+	for area in get_overlapping_areas():
+		if group_name != "" and area.is_in_group(group_name):
+			found_items.push_back(area)
+		elif area.is_in_group("interactable"):
+			found_items.push_back(area)
+
+	if found_items.size() > 0:
+		return found_items[0]
+
+func get_overlapping_bodies_in_group(group_name: String = ""):
+	var found_items = []
+	
+	for body in get_overlapping_bodies():
+		if group_name != "" and body.is_in_group(group_name):
+			found_items.push_back(body)
+		elif body.is_in_group("interactable"):
+			found_items.push_back(body)
+
+	if found_items.size() > 0:
+		return found_items[0]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var overlapping_bodies = self.get_overlapping_bodies()
+	if get_parent() is not CollisionShape3D:
+		return
+		
+	var incoming_collision_shape: CollisionShape3D = get_parent()
 	
-	if door_hindge and collision_shape.shape is BoxShape3D:		
-		$MeshInstance3D.mesh.size = collision_shape.shape.size
-		$MeshInstance3D.global_position = collision_shape.global_position
-		$MeshInstance3D. global_rotation = collision_shape.global_rotation
-	
-	for overlapping_body in overlapping_bodies:
-		if overlapping_body is Character:
-			if Input.is_action_just_pressed("interact"):
-				if is_opened:
-					close_door()
-				else:
-					open_door()	
-	pass
-	
-func open_door():
-	if door_hindge:
-		var tweener: Tween = create_tween()
-		tweener.tween_property(door_hindge, "rotation", Vector3(door_hindge.rotation.x, door_hindge.rotation.y, -1.5), 0.1)
-		tweener.play()
-		is_opened = true
+	if not self_collision_shape:		
+		self_collision_shape = CollisionShape3D.new() 
+		self_collision_shape.shape = incoming_collision_shape.shape.duplicate()
 
-func close_door():
-	if door_hindge:
-		var tweener: Tween = create_tween()
-		tweener.tween_property(door_hindge, "rotation", Vector3(door_hindge.rotation.x, door_hindge.rotation.y, 0), 0.1)
-		tweener.play()
-		is_opened = false
+		add_child(self_collision_shape)
+		
+		self_collision_shape.top_level = false
+	self_collision_shape.global_position = incoming_collision_shape.global_position
+	self_collision_shape.global_rotation = incoming_collision_shape.global_rotation
+	self_collision_shape.scale =  incoming_collision_shape.scale * Vector3(1.1, 1.1, 1.1)
+		
+	if not self_mesh_instance:
+		self_mesh_instance = MeshInstance3D.new()
+		self_mesh_instance.mesh = incoming_mesh_instance.mesh.duplicate()
+		
+		add_child(self_mesh_instance)
+		
+		self_mesh_instance.top_level = true
+	self_mesh_instance.global_position = incoming_mesh_instance.global_position
+	self_mesh_instance.global_rotation = incoming_mesh_instance.global_rotation
+	self_mesh_instance.scale =  incoming_mesh_instance.scale * Vector3(1.1, 1.1, 1.1)
+	
+	self_mesh_instance.set_surface_override_material(0, template_mesh.mesh.surface_get_material(0))
+	
+	pass
