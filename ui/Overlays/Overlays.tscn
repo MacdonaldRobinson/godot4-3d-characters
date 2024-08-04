@@ -41,18 +41,14 @@ visible = false
 visible = false
 
 [node name="PlayerOverlay" parent="." instance=ExtResource("12_0xfm4")]
+visible = false
 
 [node name="ScreenOverlay" parent="." instance=ExtResource("11_l385d")]
 visible = false
 mouse_filter = 0
 
 [node name="JoystickOverlay" parent="." instance=ExtResource("5_57n0d")]
-visible = false
-
-[node name="ChatOverlay" parent="." instance=ExtResource("8_7ho4t")]
-visible = false
-offset_top = 283.0
-offset_right = -528.0
+mouse_filter = 2
 
 [node name="SettingsOverlay" parent="." instance=ExtResource("13_jkw6c")]
 
@@ -60,5 +56,11 @@ offset_right = -528.0
 visible = false
 
 [node name="MainMenu" parent="." node_paths=PackedStringArray("overlays") instance=ExtResource("9_ejgin")]
-visible = false
+z_index = 1
 overlays = NodePath("..")
+
+[node name="ChatOverlay" parent="." instance=ExtResource("8_7ho4t")]
+visible = false
+z_index = 1
+offset_top = 283.0
+offset_right = -528.0

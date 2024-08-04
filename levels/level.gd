@@ -7,6 +7,10 @@ class_name Level
 @onready var npcs_container: Node3D = %NPCs
 @onready var npc_spawner: MultiplayerSpawner = %NpcSpawner
 
+func _ready() -> void:
+	super._ready()
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func spawn_players() -> void:
 	for player in GameState.all_players_info:

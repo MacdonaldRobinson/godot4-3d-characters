@@ -10,7 +10,7 @@ class_name SettingsUI
 		background_music.button_pressed = level.level_music.playing
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void:	
 	pass # Replace with function body.
 
 

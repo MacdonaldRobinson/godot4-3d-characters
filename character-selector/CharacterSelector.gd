@@ -11,7 +11,7 @@ var selected_character: Character
 func _ready():
 	setup_character_signals();
 	select_character(characters_container.get_child(0))
-	
+	GameState.game.overlays.joystick_overlay.hide()
 
 func setup_character_signals():
 	for character in characters_container.get_children():

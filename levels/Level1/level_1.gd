@@ -3,6 +3,7 @@ class_name Level1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	spawn_players.call_deferred()
 	
 	if multiplayer.is_server():
@@ -19,5 +20,6 @@ func _process(delta: float) -> void:
 func spawn_npc():
 	var warrok: Character = preload("res://enemy/Warrok.tscn").instantiate()	
 	warrok.character_stats.is_auto_play = true
+	warrok.character_stats.current_health = warrok.character_stats.max_health
 	npcs_container.add_child(warrok, true)	
 	

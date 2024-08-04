@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyo5ay57gsh7i"]
+[gd_scene load_steps=7 format=3 uid="uid://cyo5ay57gsh7i"]
 
 [ext_resource type="Script" path="res://lobby/Lobby.gd" id="1_ugqrq"]
 [ext_resource type="Texture2D" uid="uid://cc1slrppohqdx" path="res://icon.svg" id="2_ap4kl"]
 [ext_resource type="PackedScene" uid="uid://cquyprb3f0o57" path="res://ui/Overlays/ChatOverlay/ChatOverlay.tscn" id="4_f7ucu"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="4_mkvf2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_372o4"]
 albedo_texture = ExtResource("2_ap4kl")
@@ -33,6 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7)
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -41,6 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CharacterSelecter" type="Button" parent="CanvasLayer/Control"]
 unique_name_in_owner = true
@@ -220,21 +221,11 @@ text = "Start Game"
 
 [node name="ChatOverlay" parent="CanvasLayer/Control" instance=ExtResource("4_f7ucu")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 offset_top = 312.0
 offset_right = -600.0
 theme = null
-
-[node name="Virtual Joystick" parent="CanvasLayer/Control" instance=ExtResource("4_mkvf2")]
-layout_mode = 1
-offset_left = 1.0
-offset_top = -616.0
-offset_right = 301.0
-offset_bottom = -316.0
-action_left = "left"
-action_right = "right"
-action_up = "forward"
-action_down = "backward"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xww1p")

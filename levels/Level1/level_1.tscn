@@ -38,10 +38,9 @@ shader = ExtResource("15_8pbup")
 
 [sub_resource type="QuadMesh" id="QuadMesh_2dsgi"]
 
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "screen_ui", "players_container")]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("level_music", "players_container")]
 script = ExtResource("1_e0jkn")
 level_music = NodePath("BackgroundMusic")
-screen_ui = NodePath("")
 players_container = NodePath("Players")
 
 [node name="Terrain1" type="Node3D" parent="."]
@@ -91,6 +90,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.155, 5.19764, 0)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_2blv2")
+autoplay = true
 parameters/looping = true
 
 [node name="Node3D" type="Node3D" parent="."]

@@ -31,8 +31,8 @@ var selected_world: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	GameState.remove_all_players_from_current_scene()
-
+	super._ready()
+	
 	host_join_container.show()
 	
 	chat_overlay.hide()
