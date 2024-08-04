@@ -1,3 +1,5 @@
+@tool
+
 extends Area3D
 class_name InteractionArea
 
@@ -66,5 +68,6 @@ func _process(delta: float) -> void:
 	self_mesh_instance.scale =  incoming_mesh_instance.scale * Vector3(1.1, 1.1, 1.1)
 	
 	self_mesh_instance.set_surface_override_material(0, template_mesh.mesh.surface_get_material(0))
+	template_mesh.hide()
 	
 	pass

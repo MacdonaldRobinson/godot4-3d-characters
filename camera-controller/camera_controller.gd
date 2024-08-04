@@ -53,8 +53,8 @@ func _input(event: InputEvent) -> void:
 		self.rotate_y(-normalized.x)		
 		camera.rotate_x(-normalized.y)
 		
-		if camera.rotation.x < -0.5:
-			camera.rotation.x = -0.5
+		if camera.rotation.x < -0.7:
+			camera.rotation.x = -0.7
 
 		if camera.rotation.x > 0.5:
 			camera.rotation.x = 0.5
@@ -118,4 +118,4 @@ func _process(delta: float) -> void:
 		pass
 	
 	self.global_position = lerp(self.global_position, follow_node.global_position, 0.1) 
-	camera.look_at(self.global_position)
+	#camera.look_at(self.global_position)
