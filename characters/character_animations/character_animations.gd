@@ -37,11 +37,11 @@ func _process(delta: float) -> void:
 
 	if is_dying():
 		return
-		
+			
 	var animation_name: String = "";
 	
 	if not is_on_floor:		
-		set_falling()	
+		set_falling.rpc()	
 		
 	elif is_on_floor and not is_dying():
 		var input_dir := Input.get_vector("left", "right", "forward", "backward")
@@ -52,13 +52,14 @@ func _process(delta: float) -> void:
 			Input.is_action_pressed("left") or
 			Input.is_action_pressed("right")):
 				motion_direction = lerp_vector(motion_direction, Vector2(direction.x, -direction.z))
-				set_motion(motion_direction)
-		else:
-			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
-			set_motion(motion_direction)
+				set_motion.rpc(motion_direction)
+		#else:
+			#motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
+			#set_motion.rpc(motion_direction)
 			
 		
 		if Input.is_action_just_pressed("jump"):
+			#attack_stance.rpc(false)
 			set_jumping.rpc(motion_direction)
 			
 		#if not Input.is_anything_pressed():
@@ -71,6 +72,7 @@ func _process(delta: float) -> void:
 func set_is_on_floor(is_on_floor: bool):
 	self.is_on_floor = is_on_floor
 	
+@rpc("call_local", "any_peer")
 func set_falling():
 	anim_tree.set("parameters/motion_state/transition_request", "falling")
 
@@ -92,7 +94,8 @@ func set_up_steps():
 func set_down_stairs():
 	anim_tree.set("parameters/motion_state/transition_request", "down_steps")
 	
-func set_motion(motion_direction: Vector2):
+@rpc("call_local", "any_peer")
+func set_motion(motion_direction: Vector2):		
 	anim_tree.set("parameters/motion_state/transition_request", "motion")	
 	anim_tree.set("parameters/motion/blend_position", motion_direction)
 	
@@ -100,6 +103,7 @@ func lerp_vector(current_vector: Vector2, final_vector: Vector2) -> Vector2:
 	var new_vector = lerp(motion_direction, final_vector, 0.1)
 	return new_vector
 
+@rpc("call_local","any_peer")
 func lerp_motion_animation(new_value: Vector2):
 	anim_tree.set("parameters/motion_state/transition_request", "motion")		
 	var current_value: Vector2 = anim_tree.get("parameters/motion/blend_position")	
@@ -119,11 +123,8 @@ func idle():
 
 func is_attacking():
 	var current_motion_state = get_current_motion_state()
-	var is_attack_stance: bool = (current_motion_state == "attacking")	
-	var is_attacking = anim_tree.get("parameters/motion_attack/active")
+	return current_motion_state == "attacking"	
 
-	return is_attack_stance and is_attacking
-		
 func is_dying():
 	var current_motion_state = get_current_motion_state()
 	return current_motion_state == "dying"
@@ -145,21 +146,18 @@ func get_current_motion_state() -> String:
 
 @rpc("call_local", "any_peer")
 func attack_stance(auto_attack: bool):
-	if not multiplayer:
-		return 
-		
-	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
-		return
-	
 	anim_tree.set("parameters/motion_state/transition_request", "attacking")
 	
-	if !is_attacking() and auto_attack:
+	if auto_attack:
+		#print(character.name, get_current_motion_state())
 		var attack_state: Array[String] =["state_0", "state_1", "state_2", "state_3"]
 		var random_attack_state: String = attack_state.pick_random()
-		attack.rpc(random_attack_state)
+		attack.rpc(random_attack_state, auto_attack)
 			
 	if auto_attack:
 		return
+		
+	#print(multiplayer.get_unique_id(), "=", multiplayer.get_remote_sender_id())
 
 	if (Input.is_action_pressed("forward") or
 		Input.is_action_pressed("backward") or
@@ -168,27 +166,29 @@ func attack_stance(auto_attack: bool):
 			idle.rpc()
 			return
 	
-	if is_attacking():
+	if auto_attack:
 		return
 
 	if Input.is_action_pressed("attack1"):
 		var attack_state: Array[String] =["state_0", "state_1", "state_2", "state_3"]
 		var random_attack_state: String = attack_state.pick_random()
-		attack.rpc(random_attack_state)
+		
+		if is_multiplayer_authority():
+			attack.rpc(random_attack_state, auto_attack)
 		
 	elif Input.is_action_pressed("attack2"):	
 		var attack_state: Array[String] =["state_4"]
 		var random_attack_state: String = attack_state.pick_random()
-		attack.rpc(random_attack_state)
+		if is_multiplayer_authority():
+			attack.rpc(random_attack_state, auto_attack)
 
 @rpc("call_local", "any_peer")
-func attack(attack_state: String):
-	if not multiplayer:
+func attack(attack_state: String, auto_attack: bool):
+	var is_activly_attacking = anim_tree.get("parameters/motion_attack/active")
+
+	if is_activly_attacking:
 		return
 		
-	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
-		return
-			
 	anim_tree.set("parameters/attack_state/transition_request", attack_state)
 	anim_tree.set("parameters/motion_attack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)	
 	

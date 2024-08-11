@@ -40,7 +40,7 @@ var nodes_in_follow_area: Array[Node3D] = []
 @export var dying_sound: AudioStreamPlayer3D
 
 func character_leveled_up():		
-	if level.level_music.playing:
+	if level and level.level_music.playing:
 		level.level_music.stop()	
 	
 	levelup_effect.play_levelup_effect()
@@ -81,17 +81,17 @@ func _process(delta: float) -> void:
 			if alert_target:
 				look_at_target(alert_target)
 
-			if follow_target:
-				character_animations.lerp_motion_animation(Vector2(0, 1))
+			if follow_target and !interact_target:
+				character_animations.lerp_motion_animation.rpc(Vector2(0, 1))
 			
 			if interact_target and interact_target is Character:
 				character_animations.attack_stance.rpc(true)
-			else:
-				character_animations.idle.rpc()
+			#else:
+				#character_animations.idle.rpc()
 		else:
 			var look_at_target = true
 			
-			if interact_target and interact_target is Character:
+			if interact_target and interact_target is Character:				
 				character_animations.attack_stance.rpc(false)
 			
 				if (Input.is_action_pressed("forward") or
@@ -103,8 +103,8 @@ func _process(delta: float) -> void:
 				if look_at_target:
 					look_at_target(interact_target)
 					
-		if not Input.is_anything_pressed():
-			character_animations.idle.rpc()
+		#if not character_animations.is_attacking():
+			#character_animations.idle.rpc()
 		
 		if health_bar_3d.health_bar.progress_bar.value == 0:
 			character_animations.set_dying.rpc()
@@ -189,6 +189,8 @@ func apply_root_motion(delta):
 
 	if root_motion_rotation_normalized != Vector3.ZERO:
 		self.rotate_object_local(root_motion_rotation_normalized, root_motion_rotation.get_angle())		
+		
+	GameState.sync_node.rpc(self.get_path(), { "position": self.position, "rotation": self.rotation} )
 
 @rpc("call_local","any_peer")
 func take_damage(damage_amount: int):

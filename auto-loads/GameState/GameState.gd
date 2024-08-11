@@ -202,13 +202,12 @@ func add_chat_message(sender_name: String, message: String):
 	OnChatMessageAdded.emit(chat_message)
 	
 @rpc("call_remote","any_peer")
-func sync_node(node_path: String, properties: Dictionary):
-	#print(multiplayer.get_unique_id())
-	#var found_node: Node = get_node(node_path)
-	#if found_node:
-		#for property in properties:
-			#found_node.set(property, properties[property])
-		#
+func sync_node(node_path: String, properties: Dictionary):	
+	var found_node: Node = get_node(node_path)
+	if found_node:
+		for property in properties:
+			found_node.set(property, properties[property])
+		
 	pass
 	
 func _process(delta):		
