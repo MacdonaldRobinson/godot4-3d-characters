@@ -10,8 +10,10 @@ shader = ExtResource("2_hoxtl")
 [sub_resource type="BoxMesh" id="BoxMesh_jc46y"]
 material = SubResource("ShaderMaterial_efpox")
 
-[node name="InteractionArea" type="Area3D" groups=["interactable"]]
+[node name="InteractionArea" type="Area3D"]
 script = ExtResource("1_tlh2s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_jc46y")
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

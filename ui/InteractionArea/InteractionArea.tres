@@ -17,9 +17,10 @@ default_input_values = [1, Vector2(0, 1), 2, Vector2(0, 0)]
 input_name = "time"
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_bqyl2"]
-default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0.1, 0, 0, 0.1)]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0.5, 0, 0, 0)]
+expanded_output_ports = [0]
 op_type = 2
-operator = 2
+operator = 1
 
 [resource]
 code = "shader_type spatial;
@@ -44,8 +45,8 @@ void fragment() {
 
 
 // VectorOp:9
-	vec4 n_in9p1 = vec4(0.10000, 0.00000, 0.00000, 0.10000);
-	vec4 n_out9p0 = n_out2p0 * n_in9p1;
+	vec4 n_in9p1 = vec4(0.50000, 0.00000, 0.00000, 0.00000);
+	vec4 n_out9p0 = n_out2p0 - n_in9p1;
 
 
 // Output:0
@@ -56,6 +57,7 @@ void fragment() {
 "
 flags/unshaded = true
 flags/shadows_disabled = true
+nodes/fragment/0/position = Vector2(620, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_4igcg")
 nodes/fragment/2/position = Vector2(-160, 180)
 nodes/fragment/6/node = SubResource("VisualShaderNodeUVFunc_55fmb")

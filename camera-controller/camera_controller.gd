@@ -39,15 +39,20 @@ func _input(event: InputEvent) -> void:
 		
 	last_event = event 
 		
-	if not camera.current:
-		return		
-	
 	if Input.is_action_just_pressed("mouse_capture"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if GameState.is_mouse_captured():
 			GameState.release_mouse()
 		else:
 			GameState.capture_mouse()
+
+	if not camera.current:
+		return		
 	
+	GameState.game.overlays.joystick_overlay.camera_controller = self
+		
+	handle_camera_rotation(event)	
+	
+func handle_camera_rotation(event):
 	if event is InputEventMouseMotion:
 		var normalized = event.screen_relative / 800
 		self.rotate_y(-normalized.x)		
@@ -77,21 +82,22 @@ func _input(event: InputEvent) -> void:
 				to_val = 5
 
 			tween.tween_property(self, "spring_length", to_val, 0.1)
-			
+	
+
 func _process(delta: float) -> void:
 	if not multiplayer.has_multiplayer_peer():
 		return
 	
 	if not is_multiplayer_authority():
-		return	
-			
-	if not camera.current:
 		return
-		
+
 	camera.global_position.y += 1
 		
 	self.add_excluded_object(character)	
-	
+		
+	if not camera.current:
+		return
+		
 	if character.get_node_in_alert_area():
 		self.add_excluded_object(character.get_node_in_alert_area())
 	
@@ -106,7 +112,7 @@ func _process(delta: float) -> void:
 	
 	if character.character_animations.is_dying():
 		return
-	
+
 	if (Input.is_action_pressed("forward") or
 		Input.is_action_pressed("backward") or
 		Input.is_action_pressed("left") or 
@@ -118,4 +124,7 @@ func _process(delta: float) -> void:
 		pass
 	
 	self.global_position = lerp(self.global_position, follow_node.global_position, 0.1) 
-	#camera.look_at(self.global_position)
+	camera.look_at(self.global_position)
+	
+	
+	

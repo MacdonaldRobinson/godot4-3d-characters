@@ -4,7 +4,6 @@ extends Area3D
 class_name InteractionArea
 
 @export var incoming_mesh_instance: MeshInstance3D
-
 @onready var template_mesh: MeshInstance3D = $MeshInstance3D
 
 var self_mesh_instance: MeshInstance3D 
@@ -44,7 +43,7 @@ func _process(delta: float) -> void:
 		return
 		
 	var incoming_collision_shape: CollisionShape3D = get_parent()
-	
+
 	if not self_collision_shape:		
 		self_collision_shape = CollisionShape3D.new() 
 		self_collision_shape.shape = incoming_collision_shape.shape.duplicate()
@@ -52,6 +51,7 @@ func _process(delta: float) -> void:
 		add_child(self_collision_shape)
 		
 		self_collision_shape.top_level = false
+
 	self_collision_shape.global_position = incoming_collision_shape.global_position
 	self_collision_shape.global_rotation = incoming_collision_shape.global_rotation
 	self_collision_shape.scale =  incoming_collision_shape.scale * Vector3(1.1, 1.1, 1.1)
@@ -59,15 +59,33 @@ func _process(delta: float) -> void:
 	if not self_mesh_instance:
 		self_mesh_instance = MeshInstance3D.new()
 		self_mesh_instance.mesh = incoming_mesh_instance.mesh.duplicate()
+		self_mesh_instance.top_level = true
 		
 		add_child(self_mesh_instance)
 		
-		self_mesh_instance.top_level = true
-	self_mesh_instance.global_position = incoming_mesh_instance.global_position
-	self_mesh_instance.global_rotation = incoming_mesh_instance.global_rotation
-	self_mesh_instance.scale =  incoming_mesh_instance.scale * Vector3(1.1, 1.1, 1.1)
-	
-	self_mesh_instance.set_surface_override_material(0, template_mesh.mesh.surface_get_material(0))
-	template_mesh.hide()
+
+	if self_mesh_instance and self_mesh_instance.is_inside_tree():
+		self_mesh_instance.global_position = incoming_mesh_instance.global_position
+		self_mesh_instance.global_rotation = incoming_mesh_instance.global_rotation
+		self_mesh_instance.rotation = incoming_mesh_instance.rotation
+		
+		self_mesh_instance.scale =  incoming_mesh_instance.scale * Vector3(1.1, 1.1, 1.1)
+		
+		self_mesh_instance.set_surface_override_material(0, template_mesh.mesh.surface_get_material(0))
+
+		template_mesh.hide()
+		
+	var interacting_area: Area3D = get_overlapping_area_in_group()
+
+	if GameState.game and interacting_area and interacting_area.is_multiplayer_authority():
+		GameState.game.overlays.interact_overlay.show()
 	
 	pass
+
+
+func _on_area_exited(area: Area3D) -> void:
+	var interacting_area: Area3D = get_overlapping_area_in_group()
+
+	if GameState.game and !interacting_area:
+		GameState.game.overlays.interact_overlay.hide()
+	

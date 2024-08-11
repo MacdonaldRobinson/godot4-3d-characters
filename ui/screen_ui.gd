@@ -37,10 +37,10 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("mouse_capture"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if GameState.is_mouse_captured():
+			GameState.release_mouse()
 		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			GameState.capture_mouse()
 	
 	if Input.is_action_just_pressed("main_menu_toggle"):
 		if main_menu.visible:

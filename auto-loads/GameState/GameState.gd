@@ -45,7 +45,8 @@ func set_my_player_character(selected_character: Character):
 	my_player_info.character_stats = selected_character.character_stats
 	my_player_info.character_scene_file_path = selected_character.scene_file_path
 	
-	GameState.add_or_update_player_info(var_to_str(my_player_info))
+	if multiplayer.get_peers().size() == 0:
+		GameState.add_or_update_player_info(var_to_str(my_player_info))
 	
 
 func set_my_player_character_name(my_character_name: String):
@@ -195,8 +196,25 @@ func add_chat_message(sender_name: String, message: String):
 	chat_messages.push_back(chat_message)
 		
 	OnChatMessageAdded.emit(chat_message)
-				
-func _process(delta):
+	
+@rpc("call_remote","any_peer")
+func sync_node(node_path: String, properties: Dictionary):
+	#print(multiplayer.get_unique_id())
+	#var found_node: Node = get_node(node_path)
+	#if found_node:
+		#for property in properties:
+			#found_node.set(property, properties[property])
+		#
+	pass
+	
+func _process(delta):		
+	#var all_nodes = get_tree().get_nodes_in_group("interactable")
+	#for node in all_nodes:
+		#if node is MeshInstance3D:
+			#for player_info in GameState.all_players_info:
+				#if player_info.peer_id != GameState.get_my_player_info().peer_id:
+					#sync_node.rpc_id(player_info.peer_id, node.get_path(), {"position": node.position, "rotation": node.rotation})
+			#pass
 	pass
 	
 func get_current_scene() -> MultiplayerScene:
@@ -233,6 +251,11 @@ func switch_to_character_selecter():
 	GameState.all_players_info.clear()
 	
 	GameState.game.load_character_selector()	
+
+func is_mouse_captured():
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		return true	
+	return false
 	
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	

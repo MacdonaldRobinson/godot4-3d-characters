@@ -53,6 +53,10 @@ func _process(delta: float) -> void:
 			Input.is_action_pressed("right")):
 				motion_direction = lerp_vector(motion_direction, Vector2(direction.x, -direction.z))
 				set_motion(motion_direction)
+		else:
+			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
+			set_motion(motion_direction)
+			
 		
 		if Input.is_action_just_pressed("jump"):
 			set_jumping.rpc(motion_direction)
@@ -103,6 +107,9 @@ func lerp_motion_animation(new_value: Vector2):
 
 @rpc("call_local", "any_peer")
 func idle():
+	if not multiplayer:
+		return
+		
 	if character.name != str(multiplayer.get_remote_sender_id()):
 		return
 		
@@ -137,6 +144,9 @@ func get_current_motion_state() -> String:
 
 @rpc("call_local", "any_peer")
 func attack_stance(auto_attack: bool):
+	if not multiplayer:
+		return 
+		
 	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
 		

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyo5ay57gsh7i"]
+[gd_scene load_steps=6 format=3 uid="uid://cyo5ay57gsh7i"]
 
 [ext_resource type="Script" path="res://lobby/Lobby.gd" id="1_ugqrq"]
 [ext_resource type="Texture2D" uid="uid://cc1slrppohqdx" path="res://icon.svg" id="2_ap4kl"]
-[ext_resource type="PackedScene" uid="uid://cquyprb3f0o57" path="res://ui/Overlays/ChatOverlay/ChatOverlay.tscn" id="4_f7ucu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_372o4"]
 albedo_texture = ExtResource("2_ap4kl")
@@ -185,7 +184,7 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -96.0
+offset_left = -175.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -218,14 +217,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 text = "Start Game"
-
-[node name="ChatOverlay" parent="CanvasLayer/Control" instance=ExtResource("4_f7ucu")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-offset_top = 312.0
-offset_right = -600.0
-theme = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xww1p")

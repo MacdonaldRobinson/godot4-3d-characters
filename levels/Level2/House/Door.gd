@@ -3,8 +3,7 @@ class_name Door
 
 @export var door_hindge: Node3D
 @export var door_mesh: MeshInstance3D
-
-@onready var interaction_area: InteractionArea = $CollisionShape3D/InteractionArea
+@export var interaction_area: InteractionArea
 
 var is_opened: bool = false
 
@@ -18,10 +17,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if interacting_area:
 			if is_opened:
-				close_door()
+				close_door.rpc()
 			else:
-				open_door()		
+				open_door.rpc()
 
+@rpc("call_local", "any_peer")
 func open_door():
 	if door_hindge:
 		var tweener: Tween = create_tween()
@@ -29,6 +29,7 @@ func open_door():
 		tweener.play()
 		is_opened = true
 
+@rpc("call_local", "any_peer")
 func close_door():
 	if door_hindge:
 		var tweener: Tween = create_tween()

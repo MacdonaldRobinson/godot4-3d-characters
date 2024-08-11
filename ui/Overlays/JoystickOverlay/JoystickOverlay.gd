@@ -9,12 +9,11 @@ class_name JoystickOverlay
 		return camera_controller
 	set(value):
 		if player_joystick.visible:
-			value.pause_rotation = true
 			camera_controller = value
 	
-func _on_camera_joystick_gui_input(event):
-	camera_controller.handle_rotation(event, true)
-
-
-func _on_player_joystick_visibility_changed():
+func _process(delta: float) -> void:
+	#print(camera_controller)
+	#if camera_controller:
+		#var angle = camera_joystick.output.angle()
+		#camera_controller.rotate_y(angle / 100)
 	pass

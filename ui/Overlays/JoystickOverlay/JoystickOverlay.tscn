@@ -41,6 +41,3 @@ offset_bottom = 150.0
 grow_horizontal = 0
 grow_vertical = 2
 visibility_mode = 1
-
-[connection signal="visibility_changed" from="PlayerJoystick" to="." method="_on_player_joystick_visibility_changed"]
-[connection signal="gui_input" from="CameraJoystick" to="." method="_on_camera_joystick_gui_input"]

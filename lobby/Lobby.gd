@@ -17,7 +17,6 @@ class_name Lobby
 
 @onready var world_selecter: Control = %WorldSelecter
 @onready var worlds_list: ItemList = %WorldList as ItemList
-@onready var chat_overlay: ChatOverlay = %ChatOverlay
 
 var worlds: Dictionary = {
 	"Grass Lands" = "res://levels/Level1/level_1.tscn",
@@ -31,23 +30,14 @@ var selected_world: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	host_join_container.show()
 	super._ready()
 	
-	host_join_container.show()
+	GameState.game.overlays.chat_overlay.hide()
 	
-	chat_overlay.hide()
 	worlds_list.clear()
 	world_selecter.hide()
-	
-	if not GameState.OnPlayerAdded.is_connected(_on_player_added):
-		GameState.OnPlayerAdded.connect(_on_player_added)	
-		
-	if not GameState.OnPlayerUpdated.is_connected(_on_player_updated):
-		GameState.OnPlayerUpdated.connect(_on_player_updated)	
-	
-	if not GameState.OnPlayerRemoved.is_connected(_on_player_removed):
-		GameState.OnPlayerRemoved.connect(_on_player_removed)	
-	
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	camera.current = true
 	
@@ -60,24 +50,10 @@ func _ready():
 		_on_host_pressed()
 	elif NetworkState.peer:
 		_on_join_pressed()
-
-func _on_player_added(player_info: PlayerInfo):
-	chat_overlay.sync_with_game_state()
-	if not player_info.is_in_game:
-		GameState.add_or_update_player_in_container(player_info, players_container)
-	
-func _on_player_updated(player_info: PlayerInfo):	
-	chat_overlay.sync_with_game_state()	
-	if not player_info.is_in_game:
-		GameState.add_or_update_player_in_container(player_info, players_container)
-
-func _on_player_removed(player_info: PlayerInfo):
-	GameState.remove_player_from_container(player_info.peer_id, players_container)						
-	chat_overlay.sync_with_game_state()
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):	
-	chat_overlay.sync_with_game_state()
+	GameState.game.overlays.chat_overlay.sync_with_game_state()
 
 	pass
 
@@ -117,10 +93,10 @@ func _on_host_pressed():
 	var my_player_info: PlayerInfo = GameState.get_my_player_info()		
 	GameState.add_or_update_player_info.rpc(var_to_str(my_player_info))
 	
-	chat_overlay.sync_with_game_state()
+	GameState.game.overlays.chat_overlay.sync_with_game_state()
 	
 	host_join_container.hide()
-	chat_overlay.show()
+	GameState.game.overlays.chat_overlay.show()
 	world_selecter.show()
 	
 
@@ -129,12 +105,12 @@ func _on_join_pressed():
 	var external_ip: String = join_external_ip.text
 	NetworkState.create_client(external_ip, port)
 	
-	chat_overlay.sync_with_game_state()
+	GameState.game.overlays.chat_overlay.sync_with_game_state()
 
 	world_selecter.show()	
 	
 	host_join_container.hide()
-	chat_overlay.show()
+	GameState.game.overlays.chat_overlay.show()
 	
 
 func _on_world_list_item_selected(index):	

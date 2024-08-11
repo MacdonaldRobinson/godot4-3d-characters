@@ -113,8 +113,7 @@ func _process(delta: float) -> void:
 	
 	character_animations.set_is_on_floor(true)
 	
-	if not get_node_in_interact_area("up_steps"):
-		velocity.y -= gravity
+	velocity.y -= gravity
 	
 	move_and_slide()
 
