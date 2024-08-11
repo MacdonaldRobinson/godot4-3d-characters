@@ -90,7 +90,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.155, 5.19764, 0)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_2blv2")
-autoplay = true
 parameters/looping = true
 
 [node name="Node3D" type="Node3D" parent="."]

@@ -5,10 +5,7 @@ class_name MultiplayerScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#GameState.all_players_info.clear()
-	#GameState.remove_all_players_from_current_scene()	
 	GameState.game.overlays.chat_overlay.chat_messages.clear()	
-	GameState.remove_all_players_from_current_scene()
 	GameState.game.overlays.chat_overlay.sync_with_game_state()
 	
 	GameState.game.overlays.joystick_overlay.show()
@@ -25,10 +22,12 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_player_added(player_info: PlayerInfo):
+	GameState.log(var_to_str(player_info))
 	GameState.game.overlays.chat_overlay.sync_with_game_state()
 	GameState.add_or_update_player_in_container(player_info, players_container)
 	
 func _on_player_updated(player_info: PlayerInfo):	
+	GameState.log(var_to_str(player_info))
 	GameState.game.overlays.chat_overlay.sync_with_game_state()
 	GameState.add_or_update_player_in_container(player_info, players_container)
 

@@ -33,6 +33,7 @@ func hide_all_overlays():
 	hud_overlay.hide()
 	settings_overlay.hide()
 	screen_overlay.hide()	
+	joystick_overlay.hide()
 
 
 func _input(event):

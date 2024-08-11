@@ -45,8 +45,7 @@ func set_my_player_character(selected_character: Character):
 	my_player_info.character_stats = selected_character.character_stats
 	my_player_info.character_scene_file_path = selected_character.scene_file_path
 	
-	if multiplayer.get_peers().size() == 0:
-		GameState.add_or_update_player_info(var_to_str(my_player_info))
+	GameState.add_or_update_player_info.rpc(var_to_str(my_player_info))
 	
 
 func set_my_player_character_name(my_character_name: String):
@@ -118,7 +117,8 @@ func remove_player_info(peer_id: int):
 	all_players_info.remove_at(player_info_index)
 	
 func get_my_player_info() -> PlayerInfo:
-	var player_info: PlayerInfo = GameState.get_player_info(multiplayer.get_unique_id())	
+	var multiplayer_id = multiplayer.get_unique_id()
+	var player_info: PlayerInfo = GameState.get_player_info(multiplayer_id)	
 	
 	if not player_info and all_players_info.size() == 1:
 		return all_players_info[0]
@@ -135,6 +135,10 @@ func get_player_in_container(peer_id: int, container: Node) -> Character:
 
 func get_my_player_in_container(container: Node) -> Character:
 	var my_player_info: PlayerInfo = get_my_player_info()
+	
+	if not my_player_info:
+		return null
+	
 	var my_player: Character = get_player_in_container(my_player_info.peer_id, container)
 			
 	return my_player
@@ -183,7 +187,7 @@ func add_or_update_player_in_container(player_info: PlayerInfo, players_containe
 		player = players_container.get_node(str_peer_id)	
 	
 	player.character_stats = player_info.character_stats
-			
+	
 	return player
 				
 @rpc("call_local","any_peer")
@@ -246,10 +250,6 @@ func remove_all_players_from_current_scene():
 			current_scene.players_container.remove_child(node)
 		
 func switch_to_character_selecter():
-	GameState.remove_player.rpc(multiplayer.get_unique_id())
-	GameState.remove_all_players_from_current_scene()
-	GameState.all_players_info.clear()
-	
 	GameState.game.load_character_selector()	
 
 func is_mouse_captured():

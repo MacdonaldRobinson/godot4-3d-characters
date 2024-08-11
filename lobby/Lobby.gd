@@ -30,13 +30,16 @@ var selected_world: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	host_join_container.show()
 	super._ready()
 	
-	GameState.game.overlays.chat_overlay.hide()
+	if NetworkState.peer == null:
+		host_join_container.show()
+	else:
+		host_join_container.hide()
 	
 	worlds_list.clear()
-	world_selecter.hide()
+	world_selecter.show()
+	GameState.game.overlays.chat_overlay.show()
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	camera.current = true
@@ -69,10 +72,9 @@ func start_game(selected_world_index: int):
 		selected_world, 
 		func(world: MultiplayerScene):
 			GameState.is_game_started = true
-							
-			for player_info in GameState.all_players_info:
-				player_info.is_in_game = true
-				GameState.add_or_update_player_info.rpc(var_to_str(player_info))				
+			#for player_info in GameState.all_players_info:
+				#player_info.is_in_game = true
+				#GameState.add_or_update_player_info.rpc(var_to_str(player_info))				
 	)
 	
 func _on_start_game_pressed():	

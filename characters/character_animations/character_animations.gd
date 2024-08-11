@@ -64,7 +64,8 @@ func _process(delta: float) -> void:
 		#if not Input.is_anything_pressed():
 			#motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
 			#set_motion(motion_direction)
-		
+			
+	#if self.get_parent().name != "1":
 	AnimationChanged.emit(self, delta)	
 	
 func set_is_on_floor(is_on_floor: bool):
@@ -149,7 +150,7 @@ func attack_stance(auto_attack: bool):
 		
 	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
-		
+	
 	anim_tree.set("parameters/motion_state/transition_request", "attacking")
 	
 	if !is_attacking() and auto_attack:
@@ -182,6 +183,9 @@ func attack_stance(auto_attack: bool):
 
 @rpc("call_local", "any_peer")
 func attack(attack_state: String):
+	if not multiplayer:
+		return
+		
 	if character.character_stats and !character.character_stats.is_auto_play and character.name != str(multiplayer.get_remote_sender_id()):
 		return
 			

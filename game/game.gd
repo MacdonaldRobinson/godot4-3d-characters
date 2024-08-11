@@ -34,14 +34,18 @@ func load_lobby():
 		lobby = lobby_scene.instantiate()
 		
 	if lobby:			
-		local_spawn_scene.add_child(lobby)		
-		NetworkState.peer = null	
-		lobby.reset_lobby()
+		local_spawn_scene.add_child(lobby)	
 		
+	GameState.game.overlays.joystick_overlay.show()
+	GameState.game.overlays.chat_overlay.show()
+	lobby.world_selecter.show()
+
 
 func load_character_selector():	
 	local_spawn_scene.show()
 	multiplayer_spawn_scene.hide()
+	
+	GameState.game.overlays.hide_all_overlays()
 
 	for node in local_spawn_scene.get_children():
 		local_spawn_scene.remove_child(node)
@@ -49,20 +53,12 @@ func load_character_selector():
 	for node in multiplayer_spawn_scene.get_children():
 		multiplayer_spawn_scene.remove_child(node)
 		
-	var my_player_info: PlayerInfo = GameState.get_my_player_info()
-	
-	if my_player_info:
-		GameState.remove_player.rpc(my_player_info.peer_id)
-	
-	GameState.all_players_info.clear()
-	GameState.remove_all_players_from_current_scene()
-	GameState.game.overlays.chat_overlay.hide()
-	
 	for node in local_spawn_scene.get_children():
 		local_spawn_scene.remove_child(node)
 	
 	local_spawn_scene.add_child(character_selector)	
-	character_selector.ready.emit()
+	
+	GameState.release_mouse()
 
 	
 

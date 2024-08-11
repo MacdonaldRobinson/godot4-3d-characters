@@ -17,9 +17,6 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_character_selecter_pressed():
-	self.hide()
-	GameState.release_mouse()
-	GameState.game.overlays.hide_all_overlays()
 	GameState.switch_to_character_selecter()
 
 

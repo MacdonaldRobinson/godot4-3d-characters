@@ -13,15 +13,19 @@ func _ready() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func spawn_players() -> void:
-	for player in GameState.all_players_info:
-		add_or_update_player(player)
-
-	var my_player_character:Character = GameState.get_my_player_in_container(players_container)
-	my_player_character.level = self
+	#var my_player_character:Character = GameState.get_my_player_in_container(players_container)
+	#
+	#if not my_player_character:
+		#return
+	
+	#my_player_character.level = self
 	#screen_ui.character = my_player_character
 		
 	GameState.OnPlayerAdded.connect(add_or_update_player)
 	GameState.OnPlayerUpdated.connect(add_or_update_player)
+	
+	for player in GameState.all_players_info:
+		add_or_update_player(player)	
 
 func add_or_update_player(player_info: PlayerInfo):
 	GameState.add_or_update_player_in_container(player_info, players_container)

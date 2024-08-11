@@ -39,7 +39,7 @@ func create_client(ip: String, port: int):
 	peer.create_client(ip, port)	
 	
 	multiplayer.set_multiplayer_peer(peer)
-	
+
 	if not multiplayer.connected_to_server.is_connected(_on_connected_to_server):
 		multiplayer.connected_to_server.connect(_on_connected_to_server)	
 	
@@ -60,9 +60,13 @@ func _on_connected_to_server():
 	# Seems to only call the server, so had to send to existing players from the add_player from the server				
 
 	var my_player_info: PlayerInfo = GameState.get_my_player_info()	
+	
+	if not my_player_info:
+		return
+		
 	my_player_info.peer_id = multiplayer.get_unique_id()
 					
-	GameState.all_players_info.clear()
+	#GameState.all_players_info.clear()
 	GameState.add_or_update_player_info.rpc(var_to_str(my_player_info))	
 
 func upup_setup(port) -> String:

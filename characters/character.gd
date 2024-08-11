@@ -115,7 +115,8 @@ func _process(delta: float) -> void:
 	
 	velocity.y -= gravity
 	
-	move_and_slide()
+	move_and_slide()	
+	
 
 func get_node_in_alert_area(group_name:String = ""):
 	if nodes_in_alert_area.size() > 0:
