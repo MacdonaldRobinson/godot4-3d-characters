@@ -62,9 +62,9 @@ func _process(delta: float) -> void:
 			#attack_stance.rpc(false)
 			set_jumping.rpc(motion_direction)
 			
-		#if not Input.is_anything_pressed():
-			#motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
-			#set_motion(motion_direction)
+		if not Input.is_anything_pressed():
+			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
+			set_motion.rpc(motion_direction)
 			
 	#if self.get_parent().name != "1":
 	AnimationChanged.emit(self, delta)	
