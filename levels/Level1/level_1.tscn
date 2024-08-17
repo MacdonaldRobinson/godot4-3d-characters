@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d26a4ioes2a6h"]
+[gd_scene load_steps=25 format=3 uid="uid://d26a4ioes2a6h"]
 
 [ext_resource type="Script" path="res://levels/Level1/level_1.gd" id="1_e0jkn"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_iowi3"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="7_1mbtt"]
 [ext_resource type="Texture2D" uid="uid://duviwwitpdip3" path="res://height-maps/terrain1/textures/Billboard_grass/sprites/n_grass_diff_0_01.png" id="8_fraqo"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="9_vw1kj"]
+[ext_resource type="PackedScene" uid="uid://b2l1vj4n6hnhl" path="res://enemy/Warrok.tscn" id="10_lvbhf"]
+[ext_resource type="Script" path="res://characters/character_stats.gd" id="11_4584c"]
 [ext_resource type="AudioStream" uid="uid://d2dagoibhus6e" path="res://sound/649132__sonically_sound__medievalfantasy-rpg-loop-mix-at-32-secs-to-extendrepeat.mp3" id="12_2blv2"]
 [ext_resource type="Shader" uid="uid://8t3dh1s4g5ha" path="res://shaders/portal/portal.tres" id="15_8pbup"]
 
@@ -31,6 +33,36 @@ background_mode = 2
 sky = SubResource("Sky_8bfeh")
 glow_enabled = true
 fog_enabled = true
+
+[sub_resource type="Resource" id="Resource_w5331"]
+script = ExtResource("11_4584c")
+name = "Ememy"
+current_level = 1
+current_health = 100
+max_health = 100
+number_of_killes = 0
+experiance_points = 0
+is_auto_play = true
+
+[sub_resource type="Resource" id="Resource_jn1ge"]
+script = ExtResource("11_4584c")
+name = "Ememy"
+current_level = 1
+current_health = 150
+max_health = 150
+number_of_killes = 0
+experiance_points = 0
+is_auto_play = true
+
+[sub_resource type="Resource" id="Resource_2s7ui"]
+script = ExtResource("11_4584c")
+name = "Ememy"
+current_level = 1
+current_health = 200
+max_health = 200
+number_of_killes = 0
+experiance_points = 0
+is_auto_play = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o4ke1"]
 render_priority = 0
@@ -88,6 +120,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, 0)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.155, 5.19764, 0)
 
+[node name="Warrok" parent="NPCs" node_paths=PackedStringArray("level") instance=ExtResource("10_lvbhf")]
+level = NodePath("../..")
+character_stats = SubResource("Resource_w5331")
+
+[node name="Warrok2" parent="NPCs" node_paths=PackedStringArray("level") instance=ExtResource("10_lvbhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22351, 0, 0)
+level = NodePath("../..")
+character_stats = SubResource("Resource_jn1ge")
+
+[node name="Warrok3" parent="NPCs" node_paths=PackedStringArray("level") instance=ExtResource("10_lvbhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22351, 0, 3.09168)
+level = NodePath("../..")
+character_stats = SubResource("Resource_2s7ui")
+
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_2blv2")
 parameters/looping = true
@@ -102,5 +148,4 @@ mesh = SubResource("QuadMesh_2dsgi")
 
 [node name="NpcSpawner" type="MultiplayerSpawner" parent="."]
 unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("res://enemy/Warrok.tscn")
 spawn_path = NodePath("../NPCs")

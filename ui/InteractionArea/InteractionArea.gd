@@ -9,19 +9,22 @@ class_name InteractionArea
 var self_mesh_instance: MeshInstance3D 
 var self_collision_shape: CollisionShape3D
 
+signal OnInteract
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 	
 func get_overlapping_area_in_group(group_name: String = ""):
 	var found_items = []
-	
 	for area in get_overlapping_areas():
 		if group_name != "" and area.is_in_group(group_name):
 			found_items.push_back(area)
-		elif area.is_in_group("interactable"):
+		
+		if area.is_in_group("interactable"):
 			found_items.push_back(area)
 
+	
 	if found_items.size() > 0:
 		return found_items[0]
 
@@ -63,7 +66,6 @@ func _process(delta: float) -> void:
 		
 		add_child(self_mesh_instance)
 		
-
 	if self_mesh_instance and self_mesh_instance.is_inside_tree():
 		self_mesh_instance.global_position = incoming_mesh_instance.global_position
 		self_mesh_instance.global_rotation = incoming_mesh_instance.global_rotation
@@ -74,12 +76,7 @@ func _process(delta: float) -> void:
 		self_mesh_instance.set_surface_override_material(0, template_mesh.mesh.surface_get_material(0))
 
 		template_mesh.hide()
-		
-	var interacting_area: Area3D = get_overlapping_area_in_group()
 
-	if GameState.game and interacting_area and interacting_area.is_multiplayer_authority():
-		GameState.game.overlays.interact_overlay.show()
-	
 	pass
 
 

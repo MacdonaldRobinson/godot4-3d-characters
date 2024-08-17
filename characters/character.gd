@@ -71,48 +71,9 @@ func _process(delta: float) -> void:
 	
 	for area in follow_area.get_overlapping_areas():
 		nodes_in_follow_area.push_back(area)
-		
-	var alert_target = get_node_in_alert_area()
-	var follow_target = get_node_in_follow_area()
-	var interact_target = get_node_in_interact_area()
-	
-	if not character_animations.is_dying():
-		if character_stats.is_auto_play:
-			if alert_target:
-				look_at_target(alert_target)
 
-			if follow_target and !interact_target:
-				character_animations.lerp_motion_animation.rpc(Vector2(0, 1))
-			
-			if interact_target and interact_target is Character:
-				character_animations.attack_stance.rpc(true)
-			#else:
-				#character_animations.idle.rpc()
-		else:
-			var look_at_target = true
-			
-			if interact_target and interact_target is Character:				
-				character_animations.attack_stance.rpc(false)
-			
-				if (Input.is_action_pressed("forward") or
-					Input.is_action_pressed("backward") or
-					Input.is_action_pressed("left") or
-					Input.is_action_pressed("right")):						
-						look_at_target = false
-						
-				if look_at_target:
-					look_at_target(interact_target)
-					
-		#if not character_animations.is_attacking():
-			#character_animations.idle.rpc()
-		
-		if health_bar_3d.health_bar.progress_bar.value == 0:
-			character_animations.set_dying.rpc()
-		
 	apply_root_motion(delta)
-	
-	character_animations.set_is_on_floor(true)
-	
+		
 	velocity.y -= gravity
 	
 	move_and_slide()	
@@ -123,7 +84,7 @@ func get_node_in_alert_area(group_name:String = ""):
 		for node in nodes_in_alert_area:
 			if node == self:
 				continue
-				
+					
 			if node is Character:
 				if node.character_animations.is_dying():
 					continue
@@ -138,10 +99,12 @@ func get_node_in_alert_area(group_name:String = ""):
 func get_node_in_interact_area(group_name:String = ""):	
 	if nodes_in_interact_area.size() > 0:	
 		for node in nodes_in_interact_area:
-			if node.is_in_group("interactable"):
+			if node.is_in_group("interactable"):				
 				if node == self:
 					continue
-
+					
+				return node
+					
 			if node is Character:
 				if node.character_animations.is_dying():
 					continue	

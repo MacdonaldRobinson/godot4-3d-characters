@@ -10,16 +10,18 @@ var is_opened: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-	
+
+func _on_interact():
+	if is_opened:
+		close_door.rpc()
+	else:
+		open_door.rpc()
+
 func _process(delta: float) -> void:
 	var interacting_area: Area3D = interaction_area.get_overlapping_area_in_group()
-		
-	if Input.is_action_just_pressed("interact"):
-		if interacting_area:
-			if is_opened:
-				close_door.rpc()
-			else:
-				open_door.rpc()
+	
+	if not interaction_area.OnInteract.is_connected(_on_interact):
+		interaction_area.OnInteract.connect(_on_interact)
 
 @rpc("call_local", "any_peer")
 func open_door():

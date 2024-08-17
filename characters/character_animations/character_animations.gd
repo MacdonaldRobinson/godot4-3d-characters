@@ -21,52 +21,67 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not multiplayer.has_multiplayer_peer():
-		return
-		
-	if not is_multiplayer_authority():
-		return	
-
 	if not character:
 		return
-		
+	
 	var my_player_info = GameState.get_my_player_info()
 	
-	if not my_player_info or str(my_player_info.peer_id) != character.name:
+	
+	if (not my_player_info or 
+		(str(my_player_info.peer_id) != character.name) and not character.character_stats.is_auto_play):
 		return
 
 	if is_dying():
 		return
-			
-	var animation_name: String = "";
-	
-	if not is_on_floor:		
-		set_falling.rpc()	
 		
-	elif is_on_floor and not is_dying():
-		var input_dir := Input.get_vector("left", "right", "forward", "backward")
-		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()		
+	var input_dir := Input.get_vector("left", "right", "forward", "backward")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()		
 
+	var interact_node = character.get_node_in_interact_area()
+	var alert_node = character.get_node_in_alert_area()
+	var follow_node = character.get_node_in_follow_area()
+	
+	if not character.character_stats.is_auto_play:
 		if (Input.is_action_pressed("forward") or
 			Input.is_action_pressed("backward") or
 			Input.is_action_pressed("left") or
 			Input.is_action_pressed("right")):
 				motion_direction = lerp_vector(motion_direction, Vector2(direction.x, -direction.z))
 				set_motion.rpc(motion_direction)
-		#else:
-			#motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
-			#set_motion.rpc(motion_direction)
-			
-		
-		if Input.is_action_just_pressed("jump"):
-			#attack_stance.rpc(false)
-			set_jumping.rpc(motion_direction)
-			
-		if not Input.is_anything_pressed():
+		else:
 			motion_direction = lerp_vector(motion_direction, Vector2(0, 0))
 			set_motion.rpc(motion_direction)
+
+		if Input.is_action_just_pressed("jump"):
+			set_jumping.rpc(motion_direction)
+	else:		
+		if alert_node:
+			if alert_node is CharacterBody3D:
+				character.look_at_target(alert_node)
+
+		if follow_node:
+			if follow_node is CharacterBody3D:
+				motion_direction = lerp_vector(motion_direction, Vector2(0, 1))
+				set_motion.rpc(motion_direction)
+
+	if interact_node:
+		if interact_node is not Character:
+			GameState.game.overlays.interact_overlay.show()
+		
+		if Input.is_action_just_pressed("interact"):			
+			if interact_node is InteractionArea:
+				interact_node.OnInteract.emit()
+		
+		if interact_node is CharacterBody3D:
+			character.look_at_target(interact_node)
+			attack_stance.rpc(character.character_stats.is_auto_play)
 			
-	#if self.get_parent().name != "1":
+	else:
+		GameState.game.overlays.interact_overlay.hide()
+		
+	if character.character_stats.current_health <= 0:
+		set_dying.rpc()
+	
 	AnimationChanged.emit(self, delta)	
 	
 func set_is_on_floor(is_on_floor: bool):
@@ -184,6 +199,7 @@ func attack_stance(auto_attack: bool):
 
 @rpc("call_local", "any_peer")
 func attack(attack_state: String, auto_attack: bool):
+	#GameState.log(attack_state)
 	var is_activly_attacking = anim_tree.get("parameters/motion_attack/active")
 
 	if is_activly_attacking:

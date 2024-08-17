@@ -22,12 +22,12 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _on_player_added(player_info: PlayerInfo):
-	GameState.log(var_to_str(player_info))
+	#GameState.log(var_to_str(player_info))
 	GameState.game.overlays.chat_overlay.sync_with_game_state()
 	GameState.add_or_update_player_in_container(player_info, players_container)
 	
 func _on_player_updated(player_info: PlayerInfo):	
-	GameState.log(var_to_str(player_info))
+	#GameState.log(var_to_str(player_info))
 	GameState.game.overlays.chat_overlay.sync_with_game_state()
 	GameState.add_or_update_player_in_container(player_info, players_container)
 
