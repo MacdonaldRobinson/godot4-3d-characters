@@ -18,11 +18,20 @@ func setup_character_signals():
 	for character in characters_container.get_children():
 		if character is Character:
 			select_character(character)
-			#character.OnCharacterSelected.connect(
-				#func(character): 
-					#select_character(character)
-			#)
-	
+			character.alert_area.process_mode = Node.PROCESS_MODE_DISABLED
+			character.follow_area.process_mode = Node.PROCESS_MODE_DISABLED			
+			character.interact_area.process_mode = Node.PROCESS_MODE_DISABLED
+			character.OnClicked.connect(_on_character_clicked)
+
+func _on_character_clicked(character: Character):
+	if selected_character.scene_file_path == character.scene_file_path:
+		return
+		
+	for char in characters_container.get_children():
+		if char is Character:
+			if char.scene_file_path == character.scene_file_path:
+				select_character(char)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):	
 	var new_character

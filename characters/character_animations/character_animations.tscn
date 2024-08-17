@@ -194,7 +194,7 @@ input_5/break_loop_at_end = false
 input_5/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_pjakq"]
-graph_offset = Vector2(-440.405, -40)
+graph_offset = Vector2(-462.405, -76)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_0vc6e")
 nodes/Animation/position = Vector2(-620, 140)
 "nodes/Animation 10/node" = SubResource("AnimationNodeAnimation_yqhhe")
@@ -286,7 +286,7 @@ parameters/jump/active = false
 parameters/jump/internal_active = false
 parameters/jump/request = 0
 parameters/jump_direction/blend_position = Vector2(0.00407052, 0.0084033)
-parameters/motion/blend_position = Vector2(0, 0.98778)
+parameters/motion/blend_position = Vector2(0, 0)
 parameters/motion_attack/active = false
 parameters/motion_attack/internal_active = false
 parameters/motion_attack/request = 0

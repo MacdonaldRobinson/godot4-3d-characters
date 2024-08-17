@@ -19,6 +19,8 @@ var nodes_in_alert_area: Array[Node3D] = []
 var nodes_in_interact_area: Array[Node3D] = []
 var nodes_in_follow_area: Array[Node3D] = []
 
+signal OnClicked(character: Character)
+
 @export var level: Level
 @export var character_stats: CharacterStats:
 	set(value):
@@ -78,7 +80,6 @@ func _process(delta: float) -> void:
 	
 	move_and_slide()	
 	
-
 func get_node_in_alert_area(group_name:String = ""):
 	if nodes_in_alert_area.size() > 0:
 		for node in nodes_in_alert_area:
@@ -91,18 +92,17 @@ func get_node_in_alert_area(group_name:String = ""):
 				else:
 					return node		
 				
-			if node.is_in_group("interactable"):
-				if node.is_in_group(group_name):
-					return node		
+			if node.is_in_group(group_name):
+				return node		
 	return null
 	
 func get_node_in_interact_area(group_name:String = ""):	
 	if nodes_in_interact_area.size() > 0:	
 		for node in nodes_in_interact_area:
+			if node == self:
+				continue
+
 			if node.is_in_group("interactable"):				
-				if node == self:
-					continue
-					
 				return node
 					
 			if node is Character:
@@ -128,9 +128,8 @@ func get_node_in_follow_area(group_name:String = ""):
 				else:
 					return node						
 				
-			if node.is_in_group("interactable"):
-				if node.is_in_group(group_name):
-					return node
+			if node.is_in_group(group_name):
+				return node		
 		
 	return null		
 
@@ -170,3 +169,15 @@ func attack_damage(damage_amount: int):
 		if interact_target.character_stats:
 			if interact_target.character_stats.current_health == 0:
 				character_stats.number_of_killes += 1
+
+
+func _on_interact_area_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			print(event, self.name)	
+
+
+func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			OnClicked.emit(self)

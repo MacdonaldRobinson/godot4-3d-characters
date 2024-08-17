@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://by45l4tevn24p"]
+[gd_scene load_steps=9 format=3 uid="uid://by45l4tevn24p"]
 
 [ext_resource type="Script" path="res://character-selector/CharacterSelector.gd" id="1_bhs8g"]
+[ext_resource type="PackedScene" uid="uid://bbw8idr0dayhh" path="res://characters/kaya/kaya.tscn" id="2_0o4i6"]
 [ext_resource type="PackedScene" uid="uid://cfn7ocuss05kg" path="res://characters/character.tscn" id="2_2od0v"]
 [ext_resource type="Script" path="res://characters/character_stats.gd" id="3_v7arc"]
 [ext_resource type="Theme" uid="uid://ctly6v5xdcdqo" path="res://ui/Theme.tres" id="4_vpy62"]
@@ -10,6 +11,16 @@
 [sub_resource type="Resource" id="Resource_wmgt2"]
 script = ExtResource("3_v7arc")
 name = "Clara"
+current_level = 1
+current_health = 1000
+max_health = 1000
+number_of_killes = 0
+experiance_points = 0
+is_auto_play = false
+
+[sub_resource type="Resource" id="Resource_2kvko"]
+script = ExtResource("3_v7arc")
+name = "Kaya"
 current_level = 1
 current_health = 1000
 max_health = 1000
@@ -31,10 +42,15 @@ size = Vector3(4.48068, 0.248474, 3.50318)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30641, 2.10138)
 
 [node name="CharactersContainer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21477, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0973826, 0)
 
 [node name="Character" parent="CharactersContainer" instance=ExtResource("2_2od0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.822297, 0, 0)
 character_stats = SubResource("Resource_wmgt2")
+
+[node name="Kaya" parent="CharactersContainer" instance=ExtResource("2_0o4i6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37212, 0, 0)
+character_stats = SubResource("Resource_2kvko")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216, 1.55935)

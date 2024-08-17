@@ -25,8 +25,7 @@ func _process(delta: float) -> void:
 		return
 	
 	var my_player_info = GameState.get_my_player_info()
-	
-	
+
 	if (not my_player_info or 
 		(str(my_player_info.peer_id) != character.name) and not character.character_stats.is_auto_play):
 		return

@@ -1,0 +1,184 @@
+[gd_scene load_steps=19 format=3 uid="uid://bbw8idr0dayhh"]
+
+[ext_resource type="Script" path="res://characters/character.gd" id="1_srlj0"]
+[ext_resource type="PackedScene" uid="uid://ctwwjlkqm3y5l" path="res://characters/kaya/kaya.fbx" id="2_114is"]
+[ext_resource type="PackedScene" uid="uid://phuytkofmlld" path="res://characters/character_animations/character_animations.tscn" id="3_pwt07"]
+[ext_resource type="AnimationLibrary" uid="uid://crw5ru71bh6xc" path="res://animations/custom-attack-punch-kick-pack/custom-attack-punch-kick-pack.glb" id="4_sjucb"]
+[ext_resource type="AnimationLibrary" uid="uid://cr5nio0utun3w" path="res://animations/custom-dying-pack/custom-dying-pack.glb" id="5_h8vq2"]
+[ext_resource type="AnimationLibrary" uid="uid://dooem8cdowvkb" path="res://animations/custom-jumping-falling-pack/custom-jumping-falling-pack.glb" id="6_dwn5d"]
+[ext_resource type="AnimationLibrary" uid="uid://cbacn6efdymri" path="res://animations/custom-locomotion-pack/custom-locomotion-pack.glb" id="7_b2806"]
+[ext_resource type="PackedScene" uid="uid://cb3t1tufdkhwr" path="res://ui/health-bar-3d/health_bar_3d.tscn" id="8_ftcsh"]
+[ext_resource type="PackedScene" uid="uid://bdxfq0dsupr3v" path="res://camera-controller/camera-controller.tscn" id="9_u5mu7"]
+[ext_resource type="AudioStream" uid="uid://pmcht61tl7qt" path="res://sound/effects/dying/386030__taramg__deathgroan003.wav" id="10_nws8w"]
+[ext_resource type="PackedScene" uid="uid://vkwy58ucg8xi" path="res://effects/level_up/level_up_effect.tscn" id="11_r1lu3"]
+
+[sub_resource type="Animation" id="Animation_0gvn7"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ws2to"]
+_data = {
+"RESET": SubResource("Animation_0gvn7")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qu0bv"]
+radius = 0.273444
+height = 1.81011
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gxtmj"]
+height = 1.307
+radius = 4.74196
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m77m5"]
+height = 1.69743
+radius = 0.790826
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0qe41"]
+height = 1.00929
+radius = 3.39317
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aqu6h"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Kaya" type="CharacterBody3D"]
+script = ExtResource("1_srlj0")
+
+[node name="kaya" parent="." instance=ExtResource("2_114is")]
+
+[node name="GeneralSkeleton" parent="kaya" index="0"]
+bones/0/position = Vector3(1.7527e-06, 0.693471, 1.68569e-07)
+bones/0/rotation = Quaternion(-0.0310958, -0.065571, -0.0404679, 0.996542)
+bones/1/rotation = Quaternion(-0.0148901, -0.00384241, 0.0419258, 0.999002)
+bones/2/rotation = Quaternion(0.00655287, -0.0105286, 0.0546838, 0.998427)
+bones/3/rotation = Quaternion(0.00695334, -0.0114634, 0.0545197, 0.998423)
+bones/4/rotation = Quaternion(0.0482438, 0.00569134, -0.0251175, 0.998504)
+bones/5/rotation = Quaternion(0.0127898, 0.0378281, -0.0788443, 0.996087)
+bones/16/rotation = Quaternion(0.550242, 0.442597, 0.533693, -0.465311)
+bones/17/rotation = Quaternion(0.0536023, 0.76281, -0.627912, -0.144826)
+bones/18/rotation = Quaternion(0.0816119, -0.702374, 0.0816119, 0.702389)
+bones/19/rotation = Quaternion(0.0887192, 0.706131, 0.0525537, 0.700533)
+bones/20/rotation = Quaternion(-0.154906, 0.734731, 0.104903, 0.652051)
+bones/21/rotation = Quaternion(0.184734, 0.0561374, -0.0106076, 0.981127)
+bones/22/rotation = Quaternion(0.164727, 0.0323959, 0.0383239, 0.985062)
+bones/23/scale = Vector3(1.00058, 1.00049, 1.00015)
+bones/24/rotation = Quaternion(0.0644483, -0.000422567, -0.00117478, 0.99792)
+bones/25/rotation = Quaternion(0.223099, -3.12924e-06, -0.0270291, 0.974421)
+bones/26/rotation = Quaternion(0.141237, -1.93715e-06, -0.0171112, 0.989828)
+bones/28/rotation = Quaternion(0.100137, -1.0252e-05, -0.012042, 0.994901)
+bones/29/rotation = Quaternion(0.247171, -2.45869e-06, -0.0299454, 0.968509)
+bones/30/rotation = Quaternion(0.193741, -2.11596e-06, -0.0234722, 0.980772)
+bones/32/rotation = Quaternion(0.136704, -0.000565877, -0.0124465, 0.990534)
+bones/33/rotation = Quaternion(0.346778, -6.19688e-06, -0.0420132, 0.937006)
+bones/34/rotation = Quaternion(0.280601, -5.09362e-06, -0.0339957, 0.959222)
+bones/36/rotation = Quaternion(0.176422, 0.00299917, -0.0376588, 0.983589)
+bones/37/rotation = Quaternion(0.259165, 0.00904024, 0.00330847, 0.965785)
+bones/38/rotation = Quaternion(0.442508, -1.69357e-06, -0.0536112, 0.895161)
+bones/51/rotation = Quaternion(0.52187, -0.457381, -0.591499, -0.41059)
+bones/52/rotation = Quaternion(0.0359476, 0.873716, -0.471733, 0.113119)
+bones/53/rotation = Quaternion(0.0607652, 0.704496, -0.0607655, 0.704486)
+bones/54/rotation = Quaternion(0.0187478, -0.630513, 0.016165, 0.775784)
+bones/55/rotation = Quaternion(-0.185602, -0.686741, -0.123579, 0.691858)
+bones/56/rotation = Quaternion(0.191015, -0.116921, -0.0336475, 0.974018)
+bones/57/rotation = Quaternion(0.11391, -0.0438469, -0.030274, 0.992061)
+bones/58/scale = Vector3(1.00058, 1.00049, 1.00015)
+bones/59/rotation = Quaternion(0.0741668, 0.000412489, 0.00345604, 0.99724)
+bones/60/rotation = Quaternion(0.170786, -2.16841e-06, 0.0208884, 0.985087)
+bones/61/rotation = Quaternion(0.0921872, -1.19209e-06, 0.0112751, 0.995678)
+bones/63/rotation = Quaternion(0.0855471, 6.01958e-06, 0.0103805, 0.99628)
+bones/64/rotation = Quaternion(0.269611, -3.28084e-06, 0.0329754, 0.962405)
+bones/65/rotation = Quaternion(0.149701, -6.85518e-05, 0.0182993, 0.988562)
+bones/67/rotation = Quaternion(0.158652, -0.000686916, 0.0236415, 0.987051)
+bones/68/rotation = Quaternion(0.33436, -1.68842e-06, 0.0408947, 0.941558)
+bones/69/rotation = Quaternion(0.316791, -5.92133e-05, 0.0387263, 0.947704)
+bones/71/rotation = Quaternion(0.204771, 0.000142791, 0.0243451, 0.978507)
+bones/72/rotation = Quaternion(0.289664, 9.76314e-07, 0.0354279, 0.956473)
+bones/73/rotation = Quaternion(0.458623, -8.21538e-06, 0.0560929, 0.886859)
+bones/78/rotation = Quaternion(-0.0748952, 0.0208714, 0.994969, -0.0631805)
+bones/79/rotation = Quaternion(0.000584935, 0.980739, -0.187409, -0.0550391)
+bones/80/rotation = Quaternion(-0.0119518, 0.602238, -0.798187, 0.00808142)
+bones/81/rotation = Quaternion(3.76024e-05, 0.999998, 0.00202471, -9.00434e-05)
+bones/83/rotation = Quaternion(0.140708, 0.174497, 0.965828, -0.130109)
+bones/84/rotation = Quaternion(-0.0272142, 0.987388, -0.152143, -0.0343057)
+bones/85/rotation = Quaternion(-0.0677974, 0.741504, -0.665908, 0.0462859)
+bones/86/rotation = Quaternion(0.000383434, 0.999804, -0.0197842, -0.00086897)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="kaya/GeneralSkeleton" index="4"]
+transform = Transform3D(0.997388, -0.026349, -0.0672466, 0.0233663, 0.998724, -0.0447622, 0.0683403, 0.043074, 0.996732, -0.054488, 1.36916, -0.0632685)
+bone_name = "Head"
+bone_idx = 5
+
+[node name="CameraLookAtPoint" type="Node3D" parent="kaya/GeneralSkeleton/BoneAttachment3D"]
+transform = Transform3D(0.997102, -0.0172903, 0.0740864, 0.00976116, 0.994858, 0.100808, -0.0754484, -0.0997927, 0.992144, 0.0631784, 0.120076, 0.0120412)
+
+[node name="CharacterAnimations" parent="." node_paths=PackedStringArray("character", "animation_tree") instance=ExtResource("3_pwt07")]
+character = NodePath("..")
+animation_tree = NodePath("AnimationTree")
+
+[node name="AnimationPlayer" parent="CharacterAnimations" index="0"]
+root_node = NodePath("../../kaya")
+root_motion_track = NodePath("%GeneralSkeleton:Root")
+libraries = {
+"": SubResource("AnimationLibrary_ws2to"),
+"custom-attack-punch-kick-pack": ExtResource("4_sjucb"),
+"custom-dying-pack": ExtResource("5_h8vq2"),
+"custom-jumping-falling-pack": ExtResource("6_dwn5d"),
+"custom-locomotion-pack": ExtResource("7_b2806")
+}
+
+[node name="AnimationTree" parent="CharacterAnimations" index="1"]
+root_node = NodePath("../../kaya")
+
+[node name="RootMotionView" type="RootMotionView" parent="."]
+animation_path = NodePath("../CharacterAnimations/AnimationTree")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.884513, 0)
+shape = SubResource("CapsuleShape3D_qu0bv")
+
+[node name="FloorCheckRayCast" type="RayCast3D" parent="."]
+
+[node name="AlertArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712344, 0)
+shape = SubResource("CylinderShape3D_gxtmj")
+
+[node name="InteractArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.814, 0)
+shape = SubResource("CylinderShape3D_m77m5")
+
+[node name="FollowArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FollowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.662804, 0)
+shape = SubResource("CylinderShape3D_0qe41")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("character") instance=ExtResource("8_ftcsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03868, 0)
+texture = SubResource("ViewportTexture_aqu6h")
+character = NodePath("..")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_node", "character") instance=ExtResource("9_u5mu7")]
+process_mode = 3
+follow_node = NodePath("../kaya/GeneralSkeleton/BoneAttachment3D/CameraLookAtPoint")
+character = NodePath("..")
+
+[node name="FootStepSound" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.5
+
+[node name="DyingSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_nws8w")
+
+[node name="LevelUpEffect" parent="." instance=ExtResource("11_r1lu3")]
+
+[node name="Name" type="Label3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20569, 0)
+billboard = 2
+text = "Name"
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+
+[editable path="kaya"]
+[editable path="CharacterAnimations"]

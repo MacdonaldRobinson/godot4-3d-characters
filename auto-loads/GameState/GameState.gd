@@ -179,7 +179,7 @@ func add_or_update_player_in_container(player_info: PlayerInfo, players_containe
 	var player: Character
 	
 	if(not players_container.has_node(str_peer_id)):
-		player = GameState.player_scene.instantiate()
+		player = (ResourceLoader.load(player_info.character_scene_file_path) as PackedScene).instantiate()
 		player.name = str(player_info.peer_id)
 		player.set_multiplayer_authority(player_info.peer_id)
 		players_container.add_child(player)		
